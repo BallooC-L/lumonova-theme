@@ -144,7 +144,11 @@
     "specs_title": "Everything that matters.",
     "specs_coming": "Technical specifications coming soon.",
     "compat_eyebrow": "Compatibility",
-    "compat_title": "Fully integrated."
+    "compat_title": "Fully integrated.",
+    "delivery_default_eu": "3–10 business days",
+    "delivery_default_de": "1–3 business days",
+    "cta_buy_default": "Buy now",
+    "cta_amazon_default": "View on Amazon →"
   },
   "collection": {
     "eyebrow": "Range",

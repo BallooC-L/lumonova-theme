@@ -127,9 +127,9 @@
         {%- assign delivery_time = product.metafields.custom.delivery_time -%}
         {%- unless delivery_time -%}
           {%- if localization.market.handle == 'eu' -%}
-            {%- assign delivery_time = '3–10 Werktage' -%}
+            {%- assign delivery_time = 'product.delivery_default_eu' | t -%}
           {%- else -%}
-            {%- assign delivery_time = '1–3 Werktage' -%}
+            {%- assign delivery_time = 'product.delivery_default_de' | t -%}
           {%- endif -%}
         {%- endunless -%}
         {%- unless product.available -%}
@@ -154,10 +154,12 @@
       {%- endunless -%}
 
       <div class="product-info__ctas">
+        {%- assign cta_buy_default = 'product.cta_buy_default' | t -%}
+        {%- assign cta_amazon_default = 'product.cta_amazon_default' | t -%}
         {%- if cta_external_url != blank -%}
           <a href="{{ cta_external_url }}" target="_blank" rel="noopener noreferrer" class="btn-amber"
-             aria-label="{{ product.title }} – {{ cta_external_label | default: 'Jetzt kaufen' }}">
-            {{ cta_external_label | default: 'Bei Amazon ansehen →' }}
+             aria-label="{{ product.title }} – {{ cta_external_label | default: cta_buy_default }}">
+            {{ cta_external_label | default: cta_amazon_default }}
           </a>
         {%- elsif price_is_request -%}
           <a href="mailto:support@lumonova.com?subject=Anfrage%20{{ product.title | url_encode }}" class="btn-amber">

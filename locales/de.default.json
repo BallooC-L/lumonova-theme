@@ -145,7 +145,11 @@
     "specs_title": "Alles, was zählt.",
     "specs_coming": "Technische Daten folgen.",
     "compat_eyebrow": "Kompatibilität",
-    "compat_title": "Vollständig integriert."
+    "compat_title": "Vollständig integriert.",
+    "delivery_default_eu": "3–10 Werktage",
+    "delivery_default_de": "1–3 Werktage",
+    "cta_buy_default": "Jetzt kaufen",
+    "cta_amazon_default": "Bei Amazon ansehen →"
   },
   "collection": {
     "eyebrow": "Sortiment",
