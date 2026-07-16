@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{ localization.language.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+  <meta name="theme-color" content="#0a0908">
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} – {{ current_tags | join: ', ' }}{% endif %}
+    {%- unless page_title contains shop.name %} – {{ shop.name }}{% endunless %}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- comment -%} Favicon {%- endcomment -%}
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+  {%- endif -%}
+
+  {%- comment -%} Fonts {%- endcomment -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  {%- comment -%} Styles {%- endcomment -%}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+
+  {{ content_for_header }}
+</head>
+
+<body>
+
+  {%- comment -%} Global locale prefix — '' für DE (default), '/en' für EN usw. {%- endcomment -%}
+  {%- assign locale_prefix = '' -%}
+  {%- unless localization.language.iso_code == shop.primary_locale -%}
+    {%- assign locale_prefix = '/' | append: localization.language.iso_code -%}
+  {%- endunless -%}
+
+  {%- comment -%} Announcement bar {%- endcomment -%}
+  {% section 'announcement-bar' %}
+
+  {%- comment -%} Header {%- endcomment -%}
+  {% section 'header' %}
+
+  {%- comment -%} Off-Canvas Cart Drawer (global, once) {%- endcomment -%}
+  {% render 'cart-drawer' %}
+
+  {%- comment -%} Main content {%- endcomment -%}
+  <main id="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- comment -%} Footer {%- endcomment -%}
+  {% section 'footer' %}
+
+  {%- comment -%} Scripts {%- endcomment -%}
+  {{ 'theme.js' | asset_url | script_tag }}
+  {{ 'cart-drawer.js' | asset_url | script_tag }}
+
+</body>
+</html>

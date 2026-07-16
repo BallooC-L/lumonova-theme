@@ -1,0 +1,29 @@
+<section class="section bg-base">
+  <div class="container" style="max-width:56rem;">
+    <article class="surface-soft" style="padding:3rem;">
+      <h1 class="section-title" style="font-size:clamp(24px,3vw,36px); margin-bottom:2rem;">{{ page.title }}</h1>
+      <div class="rte" style="color:var(--fg-mid); line-height:1.75; font-size:15px;">
+        {{ page.content }}
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .rte h2 { font-size: 20px; font-weight: 700; color: var(--fg-high); margin: 2rem 0 0.75rem; }
+  .rte h3 { font-size: 16px; font-weight: 600; color: var(--fg-high); margin: 1.5rem 0 0.5rem; }
+  .rte p { margin-bottom: 1rem; }
+  .rte a { color: var(--color-amber); text-decoration: underline; }
+  .rte ul, .rte ol { margin: 0.75rem 0 1rem 1.5rem; }
+  .rte ul { list-style: disc; }
+  .rte ol { list-style: decimal; }
+  .rte li { margin-bottom: 0.5rem; }
+  .rte strong { color: var(--fg-high); font-weight: 600; }
+</style>
+
+{% schema %}
+{
+  "name": "Seite",
+  "settings": []
+}
+{% endschema %}

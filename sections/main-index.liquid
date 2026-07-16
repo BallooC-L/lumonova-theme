@@ -1,0 +1,424 @@
+{%- assign locale_prefix = "" -%}
+{%- unless localization.language.iso_code == "de" -%}
+  {%- assign locale_prefix = "/" | append: localization.language.iso_code -%}
+{%- endunless -%}
+{%- comment -%}
+  main-index.liquid
+  Homepage — alle Sektionen in Reihenfolge:
+  1. Hero, 2. USP-Bar, 3. Categories, 4. TierLadder + TierGrid,
+  5. Atmosphere, 6. Featured Products, 7. Compatibility, 8. Trust
+{%- endcomment -%}
+
+{%- assign hero_image = section.settings.hero_image -%}
+{%- assign hero_headline_1 = section.settings.hero_headline_1 | default: 'Kein Hub.' -%}
+{%- assign hero_headline_2 = section.settings.hero_headline_2 | default: 'Kein Lock-in.' -%}
+{%- assign hero_headline_3 = section.settings.hero_headline_3 | default: 'Einfach smart.' -%}
+{%- assign hero_body = section.settings.hero_body -%}
+{%- assign hero_cta_primary_label = section.settings.hero_cta_primary_label | default: 'Kollektion ansehen' -%}
+{%- assign hero_cta_primary_url = section.settings.hero_cta_primary_url | default: '/collections/all' -%}
+{%- assign hero_cta_ghost_label = section.settings.hero_cta_ghost_label | default: 'SMART+ entdecken' -%}
+{%- assign hero_cta_ghost_url = section.settings.hero_cta_ghost_url | default: '/collections/all?filter.p.tag=tier-smart-plus' -%}
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  1. HERO
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+<section class="hero" aria-label="{{ 'home.hero.aria' | t }}">
+  {%- if hero_image != blank -%}
+    <img
+      src="{{ hero_image | img_url: '2000x' }}"
+      srcset="{{ hero_image | img_url: '800x' }} 800w, {{ hero_image | img_url: '1400x' }} 1400w, {{ hero_image | img_url: '2000x' }} 2000w"
+      sizes="100vw"
+      alt=""
+      aria-hidden="true"
+      class="hero__bg"
+      loading="eager"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="hero__grid-overlay hero-grid" aria-hidden="true"></div>
+
+  {% render 'logo-arc', variant: 'hero' %}
+
+  <div class="container">
+    <div class="hero__content reveal">
+      <span class="hero__eyebrow-line" aria-hidden="true"></span>
+      <p class="hero__eyebrow">Smart Lighting</p>
+      <h1 class="hero__headline">
+        <span class="fg-primary">{{ hero_headline_1 }}</span>
+        <span class="text-amber">{{ hero_headline_2 }}</span>
+        <span class="fg-minimal" style="font-weight:300;">{{ hero_headline_3 }}</span>
+      </h1>
+      {%- if hero_body != blank -%}
+        <p class="hero__body">{{ hero_body }}</p>
+      {%- else -%}
+        <p class="hero__body">{{ 'home.hero.body_default' | t }}</p>
+      {%- endif -%}
+      <div class="hero__ctas">
+        <a href="{{ hero_cta_primary_url }}" class="btn-amber">{{ hero_cta_primary_label }}</a>
+        <a href="{{ hero_cta_ghost_url }}" class="btn-ghost">{{ hero_cta_ghost_label }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  2. USP BAR
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+<section class="usp-bar" aria-label="{{ 'home.usps.aria' | t }}">
+  <div class="container">
+    <ul class="usp-bar__list" role="list">
+      {%- assign usps = 'Smart Lighting aus Europa|Kein Hub erforderlich|3 Jahre EU-Garantie' | split: '|' -%}
+      {%- if section.settings.usp_1 != blank -%}
+        {%- assign usps = '' -%}
+        {%- if section.settings.usp_1 != blank -%}{%- assign usps = usps | append: section.settings.usp_1 -%}{%- endif -%}
+        {%- if section.settings.usp_2 != blank -%}{%- assign usps = usps | append: '|' | append: section.settings.usp_2 -%}{%- endif -%}
+        {%- if section.settings.usp_3 != blank -%}{%- assign usps = usps | append: '|' | append: section.settings.usp_3 -%}{%- endif -%}
+        {%- assign usps = usps | split: '|' -%}
+      {%- endif -%}
+      {%- for usp in usps -%}
+        <li class="usp-bar__item" role="listitem">
+          <span class="usp-bar__text">{{ usp }}</span>
+          {%- unless forloop.last -%}<span class="usp-bar__divider" aria-hidden="true"></span>{%- endunless -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  3. CATEGORIES
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+<section class="section bg-base" aria-labelledby="categories-title">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">{{ 'home.categories.eyebrow' | t }}</p>
+      <h2 class="section-title" id="categories-title">{{ 'home.categories.title' | t }}</h2>
+      <p class="section-subtitle">{{ 'home.categories.subtitle' | t }}</p>
+    </div>
+    <div class="grid-4 reveal">
+      {%- comment -%} Smart Bulbs — available {%- endcomment -%}
+      <a href="{{ locale_prefix }}/collections/smart-bulbs" aria-label="{{ 'home.categories.smart_bulbs_aria' | t }}">
+        <article class="category-card category-card--available">
+          <span class="category-card__icon" aria-hidden="true">
+            <span class="material-symbols-outlined text-amber" style="font-size:32px;">lightbulb</span>
+          </span>
+          <h3 class="category-card__name">Smart Bulbs</h3>
+          <p class="category-card__desc">{{ 'home.categories.smart_bulbs_desc' | t }}</p>
+          <div class="category-card__status">
+            <span class="category-card__available">{{ 'home.categories.available' | t }}</span>
+          </div>
+        </article>
+      </a>
+
+      {%- comment -%} Filament — coming soon {%- endcomment -%}
+      <article class="category-card category-card--unavailable" aria-disabled="true">
+        <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
+          <span class="material-symbols-outlined text-amber" style="font-size:32px;">emoji_objects</span>
+        </span>
+        <h3 class="category-card__name">Filament</h3>
+        <p class="category-card__desc">{{ 'home.categories.filament_desc' | t }}</p>
+        <div class="category-card__status">
+          <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+        </div>
+      </article>
+
+      {%- comment -%} Panels — available {%- endcomment -%}
+        <article class="category-card category-card--unavailable" aria-disabled="true">
+          <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
+            <span class="material-symbols-outlined text-amber" style="font-size:32px;">grid_view</span>
+          </span>
+          <h3 class="category-card__name">Panels</h3>
+          <p class="category-card__desc">{{ 'home.categories.panels_desc' | t }}</p>
+          <div class="category-card__status">
+            <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+          </div>
+        </article>
+      </a>
+
+      {%- comment -%} Ceiling Lights — coming soon {%- endcomment -%}
+      <article class="category-card category-card--unavailable" aria-disabled="true">
+        <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
+          <span class="material-symbols-outlined text-amber" style="font-size:32px;">wb_iridescent</span>
+        </span>
+        <h3 class="category-card__name">Ceiling Lights</h3>
+        <p class="category-card__desc">{{ 'home.categories.ceiling_lights_desc' | t }}</p>
+        <div class="category-card__status">
+          <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  4. TIERS
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+<section class="section bg-mid" aria-labelledby="tiers-title">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">{{ 'home.tiers.eyebrow' | t }}</p>
+      <h2 class="section-title" id="tiers-title">{{ 'home.tiers.title' | t }}</h2>
+      <p class="section-subtitle">{{ 'home.tiers.subtitle' | t }}</p>
+    </div>
+
+    <div class="grid-4 reveal">
+
+      {%- comment -%} CLASSIC {%- endcomment -%}
+      <article class="tier-card">
+        <div>
+          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 01</p>
+          <h3 class="tier-card__name">CLASSIC</h3>
+          <p class="tier-card__range">€20–€60</p>
+          <ul class="tier-card__features" role="list">
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic.f1' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic.f2' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic.f3' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic.f4' | t }}
+            </li>
+          </ul>
+        </div>
+        <div style="margin-top:2.5rem; display:flex; justify-content:center;">
+          <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>
+        </div>
+      </article>
+
+      {%- comment -%} CLASSIC+ {%- endcomment -%}
+      <article class="tier-card">
+        <div>
+          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 02</p>
+          <h3 class="tier-card__name">CLASSIC+</h3>
+          <p class="tier-card__range">€35–€80</p>
+          <ul class="tier-card__features" role="list">
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic_plus.f1' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic_plus.f2' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic_plus.f3' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.classic_plus.f4' | t }}
+            </li>
+          </ul>
+        </div>
+        <div style="margin-top:2.5rem; display:flex; justify-content:center;">
+          <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>
+        </div>
+      </article>
+
+      {%- comment -%} SMART — recommended {%- endcomment -%}
+      <article class="tier-card tier-card--recommended">
+        <div>
+          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 03</p>
+          <h3 class="tier-card__name">SMART</h3>
+          <p class="tier-card__range">€35–€80</p>
+          <ul class="tier-card__features" role="list">
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart.f1' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart.f2' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart.f3' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart.f4' | t }}
+            </li>
+          </ul>
+        </div>
+        <a href="{{ locale_prefix }}/collections/all?filter.p.tag=tier-smart" class="tier-card__cta">{{ 'home.tiers.learn_more' | t }}</a>
+      </article>
+
+      {%- comment -%} SMART+ — coming soon {%- endcomment -%}
+      <article class="tier-card">
+        <div>
+          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 04</p>
+          <h3 class="tier-card__name">SMART+</h3>
+          <p class="tier-card__range">€55–€120</p>
+          <ul class="tier-card__features" role="list">
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart_plus.f1' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart_plus.f2' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart_plus.f3' | t }}
+            </li>
+            <li class="tier-card__feature">
+              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
+              {{ 'home.tiers.smart_plus.f4' | t }}
+            </li>
+          </ul>
+        </div>
+        <div style="margin-top:2.5rem; display:flex; justify-content:center;">
+          <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  5. ATMOSPHERE
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+<section class="section bg-mid" aria-labelledby="atmosphere-title">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">{{ 'home.atmosphere.eyebrow' | t }}</p>
+      <h2 class="section-title" id="atmosphere-title">{{ 'home.atmosphere.title' | t }}</h2>
+      <p class="section-subtitle">{{ 'home.atmosphere.subtitle' | t }}</p>
+    </div>
+    <div class="atmosphere-grid reveal-fade">
+      <div class="atmosphere-grid__main">
+        <figure class="scene-tile">
+          {%- if section.settings.atmosphere_img_1 != blank -%}
+            <img src="{{ section.settings.atmosphere_img_1 | img_url: '1400x' }}" alt="{{ 'home.atmosphere.img1_alt' | t }}" class="scene-tile__img" loading="lazy">
+          {%- endif -%}
+          <figcaption class="scene-tile__caption">{{ 'home.atmosphere.img1_caption' | t }}</figcaption>
+        </figure>
+      </div>
+      <div>
+        <figure class="scene-tile">
+          {%- if section.settings.atmosphere_img_2 != blank -%}
+            <img src="{{ section.settings.atmosphere_img_2 | img_url: '800x' }}" alt="{{ 'home.atmosphere.img2_alt' | t }}" class="scene-tile__img" loading="lazy">
+          {%- endif -%}
+          <figcaption class="scene-tile__caption">{{ 'home.atmosphere.img2_caption' | t }}</figcaption>
+        </figure>
+      </div>
+      <div>
+        <figure class="scene-tile">
+          {%- if section.settings.atmosphere_img_3 != blank -%}
+            <img src="{{ section.settings.atmosphere_img_3 | img_url: '800x' }}" alt="{{ 'home.atmosphere.img3_alt' | t }}" class="scene-tile__img" loading="lazy">
+          {%- endif -%}
+          <figcaption class="scene-tile__caption">{{ 'home.atmosphere.img3_caption' | t }}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  6. FEATURED PRODUCTS
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+<section class="section bg-mid" aria-labelledby="featured-title">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">{{ 'home.featured.eyebrow' | t }}</p>
+      <h2 class="section-title" id="featured-title">{{ 'home.featured.title' | t }}</h2>
+      <p class="section-subtitle">{{ 'home.featured.subtitle' | t }}</p>
+    </div>
+
+    {%- assign featured_collection = section.settings.featured_collection -%}
+    {%- if featured_collection != blank -%}
+      <div class="grid-4 reveal">
+        {%- for product in featured_collection.products limit: 4 -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="grid-4 reveal">
+        {%- for product in collections.all.products limit: 4 -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div style="margin-top:2rem; display:flex; justify-content:flex-end;">
+      <a href="{{ locale_prefix }}/collections/all" style="display:inline-flex; align-items:center; gap:4px; font-size:12px; text-transform:uppercase; color:var(--color-amber); letter-spacing:var(--tracking-btn);">
+        {{ 'home.featured.all_products' | t }}
+        <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  7. COMPATIBILITY
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+<section class="section bg-base" aria-labelledby="compat-title">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">{{ 'home.compat.eyebrow' | t }}</p>
+      <h2 class="section-title" id="compat-title">{{ 'home.compat.title' | t }}</h2>
+      <p class="section-subtitle">{{ 'home.compat.subtitle' | t }}</p>
+    </div>
+    {% render 'compatibility-grid' %}
+  </div>
+</section>
+
+{%- comment -%}
+  ════════════════════════════════════════════════
+  8. TRUST ROW
+  ════════════════════════════════════════════════
+{%- endcomment -%}
+{% render 'trust-row' %}
+
+{% schema %}
+{
+  "name": "Homepage",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero Hintergrundbild" },
+    { "type": "text", "id": "hero_headline_1", "label": "Headline Zeile 1", "default": "Kein Hub." },
+    { "type": "text", "id": "hero_headline_2", "label": "Headline Zeile 2 (Amber)", "default": "Kein Lock-in." },
+    { "type": "text", "id": "hero_headline_3", "label": "Headline Zeile 3 (Ghost)", "default": "Einfach smart." },
+    { "type": "textarea", "id": "hero_body", "label": "Fließtext", "default": "LUMOnova ist Beleuchtung, die zu Dir kommt – nicht zu einem Ökosystem. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das funktioniert." },
+    { "type": "text", "id": "hero_cta_primary_label", "label": "CTA 1 Text", "default": "Kollektion ansehen" },
+    { "type": "url", "id": "hero_cta_primary_url", "label": "CTA 1 URL" },
+    { "type": "text", "id": "hero_cta_ghost_label", "label": "CTA 2 Text", "default": "SMART+ entdecken" },
+    { "type": "url", "id": "hero_cta_ghost_url", "label": "CTA 2 URL" },
+    { "type": "header", "content": "USP Bar" },
+    { "type": "text", "id": "usp_1", "label": "USP 1", "default": "Smart Lighting aus Europa" },
+    { "type": "text", "id": "usp_2", "label": "USP 2", "default": "Kein Hub erforderlich" },
+    { "type": "text", "id": "usp_3", "label": "USP 3", "default": "3 Jahre EU-Garantie" },
+    { "type": "header", "content": "Atmosphere Bilder" },
+    { "type": "image_picker", "id": "atmosphere_img_1", "label": "Atmosphäre Bild 1 (groß)" },
+    { "type": "image_picker", "id": "atmosphere_img_2", "label": "Atmosphäre Bild 2" },
+    { "type": "image_picker", "id": "atmosphere_img_3", "label": "Atmosphäre Bild 3" },
+    { "type": "header", "content": "Featured Products" },
+    { "type": "collection", "id": "featured_collection", "label": "Featured Collection" }
+  ],
+  "presets": [{ "name": "Homepage" }]
+}
+{% endschema %}

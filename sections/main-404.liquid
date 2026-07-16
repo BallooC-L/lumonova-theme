@@ -1,0 +1,19 @@
+{%- assign locale_prefix = "" -%}
+{%- unless localization.language.iso_code == "de" -%}
+  {%- assign locale_prefix = "/" | append: localization.language.iso_code -%}
+{%- endunless -%}
+<section class="section bg-base" style="min-height:60vh; display:flex; align-items:center;">
+  <div class="container" style="text-align:center;">
+    <p class="material-symbols-outlined text-amber" style="font-size:64px; margin-bottom:1.5rem;" aria-hidden="true">search_off</p>
+    <h1 class="section-title" style="margin-bottom:1rem;">{{ '404.title' | t }}</h1>
+    <p class="section-subtitle" style="margin: 0 auto 2rem;">{{ '404.body' | t }}</p>
+    <a href="{{ locale_prefix }}/" class="btn-amber">{{ '404.cta' | t }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

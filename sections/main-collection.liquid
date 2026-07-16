@@ -1,0 +1,146 @@
+{%- comment -%}
+  main-collection.liquid
+  Kollektionsseite mit Kategorie- und Tier-Filter-Chips + Sortierung
+{%- endcomment -%}
+
+{%- assign current_collection = collection -%}
+
+<section class="section bg-base" aria-labelledby="collection-title">
+  <div class="container">
+
+    {%- comment -%} Heading {%- endcomment -%}
+    <div class="section-heading">
+      <p class="section-eyebrow">{{ 'collection.eyebrow' | t }}</p>
+      <h1 class="section-title" id="collection-title">
+        {%- if current_collection.title != blank -%}
+          {{ current_collection.title }}
+        {%- else -%}
+          {{ 'collection.all_products_title' | t }}
+        {%- endif -%}
+      </h1>
+      <p class="section-subtitle">{{ 'collection.subtitle' | t }}</p>
+      <div style="width:2rem; height:2px; background:var(--color-amber); margin-top:1rem;"></div>
+    </div>
+
+    {%- comment -%} Category filter chips {%- endcomment -%}
+    <div style="margin-top:2.5rem; display:flex; flex-direction:column; gap:1rem;">
+      <div>
+        <p class="filter-row__label">{{ 'collection.filter_category' | t }}</p>
+        <div class="filter-row__chips no-scrollbar">
+          <a href="{{ current_collection.url }}" class="filter-chip{% unless current_tags %} is-active{% endunless %}">
+            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_view</span>
+            {{ 'collection.filter_all' | t }}
+          </a>
+          <a href="{{ current_collection.url }}/smart-bulbs" class="filter-chip{% if current_tags contains 'smart-bulbs' %} is-active{% endif %}">
+            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">lightbulb</span>
+            Smart Bulbs
+          </a>
+          <a href="{{ current_collection.url }}/filament" class="filter-chip{% if current_tags contains 'filament' %} is-active{% endif %}">
+            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">emoji_objects</span>
+            Filament
+          </a>
+          <a href="{{ current_collection.url }}/panels" class="filter-chip{% if current_tags contains 'panels' %} is-active{% endif %}">
+            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_on</span>
+            Panels
+          </a>
+          <a href="{{ current_collection.url }}/ceiling-lights" class="filter-chip{% if current_tags contains 'ceiling-lights' %} is-active{% endif %}">
+            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">light_mode</span>
+            Ceiling Lights
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p class="filter-row__label">{{ 'collection.filter_tier' | t }}</p>
+        <div class="filter-row__chips no-scrollbar">
+          <a href="{{ current_collection.url }}" class="filter-chip{% unless current_tags contains 'tier-' %} is-active{% endunless %}">{{ 'collection.filter_all_tiers' | t }}</a>
+          <a href="{{ current_collection.url }}/tier-classic" class="filter-chip{% if current_tags contains 'tier-classic' %} is-active{% endif %}">CLASSIC</a>
+          <a href="{{ current_collection.url }}/tier-classic-plus" class="filter-chip{% if current_tags contains 'tier-classic-plus' %} is-active{% endif %}">CLASSIC+</a>
+          <a href="{{ current_collection.url }}/tier-smart" class="filter-chip{% if current_tags contains 'tier-smart' %} is-active{% endif %}">SMART</a>
+          <a href="{{ current_collection.url }}/tier-smart-plus" class="filter-chip{% if current_tags contains 'tier-smart-plus' %} is-active{% endif %}">SMART+</a>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Toolbar: count + sort {%- endcomment -%}
+    <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:1.5rem; margin-bottom:2rem;">
+      <p style="font-size:13px; font-weight:500; color:var(--fg-mid);" aria-live="polite">
+        {{ collection.products_count }}
+        {%- if collection.products_count == 1 -%} {{ 'collection.product_singular' | t }}{%- else -%} {{ 'collection.product_plural' | t }}{%- endif -%}
+      </p>
+
+      <label style="display:flex; align-items:center; gap:0.5rem; font-size:13px; color:var(--fg-mid);">
+        <span>{{ 'collection.sort_label' | t }}:</span>
+        <select
+          class="sort-select"
+          onchange="location.href = this.value"
+          aria-label="{{ 'collection.sort_label' | t }}"
+        >
+          <option value="{{ current_collection.url }}?sort_by=manual"
+            {% if collection.sort_by == 'manual' or collection.sort_by == '' %}selected{% endif %}>
+            {{ 'collection.sort_recommended' | t }}
+          </option>
+          <option value="{{ current_collection.url }}?sort_by=price-ascending"
+            {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>
+            {{ 'collection.sort_price_asc' | t }}
+          </option>
+          <option value="{{ current_collection.url }}?sort_by=price-descending"
+            {% if collection.sort_by == 'price-descending' %}selected{% endif %}>
+            {{ 'collection.sort_price_desc' | t }}
+          </option>
+          <option value="{{ current_collection.url }}?sort_by=title-ascending"
+            {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>
+            {{ 'collection.sort_name_az' | t }}
+          </option>
+        </select>
+      </label>
+    </div>
+
+    {%- comment -%} Product grid {%- endcomment -%}
+    {%- if collection.products.size > 0 -%}
+      <div class="grid-3" role="list">
+        {%- for product in collection.products -%}
+          <div role="listitem">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} Pagination {%- endcomment -%}
+      {%- if paginate.pages > 1 -%}
+        <div style="display:flex; justify-content:center; gap:0.5rem; margin-top:3rem;" aria-label="{{ 'collection.pagination_aria' | t }}">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="btn-ghost" style="padding:0.5rem 1rem;">{{ 'collection.pagination_prev' | t }}</a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}" class="filter-chip">{{ part.title }}</a>
+            {%- else -%}
+              <span class="filter-chip is-active">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="btn-ghost" style="padding:0.5rem 1rem;">{{ 'collection.pagination_next' | t }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      {%- comment -%} Empty state {%- endcomment -%}
+      <div class="empty-state" role="status">
+        <p class="empty-state__icon material-symbols-outlined" aria-hidden="true">search_off</p>
+        <p class="empty-state__title">{{ 'collection.empty_title' | t }}</p>
+        <p class="empty-state__body">{{ 'collection.empty_body' | t }}</p>
+        <a href="{{ current_collection.url }}" class="btn-ghost">{{ 'collection.reset_filter' | t }}</a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kollektion",
+  "settings": []
+}
+{% endschema %}

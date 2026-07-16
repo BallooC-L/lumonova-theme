@@ -1,0 +1,66 @@
+{%- assign locale_prefix = "" -%}
+{%- unless localization.language.iso_code == "de" -%}
+  {%- assign locale_prefix = "/" | append: localization.language.iso_code -%}
+{%- endunless -%}
+<section class="section bg-base">
+  <div class="container" style="max-width:56rem;">
+    <div class="section-heading">
+      <p class="section-eyebrow">{{ 'cart.eyebrow' | t }}</p>
+      <h1 class="section-title">{{ 'cart.title' | t }}</h1>
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="/cart" method="post">
+        {%- for item in cart.items -%}
+          <div class="surface-soft" style="display:grid; grid-template-columns:80px 1fr auto; gap:1.25rem; align-items:center; padding:1.25rem; margin-bottom:0.75rem;">
+            <a href="{{ item.url }}">
+              {%- if item.image -%}
+                <img src="{{ item.image | img_url: '160x160' }}" alt="{{ item.title | escape }}" style="width:80px; height:80px; object-fit:contain; background:var(--color-mid); border-radius:0.5rem;" loading="lazy">
+              {%- endif -%}
+            </a>
+            <div>
+              <a href="{{ item.url }}" style="font-size:15px; font-weight:600; color:var(--fg-high);">{{ item.product.title }}</a>
+              {%- if item.variant.title != 'Default Title' -%}
+                <p style="font-size:12px; color:var(--fg-low); margin-top:0.25rem;">{{ item.variant.title }}</p>
+              {%- endif -%}
+              <p style="font-size:13px; color:var(--fg-mid); margin-top:0.25rem;">{{ item.price | money }}</p>
+              <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.75rem;">
+                <button type="button" onclick="updateQty('{{ item.key }}', {{ item.quantity | minus: 1 }})" class="btn-ghost" style="padding:4px 10px; font-size:14px;">-</button>
+                <span style="font-size:14px; color:var(--fg-high); min-width:24px; text-align:center;">{{ item.quantity }}</span>
+                <button type="button" onclick="updateQty('{{ item.key }}', {{ item.quantity | plus: 1 }})" class="btn-ghost" style="padding:4px 10px; font-size:14px;">+</button>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-size:15px; font-weight:700; color:var(--fg-primary);">{{ item.line_price | money }}</p>
+              <button type="button" onclick="removeItem('{{ item.key }}')" style="font-size:12px; color:var(--fg-low); background:none; border:none; margin-top:0.5rem; cursor:pointer; text-decoration:underline;">{{ 'cart.remove' | t }}</button>
+            </div>
+          </div>
+        {%- endfor -%}
+
+        <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:1.5rem; margin-top:1rem; display:flex; flex-direction:column; align-items:flex-end; gap:1rem;">
+          <p style="font-size:18px; font-weight:700; color:var(--fg-primary);">{{ 'cart.total' | t }}: {{ cart.total_price | money }}</p>
+          <button type="submit" name="checkout" class="btn-amber">{{ 'cart.checkout' | t }}</button>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="empty-state">
+        <p class="empty-state__icon material-symbols-outlined" aria-hidden="true">shopping_bag</p>
+        <p class="empty-state__title">{{ 'cart.empty_title' | t }}</p>
+        <p class="empty-state__body">{{ 'cart.empty_body' | t }}</p>
+        <a href="{{ locale_prefix }}/collections/all" class="btn-amber">{{ 'cart.empty_cta' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script>
+function updateQty(key, qty) {
+  if (qty < 0) return;
+  fetch('/cart/change.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: key, quantity: qty })
+  }).then(function() { location.reload(); });
+}
+function removeItem(key) { updateQty(key, 0); }
+</script>

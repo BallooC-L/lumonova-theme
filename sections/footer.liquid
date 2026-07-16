@@ -1,0 +1,82 @@
+{%- assign locale_prefix = "" -%}
+{%- unless localization.language.iso_code == "de" -%}
+  {%- assign locale_prefix = "/" | append: localization.language.iso_code -%}
+{%- endunless -%}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="site-footer__grid">
+
+      {%- comment -%} Logo + Tagline {%- endcomment -%}
+      <div style="grid-column: span 2;" class="lg-col-1">
+        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} – {{ 'nav.logo_aria' | t }}">
+          {%- if section.settings.logo != blank -%}
+            <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}" class="site-footer__logo">
+          {%- else -%}
+            <span class="site-footer__logo" style="display:block; font-size:20px; font-weight:700; color:var(--fg-primary); letter-spacing:var(--tracking-logo);">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+        <p class="site-footer__tagline">{{ 'footer.tagline' | t }}</p>
+        <a href="/pages/vertrag-widerrufen" class="btn-amber" style="margin-top: 1rem;">Vertrag widerrufen</a>
+      </div>
+
+      {%- comment -%} Products {%- endcomment -%}
+      <div>
+        <h3 class="site-footer__col-title">{{ 'footer.col_products' | t }}</h3>
+        <nav aria-label="{{ 'footer.col_products' | t }}">
+          <span class="site-footer__link site-footer__link--disabled" title="{{ 'general.coming_soon' | t }}">CLASSIC</span>
+          <span class="site-footer__link site-footer__link--disabled" title="{{ 'general.coming_soon' | t }}">CLASSIC+</span>
+          <a href="{{ locale_prefix }}/collections/all?filter.p.tag=tier-smart" class="site-footer__link">SMART</a>
+          <span class="site-footer__link site-footer__link--disabled" title="{{ 'general.coming_soon' | t }}">SMART+</span>
+        </nav>
+      </div>
+
+      {%- comment -%} Legal {%- endcomment -%}
+      <div>
+        <h3 class="site-footer__col-title">{{ 'footer.col_legal' | t }}</h3>
+        <nav aria-label="{{ 'footer.col_legal' | t }}">
+          <a href="{{ locale_prefix }}/policies/legal-notice" class="site-footer__link">{{ 'footer.impressum' | t }}</a>
+          <a href="{{ locale_prefix }}/policies/privacy-policy" class="site-footer__link">{{ 'footer.datenschutz' | t }}</a>
+          <a href="{{ locale_prefix }}/policies/terms-of-service" class="site-footer__link">{{ 'footer.agb' | t }}</a>
+          <a href="{{ locale_prefix }}/policies/refund-policy" class="site-footer__link">{{ 'footer.widerruf' | t }}</a>
+        </nav>
+      </div>
+
+      {%- comment -%} Contact {%- endcomment -%}
+      <div>
+        <h3 class="site-footer__col-title">{{ 'footer.col_contact' | t }}</h3>
+        <a href="mailto:info@lumo-nova.de" class="site-footer__link">info@lumo-nova.de</a>
+        <span class="site-footer__link site-footer__link--disabled">lumo-nova.de</span>
+        <span class="site-footer__link site-footer__link--disabled">Willich, DE</span>
+      </div>
+    </div>
+
+    {%- comment -%} Bottom bar {%- endcomment -%}
+    <div class="site-footer__bottom">
+      <p class="site-footer__copy">{{ 'footer.copyright' | t: year: 'now' | date: '%Y' }}</p>
+      <ul class="site-footer__certs" role="list">
+        <li class="site-footer__cert">CE</li>
+        <li class="site-footer__cert">WEEE</li>
+        <li class="site-footer__cert">RoHS</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @media (min-width: 1024px) {
+    .lg-col-1 { grid-column: span 1 !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,39 @@
+{%- comment -%} compatibility-grid.liquid — portiert aus CompatibilityGrid.tsx {%- endcomment -%}
+<div>
+  <div class="grid-3">
+    <article class="compat-card">
+      <span class="compat-card__num">01</span>
+      <div class="compat-card__badge">
+        <img src="{{ 'works-with-Google-Home.webp' | asset_url }}" alt="Works with Google Home" loading="lazy">
+      </div>
+      <h3 class="compat-card__name">Google Home</h3>
+      <p class="compat-card__avail">{{ 'compat.available_in' | t }}: <span class="text-amber" style="font-weight:600;">{{ 'compat.smart_and_smart_plus' | t }}</span></p>
+    </article>
+
+    <article class="compat-card">
+      <span class="compat-card__num">02</span>
+      <div class="compat-card__badge">
+        <img src="{{ 'works-with-Alexa.webp' | asset_url }}" alt="Works with Amazon Alexa" loading="lazy">
+      </div>
+      <h3 class="compat-card__name">Amazon Alexa</h3>
+      <p class="compat-card__avail">{{ 'compat.available_in' | t }}: <span class="text-amber" style="font-weight:600;">{{ 'compat.smart_and_smart_plus' | t }}</span></p>
+    </article>
+
+    <article class="compat-card">
+      <span class="compat-card__num">03</span>
+      <div class="compat-card__badge">
+        <img src="{{ 'Tuya-Logo.webp' | asset_url }}" alt="Tuya Smart" loading="lazy">
+      </div>
+      <h3 class="compat-card__name">Tuya Smart</h3>
+      <p class="compat-card__avail">{{ 'compat.available_in' | t }}: <span class="text-amber" style="font-weight:600;">{{ 'compat.smart_app_control' | t }}</span></p>
+    </article>
+  </div>
+
+  <div class="coming-soon-bar">
+    <span class="coming-soon-bar__label">{{ 'compat.in_preparation' | t }}:</span>
+    <ul class="coming-soon-bar__pills" role="list">
+      <li class="coming-soon-pill" role="listitem">Apple Home</li>
+      <li class="coming-soon-pill" role="listitem">SmartThings</li>
+    </ul>
+  </div>
+</div>

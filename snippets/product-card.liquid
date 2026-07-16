@@ -1,0 +1,69 @@
+{%- comment -%}
+  product-card.liquid
+  Usage: {% render 'product-card', product: product %}
+  Portiert aus ProductCard.tsx
+{%- endcomment -%}
+
+{%- assign tier = product.metafields.custom.tier | default: '' -%}
+{%- assign price_is_request = false -%}
+{%- if product.price == 0 -%}{%- assign price_is_request = true -%}{%- endif -%}
+
+{%- comment -%} Tier pill colors {%- endcomment -%}
+{%- assign tier_color = 'rgba(232,160,96,0.75)' -%}
+{%- assign tier_border = '1px solid rgba(232,160,96,0.25)' -%}
+{%- if tier == 'CLASSIC' -%}
+  {%- assign tier_color = 'rgba(232,160,96,0.55)' -%}
+  {%- assign tier_border = '1px solid rgba(232,160,96,0.15)' -%}
+{%- elsif tier == 'CLASSIC+' -%}
+  {%- assign tier_color = 'rgba(232,160,96,0.65)' -%}
+  {%- assign tier_border = '1px solid rgba(232,160,96,0.20)' -%}
+{%- elsif tier == 'SMART+' -%}
+  {%- assign tier_color = '#E8A060' -%}
+  {%- assign tier_border = '1px solid rgba(232,160,96,0.40)' -%}
+{%- endif -%}
+
+<a href="{{ product.url }}" class="product-card" aria-label="{{ product.title }} – {{ 'product_card.view_details' | t }}">
+  <article>
+    <div class="product-card__image-wrap">
+      <div class="product-card__glow" aria-hidden="true"></div>
+
+      {%- if tier != blank -%}
+        <span
+          class="product-card__tier-pill"
+          style="color:{{ tier_color }}; border:{{ tier_border }};"
+        >{{ tier }}</span>
+      {%- endif -%}
+
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | img_url: '400x' }}"
+          alt="{{ product.featured_image.alt | escape | default: product.title }}"
+          class="product-card__img"
+          loading="lazy"
+        >
+      {%- else -%}
+        <span class="material-symbols-outlined text-amber" style="font-size:80px; position:relative; z-index:2; filter:drop-shadow(0 0 30px rgba(232,160,96,0.35));" aria-hidden="true">lightbulb</span>
+      {%- endif -%}
+    </div>
+
+    <div class="product-card__body">
+      <div>
+        <p class="product-card__name">{{ product.title }}</p>
+        <p class="product-card__sku">{{ product.metafields.custom.sku | default: product.variants.first.sku }}</p>
+      </div>
+      <div class="product-card__footer">
+        <p class="product-card__price{% if price_is_request %} product-card__price--request{% endif %}">
+          {%- if price_is_request -%}
+            {{ 'product.price_on_request' | t }}
+          {%- else -%}
+            {{ product.price | money }}
+          {%- endif -%}
+        </p>
+        <span class="product-card__cta" aria-hidden="true">
+          {{ 'product_card.view' | t }}
+          <span class="material-symbols-outlined" style="font-size:15px;" aria-hidden="true">arrow_forward</span>
+        </span>
+      </div>
+    </div>
+  </article>
+</a>

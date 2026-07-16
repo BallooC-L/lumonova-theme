@@ -1,0 +1,248 @@
+{%- comment -%}
+  main-support.liquid
+  Alle Texte via {{ '...' | t }} → vollständig erkannt von Translate & Adapt
+{%- endcomment -%}
+
+<!-- HERO -->
+<section class="sp-hero bg-deepest">
+  <div class="container sp-hero__inner">
+    <p class="sp-eyebrow">{{ 'support.hero.eyebrow' | t }}</p>
+    <h1 class="sp-hero__title">{{ 'support.hero.title' | t }} <span class="text-amber">{{ 'support.hero.title_accent' | t }}</span></h1>
+    <p class="sp-hero__sub">{{ 'support.hero.sub' | t }}</p>
+  </div>
+</section>
+
+<!-- USP-LEISTE -->
+<section class="sp-usps bg-mid">
+  <div class="container sp-usps__grid">
+    <div class="sp-usp-card">
+      <span class="material-symbols-outlined sp-usp-card__icon">verified</span>
+      <p class="sp-usp-card__label">{{ 'support.usps.usp1.label' | t }}</p>
+      <p class="sp-usp-card__sub">{{ 'support.usps.usp1.sub' | t }}</p>
+    </div>
+    <div class="sp-usp-card">
+      <span class="material-symbols-outlined sp-usp-card__icon">location_on</span>
+      <p class="sp-usp-card__label">{{ 'support.usps.usp2.label' | t }}</p>
+      <p class="sp-usp-card__sub">{{ 'support.usps.usp2.sub' | t }}</p>
+    </div>
+    <div class="sp-usp-card">
+      <span class="material-symbols-outlined sp-usp-card__icon">gpp_good</span>
+      <p class="sp-usp-card__label">{{ 'support.usps.usp3.label' | t }}</p>
+      <p class="sp-usp-card__sub">{{ 'support.usps.usp3.sub' | t }}</p>
+    </div>
+    <div class="sp-usp-card">
+      <span class="material-symbols-outlined sp-usp-card__icon">support_agent</span>
+      <p class="sp-usp-card__label">{{ 'support.usps.usp4.label' | t }}</p>
+      <p class="sp-usp-card__sub">{{ 'support.usps.usp4.sub' | t }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT + FORMULAR -->
+<section class="sp-main bg-base">
+  <div class="container sp-main__grid">
+
+    <!-- Linke Spalte -->
+    <div class="sp-info">
+      <div class="sp-info__block">
+        <p class="sp-block-eyebrow">{{ 'support.contact.eyebrow' | t }}</p>
+        <h2 class="sp-block-title">{{ 'support.contact.title' | t }}</h2>
+
+        <a href="mailto:{{ section.settings.email }}" class="sp-contact-row">
+          <span class="material-symbols-outlined sp-contact-row__icon">mail</span>
+          <div>
+            <p class="sp-contact-row__label">{{ 'support.contact.email_label' | t }}</p>
+            <p class="sp-contact-row__value">{{ section.settings.email }}</p>
+          </div>
+          <span class="material-symbols-outlined sp-contact-row__arrow">arrow_forward</span>
+        </a>
+
+        <a href="tel:{{ section.settings.phone | remove: ' ' | remove: '-' }}" class="sp-contact-row">
+          <span class="material-symbols-outlined sp-contact-row__icon">phone</span>
+          <div>
+            <p class="sp-contact-row__label">{{ 'support.contact.phone_label' | t }}</p>
+            <p class="sp-contact-row__value">{{ section.settings.phone }}</p>
+          </div>
+          <span class="material-symbols-outlined sp-contact-row__arrow">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="sp-info__block" style="margin-top:2.5rem;">
+        <p class="sp-block-eyebrow">{{ 'support.hours.eyebrow' | t }}</p>
+        <h2 class="sp-block-title">{{ 'support.hours.title' | t }}</h2>
+        <table class="sp-hours">
+          <tbody>
+            <tr>
+              <td class="sp-hours__day">{{ 'support.hours.row1_day' | t }}</td>
+              <td class="sp-hours__time text-amber">{{ 'support.hours.row1_time' | t }}</td>
+            </tr>
+            <tr>
+              <td class="sp-hours__day">{{ 'support.hours.row2_day' | t }}</td>
+              <td class="sp-hours__time sp-hours__time--closed">{{ 'support.hours.closed' | t }}</td>
+            </tr>
+            <tr>
+              <td class="sp-hours__day">{{ 'support.hours.row3_day' | t }}</td>
+              <td class="sp-hours__time sp-hours__time--closed">{{ 'support.hours.closed' | t }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="sp-hours__note">{{ 'support.hours.note' | t }}</p>
+      </div>
+
+      <div class="sp-info__block sp-address-block" style="margin-top:2.5rem;">
+        <span class="material-symbols-outlined" style="color:var(--fg-low);font-size:16px;margin-right:6px;vertical-align:-3px;">apartment</span>
+        <span class="sp-address-text">{{ 'support.contact.address' | t }}</span>
+      </div>
+    </div>
+
+    <!-- Rechte Spalte: Formular -->
+    <div class="sp-form-wrap surface-soft">
+      <p class="sp-block-eyebrow">{{ 'support.form.eyebrow' | t }}</p>
+      <h2 class="sp-block-title" style="margin-bottom:1.75rem;">{{ 'support.form.title' | t }}</h2>
+
+      {%- form 'contact', id: 'lumonova-support-form', return_to: page.url -%}
+
+        {%- if form.posted_successfully? -%}
+          <div class="sp-form-success" role="alert">
+            <span class="material-symbols-outlined" style="font-size:22px;">check_circle</span>
+            <div>
+              <p style="font-weight:600;color:var(--fg-primary);">{{ 'support.form.success_title' | t }}</p>
+              <p style="font-size:13px;margin-top:2px;">{{ 'support.form.success_sub' | t }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div class="sp-form-error" role="alert">
+            <span class="material-symbols-outlined" style="font-size:20px;">error</span>
+            <span>{{ form.errors | default_errors }}</span>
+          </div>
+        {%- endif -%}
+
+        <div class="sp-field-row">
+          <div class="sp-field">
+            <label for="sp-name" class="sp-field__label">{{ 'support.form.label_name' | t }} <span class="sp-field__req">*</span></label>
+            <input type="text" id="sp-name" name="contact[name]" class="sp-field__input"
+              autocomplete="name" required
+              placeholder="{{ 'support.form.placeholder_name' | t }}"
+              value="{{ form.name }}">
+          </div>
+          <div class="sp-field">
+            <label for="sp-email" class="sp-field__label">{{ 'support.form.label_email' | t }} <span class="sp-field__req">*</span></label>
+            <input type="email" id="sp-email" name="contact[email]" class="sp-field__input"
+              autocomplete="email" required
+              placeholder="{{ 'support.form.placeholder_email' | t }}"
+              value="{{ form.email }}">
+          </div>
+        </div>
+
+        <div class="sp-field" style="margin-top:1rem;">
+          <label for="sp-order" class="sp-field__label">
+            {{ 'support.form.label_order' | t }}
+            <span class="sp-field__opt">({{ 'support.form.optional' | t }})</span>
+          </label>
+          <input type="text" id="sp-order" name="contact[Bestellnummer]" class="sp-field__input"
+            placeholder="{{ 'support.form.placeholder_order' | t }}">
+        </div>
+
+        <div class="sp-field" style="margin-top:1rem;">
+          <label for="sp-subject" class="sp-field__label">{{ 'support.form.label_subject' | t }} <span class="sp-field__req">*</span></label>
+          <select id="sp-subject" name="contact[Betreff]" class="sp-field__input sp-field__select" required>
+            <option value="" disabled selected>{{ 'support.form.subject_placeholder' | t }}</option>
+            <option value="Frage zu einem Produkt">{{ 'support.form.subject_1' | t }}</option>
+            <option value="Bestellung & Lieferung">{{ 'support.form.subject_2' | t }}</option>
+            <option value="Garantiefall">{{ 'support.form.subject_3' | t }}</option>
+            <option value="Technische Hilfe">{{ 'support.form.subject_4' | t }}</option>
+            <option value="Rückgabe / Widerruf">{{ 'support.form.subject_5' | t }}</option>
+            <option value="Sonstiges">{{ 'support.form.subject_6' | t }}</option>
+          </select>
+        </div>
+
+        <div class="sp-field" style="margin-top:1rem;">
+          <label for="sp-message" class="sp-field__label">{{ 'support.form.label_message' | t }} <span class="sp-field__req">*</span></label>
+          <textarea id="sp-message" name="contact[body]" class="sp-field__input sp-field__textarea"
+            rows="5" required
+            placeholder="{{ 'support.form.placeholder_message' | t }}">{{ form.body }}</textarea>
+        </div>
+
+        <p class="sp-privacy-note">
+          {{ 'support.form.privacy_text' | t }}
+          <a href="/pages/datenschutz">{{ 'support.form.privacy_link' | t }}</a>.
+        </p>
+
+        <button type="submit" class="sp-btn-submit">
+          <span class="material-symbols-outlined" style="font-size:18px;">send</span>
+          {{ 'support.form.submit' | t }}
+        </button>
+
+      {%- endform -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.sp-hero{padding:clamp(4rem,8vw,7rem) 0 clamp(3rem,6vw,5.5rem);border-bottom:1px solid var(--fg-ghost)}
+.sp-hero__inner{text-align:center;max-width:680px}
+.sp-eyebrow{font-size:11px;font-weight:600;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--color-amber);margin-bottom:1.25rem}
+.sp-hero__title{font-size:clamp(2rem,5vw,3.25rem);font-weight:800;line-height:1.15;color:var(--fg-primary);margin-bottom:1.25rem}
+.sp-hero__sub{font-size:clamp(15px,2vw,17px);color:var(--fg-mid);line-height:1.7}
+.sp-usps{padding:3rem 0;border-bottom:1px solid var(--fg-ghost)}
+.sp-usps__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--fg-ghost);border:1px solid var(--fg-ghost);border-radius:12px;overflow:hidden}
+.sp-usp-card{background:var(--color-mid);padding:1.75rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;transition:background .2s}
+.sp-usp-card:hover{background:var(--color-raised)}
+.sp-usp-card__icon{font-size:22px;color:var(--color-amber);margin-bottom:.25rem}
+.sp-usp-card__label{font-size:14px;font-weight:700;color:var(--fg-primary);line-height:1.3}
+.sp-usp-card__sub{font-size:12px;color:var(--fg-low);line-height:1.4}
+.sp-main{padding:clamp(3.5rem,7vw,6rem) 0}
+.sp-main__grid{display:grid;grid-template-columns:1fr 1.15fr;gap:3.5rem;align-items:start}
+@media(max-width:860px){.sp-main__grid{grid-template-columns:1fr;gap:2.5rem}}
+.sp-block-eyebrow{font-size:10.5px;font-weight:600;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--color-amber);margin-bottom:.5rem}
+.sp-block-title{font-size:clamp(18px,2.5vw,22px);font-weight:700;color:var(--fg-primary);margin-bottom:1.5rem}
+.sp-contact-row{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border:1px solid var(--fg-ghost);border-radius:10px;background:var(--color-raised);margin-bottom:.75rem;cursor:pointer;transition:background .2s,border-color .2s;text-decoration:none}
+.sp-contact-row:hover{background:var(--color-hover);border-color:rgba(232,160,96,.35)}
+.sp-contact-row__icon{font-size:20px;color:var(--color-amber);flex-shrink:0}
+.sp-contact-row__label{font-size:11px;color:var(--fg-low);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.sp-contact-row__value{font-size:14px;font-weight:600;color:var(--fg-primary)}
+.sp-contact-row__arrow{margin-left:auto;font-size:18px;color:var(--fg-minimal);transition:transform .2s,color .2s}
+.sp-contact-row:hover .sp-contact-row__arrow{transform:translateX(3px);color:var(--color-amber)}
+.sp-hours{width:100%;border-collapse:collapse;margin-bottom:1rem}
+.sp-hours td{padding:.65rem 0;border-bottom:1px solid var(--fg-ghost);font-size:14px}
+.sp-hours__day{color:var(--fg-mid)}
+.sp-hours__time{text-align:right;font-weight:600;color:var(--color-amber)}
+.sp-hours__time--closed{color:var(--fg-low);font-weight:400;text-align:right}
+.sp-hours__note{font-size:12px;color:var(--fg-low);line-height:1.6}
+.sp-address-block{display:flex;align-items:center;padding:.75rem 1rem;border:1px solid var(--fg-ghost);border-radius:8px;background:var(--color-raised)}
+.sp-address-text{font-size:13px;color:var(--fg-low)}
+.sp-form-wrap{border-radius:14px;padding:clamp(1.75rem,3vw,2.5rem)}
+.sp-field{display:flex;flex-direction:column;gap:.45rem}
+.sp-field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:520px){.sp-field-row{grid-template-columns:1fr}}
+.sp-field__label{font-size:12px;font-weight:600;color:var(--fg-mid);letter-spacing:.04em}
+.sp-field__req{color:var(--color-amber);margin-left:2px}
+.sp-field__opt{color:var(--fg-minimal);font-weight:400}
+.sp-field__input{width:100%;background:var(--color-base);border:1px solid rgba(242,242,242,.12);border-radius:8px;padding:.75rem 1rem;font-size:14px;font-family:var(--font-sans);color:var(--fg-primary);transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
+.sp-field__input::placeholder{color:var(--fg-minimal)}
+.sp-field__input:focus{outline:none;border-color:var(--color-amber);box-shadow:0 0 0 3px rgba(232,160,96,.12)}
+.sp-field__select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(242,242,242,0.45)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .85rem center;padding-right:2.5rem}
+.sp-field__select option{background:var(--color-raised);color:var(--fg-primary)}
+.sp-field__textarea{resize:vertical;min-height:130px}
+.sp-privacy-note{font-size:11.5px;color:var(--fg-low);line-height:1.6;margin-top:1.25rem;margin-bottom:1.5rem}
+.sp-privacy-note a{color:var(--color-amber);text-decoration:underline}
+.sp-btn-submit{display:inline-flex;align-items:center;gap:.6rem;background:var(--color-amber);color:#0a0908;font-size:13px;font-weight:700;letter-spacing:var(--tracking-btn);text-transform:uppercase;border:none;border-radius:8px;padding:.85rem 2rem;width:100%;justify-content:center;transition:background .2s,transform .15s}
+.sp-btn-submit:hover{background:var(--color-amber-dark);transform:translateY(-1px)}
+.sp-btn-submit:active{transform:translateY(0)}
+.sp-form-success{display:flex;align-items:flex-start;gap:.75rem;padding:1rem 1.25rem;border:1px solid rgba(76,175,138,.4);border-radius:8px;background:rgba(76,175,138,.08);color:var(--color-success);margin-bottom:1.5rem;font-size:14px}
+.sp-form-error{display:flex;align-items:flex-start;gap:.75rem;padding:1rem 1.25rem;border:1px solid rgba(232,80,80,.35);border-radius:8px;background:rgba(232,80,80,.08);color:#e85050;margin-bottom:1.5rem;font-size:14px}
+</style>
+
+{% schema %}
+{
+  "name": "Support-Seite",
+  "settings": [
+    { "type": "header", "content": "Kontaktdaten" },
+    { "type": "text", "id": "email", "label": "Support-E-Mail", "default": "info@lumo-nova.de" },
+    { "type": "text", "id": "phone", "label": "Telefonnummer", "default": "+49 2154 95365-30" }
+  ]
+}
+{% endschema %}

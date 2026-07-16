@@ -1,0 +1,359 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "password_page": {
+      "coming_soon": "Coming soon"
+    },
+    "coming_soon": "Coming soon"
+  },
+  "coming_soon": "Coming soon",
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Not available"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Shopping Cart",
+      "empty": "Your cart is empty."
+    },
+    "eyebrow": "Cart",
+    "title": "Your Cart.",
+    "remove": "Remove",
+    "total": "Total",
+    "checkout": "Proceed to Checkout →",
+    "empty_title": "Your cart is empty.",
+    "empty_body": "Explore our range and add products.",
+    "empty_cta": "Discover now"
+  },
+  "cart_drawer": {
+    "aria_label": "Shopping Cart",
+    "title": "Cart",
+    "loading": "Loading…",
+    "close_aria": "Close cart",
+    "subtotal": "Subtotal",
+    "checkout": "Secure Checkout",
+    "trust_text": "3-year EU warranty on all LUMOnova products",
+    "toast_added": "added",
+    "empty": "Your cart is empty.",
+    "empty_body": "Explore our smart lighting products.",
+    "empty_cta": "Discover now",
+    "empty_subtitle": "Your cart is empty",
+    "item_singular": "item",
+    "item_plural": "items",
+    "qty_decrease_aria": "Decrease quantity",
+    "qty_increase_aria": "Increase quantity",
+    "remove_aria": "remove",
+    "error_loading": "Error loading cart."
+  },
+  "nav": {
+    "aria_label": "Main navigation",
+    "logo_aria": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "support": "Support",
+    "lang_switcher_aria": "Switch language",
+    "switch_lang_aria": "Switch language to {{ lang }}",
+    "cart_aria": "Open cart ({{ count }} items)",
+    "menu_open_aria": "Open menu",
+    "mega": {
+      "col_categories": "Categories",
+      "col_tiers": "Product Lines",
+      "col_more": "More",
+      "smart_bulbs_desc": "E27, E14, GU10 — RGB+CCT, Tunable White, Alexa & Google Home",
+      "filament_desc": "Vintage look",
+      "panels_desc": "Office & ceiling",
+      "ceiling_lights_desc": "With smart module",
+      "classic_desc": "Classic & durable",
+      "classic_plus_desc": "With sensor or CCT",
+      "smart_desc": "Alexa & Google Home",
+      "smart_plus_desc": "Matter · Apple Home",
+      "bestseller": "Bestsellers",
+      "smart_home_guide": "Smart Home Guide",
+      "warranty_link": "3-Year Warranty",
+      "view_all": "View all products",
+      "product_count": "{{ count }} products available",
+      "quick_nav_aria": "Quick access"
+    }
+  },
+  "footer": {
+    "tagline": "European Smart Lighting. No Hub. No Lock-in.",
+    "col_products": "Products",
+    "col_legal": "Legal",
+    "col_contact": "Contact",
+    "impressum": "Legal Notice",
+    "datenschutz": "Privacy Policy",
+    "agb": "Terms of Service",
+    "widerruf": "Cancellation",
+    "coming_at_launch": "available at launch",
+    "copyright": "© {{ year }} C&L Handels GmbH, Willich, Germany"
+  },
+  "trust": {
+    "warranty_label": "3-Year EU Warranty",
+    "warranty_sub": "On all LUMOnova products",
+    "support_label": "Support from Willich",
+    "support_sub": "Mon–Fri by email and phone",
+    "cert_label": "CE / WEEE / RoHS",
+    "cert_sub": "Fully EU-certified"
+  },
+  "compat": {
+    "available_in": "Available in",
+    "smart_and_smart_plus": "SMART and SMART+",
+    "smart_app_control": "SMART (app control)",
+    "in_preparation": "Coming soon"
+  },
+  "product_card": {
+    "view_details": "View details",
+    "view": "View"
+  },
+  "product": {
+    "hero_aria": "Product hero",
+    "image_coming": "Product image coming soon",
+    "gallery_prev": "Previous image",
+    "gallery_next": "Next image",
+    "gallery_thumb_aria": "View image {{ index }}",
+    "gallery_thumb_placeholder": "Image {{ index }} (placeholder)",
+    "gallery_image_label": "Image",
+    "breadcrumb_aria": "Breadcrumb",
+    "breadcrumb_products": "Products",
+    "price_on_request": "On request",
+    "incl_vat": "Incl. VAT",
+    "shipping_costs": "Shipping costs",
+    "shipping_calculated": "calculated at checkout",
+    "delivery_time": "Delivery",
+    "unavailable": "Currently unavailable",
+    "cta_inquiry": "Send enquiry →",
+    "cta_specs": "Technical specs",
+    "subnav_aria": "Product sub-navigation",
+    "tab_description": "Description",
+    "tab_specs": "Specifications",
+    "features_eyebrow": "Features",
+    "features_title": "What this product can do.",
+    "features_subtitle_smart_bulbs": "Four core features that set LUMOnova apart from ordinary LEDs.",
+    "specs_eyebrow": "Technical Specifications",
+    "specs_title": "Everything that matters.",
+    "specs_coming": "Technical specifications coming soon.",
+    "compat_eyebrow": "Compatibility",
+    "compat_title": "Fully integrated."
+  },
+  "collection": {
+    "eyebrow": "Range",
+    "all_products_title": "All Products.",
+    "subtitle": "Four tiers. One brand. Light for every need.",
+    "filter_category": "Category",
+    "filter_all": "All",
+    "filter_tier": "Tier",
+    "filter_all_tiers": "All Tiers",
+    "product_singular": "product",
+    "product_plural": "products",
+    "sort_label": "Sort by",
+    "sort_recommended": "Recommended",
+    "sort_price_asc": "Price: low to high",
+    "sort_price_desc": "Price: high to low",
+    "sort_name_az": "Name A–Z",
+    "pagination_aria": "Pagination",
+    "pagination_prev": "← Previous",
+    "pagination_next": "Next →",
+    "empty_title": "No products found.",
+    "empty_body": "Try a different filter.",
+    "reset_filter": "Reset filters"
+  },
+  "404": {
+    "title": "Page not found.",
+    "body": "The page you were looking for does not exist.",
+    "cta": "Back to home"
+  },
+  "home": {
+    "hero": {
+      "aria": "Hero",
+      "body_default": "LUMOnova. Four tiers, four product families, one promise: light that fits you."
+    },
+    "usps": {
+      "aria": "USPs"
+    },
+    "categories": {
+      "eyebrow": "Range",
+      "title": "Four Product Families.",
+      "subtitle": "Smart Bulbs. Filament, Panels and Ceiling Lights — all with the same tier logic and the same smart standards.",
+      "smart_bulbs_aria": "Go to Smart Bulbs category",
+      "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter and classic",
+      "filament_desc": "Vintage look with warm-white LED filament",
+      "panels_aria": "Go to Panels category",
+      "panels_desc": "LED backlit panels for office and ceiling",
+      "ceiling_lights_desc": "Ceiling lights with Matter and sensors",
+      "available": "Available"
+    },
+    "tiers": {
+      "eyebrow": "Four Tiers",
+      "title": "From pure light to a full smart home.",
+      "subtitle": "Each tier stands on its own — no forced upgrades, no hidden costs. You choose how smart your light should be.",
+      "step": "Level",
+      "learn_more": "Learn more",
+      "classic": {
+        "f1": "Warm white light (2700K)",
+        "f2": "Steplessly dimmable",
+        "f3": "25,000h lifespan",
+        "f4": "IP44 / IP65 protection"
+      },
+      "classic_plus": {
+        "f1": "CCT switch (2700K–6500K)",
+        "f2": "Motion sensor optional",
+        "f3": "No app setup needed",
+        "f4": "IP65 protection"
+      },
+      "smart": {
+        "f1": "Wi-Fi 2.4 GHz, no hub",
+        "f2": "Amazon Alexa & Google Home",
+        "f3": "App control (Tuya Smart)",
+        "f4": "RGB + CCT full spectrum"
+      },
+      "smart_plus": {
+        "f1": "Matter over Wi-Fi (no hub)",
+        "f2": "Apple Home, Alexa, Google, SmartThings",
+        "f3": "Local control without internet",
+        "f4": "3-year EU warranty"
+      }
+    },
+    "atmosphere": {
+      "eyebrow": "Atmosphere",
+      "title": "Light sets the mood.",
+      "subtitle": "From a warm living room to a moody RGB wall — a few examples of how LUMOnova transforms spaces.",
+      "img1_alt": "Family moment – Warm white",
+      "img1_caption": "Family moment – Warm white",
+      "img2_alt": "Romantic dinner – Warm light",
+      "img2_caption": "Romantic dinner – Warm light",
+      "img3_alt": "Bedroom – Relaxation",
+      "img3_caption": "Bedroom – Relaxation"
+    },
+    "featured": {
+      "eyebrow": "In Focus",
+      "title": "The LM Series.",
+      "subtitle": "From the compact drop bulb to the powerful A70 — Matter models (SMART+) also cover Apple Home and SmartThings.",
+      "all_products": "All Products"
+    },
+    "compat": {
+      "eyebrow": "Compatibility",
+      "title": "Works with what you already use.",
+      "subtitle": "Amazon Alexa and Google Home work natively from the SMART tier. Apple Home and Samsung SmartThings are reserved for the SMART+ tier — via Matter, no hub required."
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "About LUMOnova"
+    },
+    "story": {
+      "eyebrow": "Our Story",
+      "img_placeholder": "Select image in Customizer"
+    },
+    "values": {
+      "eyebrow": "What defines us",
+      "title": "Our Values.",
+      "v1": {
+        "title": "3-Year EU Warranty",
+        "text": "Every LUMOnova product comes with three years of EU warranty. No fine print, no exceptions."
+      },
+      "v2": {
+        "title": "No Hub Required",
+        "text": "Our SMART products connect directly via your Wi-Fi. No gateway, no bridge device, no dependency."
+      },
+      "v3": {
+        "title": "EU-Certified",
+        "text": "CE, WEEE and RoHS — all products are fully certified to European standards and approved in the EU."
+      },
+      "v4": {
+        "title": "Support from Willich",
+        "text": "Our customer service is based in Willich, NRW. Real people, in German, Mon–Fri by email and phone."
+      },
+      "v5": {
+        "title": "Four Tiers, One System",
+        "text": "From CLASSIC to SMART+ — our tier system makes lighting planning simple and consistent. You choose the level of intelligence."
+      },
+      "v6": {
+        "title": "No Lock-in",
+        "text": "LUMOnova uses open standards and established platforms. Your home belongs to you — not an ecosystem."
+      }
+    },
+    "gallery": {
+      "eyebrow": "Atmosphere",
+      "img_placeholder_1": "Select image 1",
+      "img_placeholder_2": "Select image 2",
+      "img_placeholder_3": "Select image 3"
+    },
+    "stats": {
+      "families": "Product families",
+      "products": "Products in LM range",
+      "warranty": "Years EU warranty",
+      "support": "Support from Willich, NRW"
+    },
+    "cta": {
+      "eyebrow": "Explore now"
+    }
+  },
+  "support": {
+    "hero": {
+      "eyebrow": "Support & Contact",
+      "title": "How can we ",
+      "title_accent": "help?",
+      "sub": "Our team in Willich is available Monday through Friday — by email, phone, or directly via the form."
+    },
+    "usps": {
+      "usp1": { "label": "3-year EU warranty", "sub": "On all LUMOnova products" },
+      "usp2": { "label": "Headquarter in Germany", "sub": "C&L Handels GmbH, Willich NRW" },
+      "usp3": { "label": "CE / WEEE / RoHS", "sub": "Fully EU-certified" },
+      "usp4": { "label": "Personal Support", "sub": "No AI – Only Real People" }
+    },
+    "contact": {
+      "eyebrow": "Direct Message",
+      "title": "Contact",
+      "email_label": "Mail",
+      "phone_label": "Phone",
+      "address": "C&L Handels GmbH — Willich, NRW, Germany"
+    },
+    "hours": {
+      "eyebrow": "Our Opening Times",
+      "title": "Opening Times",
+      "row1_day": "Monday – Friday",
+      "row1_time": "08:00 – 16:30",
+      "row2_day": "Saturday",
+      "row3_day": "Sunday & Holidays",
+      "closed": "Closed",
+      "note": "We typically respond to emails within 24 hours on business days."
+    },
+    "form": {
+      "eyebrow": "Direct Message",
+      "title": "Send Message",
+      "success_title": "Message sent!",
+      "success_sub": "We typically respond within 24 hours on business days.",
+      "label_name": "Your Name",
+      "placeholder_name": "John Doe",
+      "label_email": "Email address",
+      "placeholder_email": "name@example.com",
+      "label_order": "Order Number",
+      "placeholder_order": "#LM-1234",
+      "optional": "optional",
+      "label_subject": "Subject",
+      "subject_placeholder": "Please select …",
+      "subject_1": "Question about a product",
+      "subject_2": "Order & Shipping",
+      "subject_3": "Warranty Case",
+      "subject_4": "Technical Support",
+      "subject_5": "Returns / Cancellation",
+      "subject_6": "Miscellaneous",
+      "label_message": "Your Message",
+      "placeholder_message": "Please describe your issue …",
+      "privacy_text": "By submitting this form, you agree to our",
+      "privacy_link": "Privacy Policy",
+      "submit": "Send Message"
+    }
+  }
+}

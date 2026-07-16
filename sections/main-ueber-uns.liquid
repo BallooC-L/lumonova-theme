@@ -1,0 +1,249 @@
+{%- comment -%}
+  main-ueber-uns.liquid
+  Sections: 1. Page Hero, 2. Brand Story, 3. Werte/USP Cards,
+  4. Bildergalerie, 5. Zahlen & Fakten, 6. CTA Banner, 7. Trust Row
+{%- endcomment -%}
+
+{%- assign img1    = section.settings.gallery_img_1 -%}
+{%- assign img2    = section.settings.gallery_img_2 -%}
+{%- assign img3    = section.settings.gallery_img_3 -%}
+{%- assign story_img = section.settings.story_image -%}
+
+{%- comment -%} ── 1. PAGE HERO ─────────────────────────────────────── {%- endcomment -%}
+<section class="au-hero">
+  <div class="container au-hero__inner">
+    <p class="section-eyebrow reveal">{{ 'about.hero.eyebrow' | t }}</p>
+    <h1 class="au-hero__headline reveal">
+      <span class="fg-primary">{{ section.settings.hero_line1 | default: 'Licht mit' }}</span>
+      <span class="text-amber">{{ section.settings.hero_line2 | default: 'Haltung.' }}</span>
+    </h1>
+    <p class="au-hero__sub reveal">{{ section.settings.hero_body | default: 'Wir sind LUMOnova — ein deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss.' }}</p>
+  </div>
+</section>
+
+{%- comment -%} ── 2. BRAND STORY ───────────────────────────────────── {%- endcomment -%}
+<section class="section bg-base au-story reveal-section">
+  <div class="container au-story__grid">
+    <div class="au-story__text reveal">
+      <p class="section-eyebrow">{{ 'about.story.eyebrow' | t }}</p>
+      <h2 class="section-title" style="font-size:clamp(26px,3vw,40px);">{{ section.settings.story_headline | default: 'Entstanden aus Frustration.' }}</h2>
+      <p class="au-story__body">{{ section.settings.story_body | default: 'LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen — aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist. Wir haben selbst nach einer Lösung gesucht und keine gefunden. Also haben wir sie gebaut.' }}</p>
+      <p class="au-story__body">{{ section.settings.story_body_2 | default: 'Heute entwickeln wir vier Produktfamilien — von der klassischen Glühbirne bis zum steuerbaren Panel — alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.' }}</p>
+    </div>
+    <div class="au-story__image reveal">
+      {%- if story_img != blank -%}
+        <img
+          src="{{ story_img | img_url: '900x' }}"
+          srcset="{{ story_img | img_url: '600x' }} 600w, {{ story_img | img_url: '900x' }} 900w"
+          sizes="(min-width:1024px) 45vw, 100vw"
+          alt="{{ section.settings.story_img_alt | default: 'LUMOnova Produkte' }}"
+          loading="lazy"
+          class="au-story__img"
+        >
+      {%- else -%}
+        <div class="au-story__img-placeholder">
+          <span class="material-symbols-outlined text-amber" style="font-size:48px;" aria-hidden="true">light_mode</span>
+          <p style="color:var(--fg-low); font-size:12px; margin-top:0.75rem;">{{ 'about.story.img_placeholder' | t }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── 3. WERTE / USP CARDS ─────────────────────────────── {%- endcomment -%}
+<section class="section au-values">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">{{ 'about.values.eyebrow' | t }}</p>
+      <h2 class="section-title">{{ 'about.values.title' | t }}</h2>
+    </div>
+    <div class="au-values__grid">
+
+      <div class="au-value-card reveal">
+        <span class="au-value-card__icon material-symbols-outlined" aria-hidden="true">verified</span>
+        <h3 class="au-value-card__title">{{ 'about.values.v1.title' | t }}</h3>
+        <p class="au-value-card__text">{{ 'about.values.v1.text' | t }}</p>
+      </div>
+
+      <div class="au-value-card reveal">
+        <span class="au-value-card__icon material-symbols-outlined" aria-hidden="true">hub</span>
+        <h3 class="au-value-card__title">{{ 'about.values.v2.title' | t }}</h3>
+        <p class="au-value-card__text">{{ 'about.values.v2.text' | t }}</p>
+      </div>
+
+      <div class="au-value-card reveal">
+        <span class="au-value-card__icon material-symbols-outlined" aria-hidden="true">task_alt</span>
+        <h3 class="au-value-card__title">{{ 'about.values.v3.title' | t }}</h3>
+        <p class="au-value-card__text">{{ 'about.values.v3.text' | t }}</p>
+      </div>
+
+      <div class="au-value-card reveal">
+        <span class="au-value-card__icon material-symbols-outlined" aria-hidden="true">support_agent</span>
+        <h3 class="au-value-card__title">{{ 'about.values.v4.title' | t }}</h3>
+        <p class="au-value-card__text">{{ 'about.values.v4.text' | t }}</p>
+      </div>
+
+      <div class="au-value-card reveal">
+        <span class="au-value-card__icon material-symbols-outlined" aria-hidden="true">tune</span>
+        <h3 class="au-value-card__title">{{ 'about.values.v5.title' | t }}</h3>
+        <p class="au-value-card__text">{{ 'about.values.v5.text' | t }}</p>
+      </div>
+
+      <div class="au-value-card reveal">
+        <span class="au-value-card__icon material-symbols-outlined" aria-hidden="true">lock_open</span>
+        <h3 class="au-value-card__title">{{ 'about.values.v6.title' | t }}</h3>
+        <p class="au-value-card__text">{{ 'about.values.v6.text' | t }}</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── 4. BILDERGALERIE ──────────────────────────────────── {%- endcomment -%}
+<section class="section bg-base au-gallery">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">{{ 'about.gallery.eyebrow' | t }}</p>
+      <h2 class="section-title">{{ section.settings.gallery_headline | default: 'Licht, das Räume verwandelt.' }}</h2>
+    </div>
+    <div class="au-gallery__grid">
+      <div class="au-gallery__item au-gallery__item--large reveal">
+        {%- if img1 != blank -%}
+          <img src="{{ img1 | img_url: '1200x' }}" alt="{{ section.settings.gallery_alt_1 | default: 'LUMOnova Atmosphäre' }}" loading="lazy">
+        {%- else -%}
+          <div class="au-gallery__placeholder"><span class="material-symbols-outlined text-amber" style="font-size:36px;" aria-hidden="true">add_photo_alternate</span><p>{{ 'about.gallery.img_placeholder_1' | t }}</p></div>
+        {%- endif -%}
+      </div>
+      <div class="au-gallery__item reveal" style="transition-delay:0.1s;">
+        {%- if img2 != blank -%}
+          <img src="{{ img2 | img_url: '800x' }}" alt="{{ section.settings.gallery_alt_2 | default: 'LUMOnova Atmosphäre' }}" loading="lazy">
+        {%- else -%}
+          <div class="au-gallery__placeholder"><span class="material-symbols-outlined text-amber" style="font-size:36px;" aria-hidden="true">add_photo_alternate</span><p>{{ 'about.gallery.img_placeholder_2' | t }}</p></div>
+        {%- endif -%}
+      </div>
+      <div class="au-gallery__item reveal" style="transition-delay:0.2s;">
+        {%- if img3 != blank -%}
+          <img src="{{ img3 | img_url: '800x' }}" alt="{{ section.settings.gallery_alt_3 | default: 'LUMOnova Atmosphäre' }}" loading="lazy">
+        {%- else -%}
+          <div class="au-gallery__placeholder"><span class="material-symbols-outlined text-amber" style="font-size:36px;" aria-hidden="true">add_photo_alternate</span><p>{{ 'about.gallery.img_placeholder_3' | t }}</p></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── 5. ZAHLEN & FAKTEN ───────────────────────────────── {%- endcomment -%}
+<section class="section au-stats">
+  <div class="container">
+    <div class="au-stats__grid">
+      <div class="au-stat reveal">
+        <span class="au-stat__number">4</span>
+        <span class="au-stat__label">{{ 'about.stats.families' | t }}</span>
+      </div>
+      <div class="au-stat reveal" style="transition-delay:0.08s;">
+        <span class="au-stat__number">7+</span>
+        <span class="au-stat__label">{{ 'about.stats.products' | t }}</span>
+      </div>
+      <div class="au-stat reveal" style="transition-delay:0.16s;">
+        <span class="au-stat__number">3</span>
+        <span class="au-stat__label">{{ 'about.stats.warranty' | t }}</span>
+      </div>
+      <div class="au-stat reveal" style="transition-delay:0.24s;">
+        <span class="au-stat__number text-amber">DE</span>
+        <span class="au-stat__label">{{ 'about.stats.support' | t }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── 6. CTA BANNER ────────────────────────────────────── {%- endcomment -%}
+<section class="section bg-base">
+  <div class="container" style="text-align:center; max-width:640px; margin-inline:auto;">
+    <div class="reveal">
+      <p class="section-eyebrow">{{ 'about.cta.eyebrow' | t }}</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">{{ section.settings.cta_headline | default: 'Finde dein LUMOnova.' }}</h2>
+      <p class="section-subtitle" style="margin-bottom:2rem;">{{ section.settings.cta_body | default: 'Vier Tiers, ein System — starte mit Smart Bulbs oder entdecke das gesamte Sortiment.' }}</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="{{ section.settings.cta_primary_url | default: '/collections/all' }}" class="btn-amber">
+          {{ section.settings.cta_primary_label | default: 'Kollektion ansehen' }}
+        </a>
+        <a href="{{ section.settings.cta_ghost_url | default: '/pages/support' }}" class="btn-ghost">
+          {{ section.settings.cta_ghost_label | default: 'Support & Kontakt' }}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── TRUST ROW ────────────────────────────────────────── {%- endcomment -%}
+{% render 'trust-row' %}
+
+<style>
+/* Styles unverändert aus dem Original */
+.au-hero{padding:6rem 0 4rem;background:var(--color-bg);position:relative;overflow:hidden}
+.au-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(232,160,96,.06) 0%,transparent 70%);pointer-events:none}
+.au-hero__inner{max-width:700px}
+.au-hero__headline{font-size:clamp(42px,6vw,72px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:.5rem 0 1.25rem}
+.au-hero__sub{font-size:clamp(15px,1.5vw,17px);color:var(--fg-mid);line-height:1.7;max-width:560px}
+.au-story__grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+@media(min-width:1024px){.au-story__grid{grid-template-columns:1fr 1fr}}
+.au-story__body{font-size:clamp(14px,1.5vw,16px);color:var(--fg-mid);line-height:1.75;margin-bottom:1rem}
+.au-story__img{width:100%;border-radius:1rem;object-fit:cover;max-height:500px}
+.au-story__img-placeholder{width:100%;min-height:300px;border-radius:1rem;border:1px dashed rgba(255,255,255,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--fg-low);font-size:12px;gap:.5rem}
+.au-values{background:var(--color-mid)}
+.au-values__grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:2.5rem}
+@media(min-width:640px){.au-values__grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.au-values__grid{grid-template-columns:repeat(3,1fr)}}
+.au-value-card{background:var(--color-raised);border:1px solid rgba(255,255,255,.06);border-radius:1rem;padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .2s,background .2s}
+.au-value-card:hover{border-color:rgba(232,160,96,.2);background:var(--color-hover)}
+.au-value-card__icon{font-size:22px;color:var(--color-amber)}
+.au-value-card__title{font-size:16px;font-weight:700;color:var(--fg-primary);margin:0}
+.au-value-card__text{font-size:13px;color:var(--fg-mid);line-height:1.65;margin:0}
+.au-gallery__grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem}
+@media(min-width:768px){.au-gallery__grid{grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;min-height:500px}}
+.au-gallery__item{border-radius:.875rem;overflow:hidden;background:rgba(255,255,255,.03)}
+.au-gallery__item--large{grid-column:1/-1}
+@media(min-width:768px){.au-gallery__item--large{grid-column:1/2;grid-row:1/3}}
+.au-gallery__item img{width:100%;height:100%;min-height:200px;object-fit:cover;display:block;transition:transform .4s ease}
+.au-gallery__item:hover img{transform:scale(1.03)}
+.au-gallery__placeholder{width:100%;height:100%;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px dashed rgba(255,255,255,.12);border-radius:.875rem;color:var(--fg-low);font-size:12px;gap:.5rem}
+.au-stats{background:rgba(232,160,96,.04);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+.au-stats__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;text-align:center}
+@media(min-width:768px){.au-stats__grid{grid-template-columns:repeat(4,1fr)}}
+.au-stat__number{display:block;font-size:clamp(36px,5vw,56px);font-weight:800;letter-spacing:-.04em;color:var(--fg-primary);line-height:1;margin-bottom:.5rem}
+.au-stat__label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg-low)}
+</style>
+
+{% schema %}
+{
+  "name": "Über Uns",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_line1", "label": "Headline Zeile 1", "default": "Licht mit" },
+    { "type": "text", "id": "hero_line2", "label": "Headline Zeile 2 (Amber)", "default": "Haltung." },
+    { "type": "textarea", "id": "hero_body", "label": "Einleitungstext", "default": "Wir sind LUMOnova — ein deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss." },
+    { "type": "header", "content": "Brand Story" },
+    { "type": "text", "id": "story_headline", "label": "Story Headline", "default": "Entstanden aus Frustration." },
+    { "type": "textarea", "id": "story_body", "label": "Story Absatz 1", "default": "LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen — aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist." },
+    { "type": "textarea", "id": "story_body_2", "label": "Story Absatz 2", "default": "Heute entwickeln wir vier Produktfamilien — von der klassischen Glühbirne bis zum steuerbaren Panel — alle unter einem Anspruch: Qualität, die man sieht." },
+    { "type": "image_picker", "id": "story_image", "label": "Story Bild (rechts)" },
+    { "type": "text", "id": "story_img_alt", "label": "Story Bild Alt-Text", "default": "LUMOnova Produkte" },
+    { "type": "header", "content": "Bildergalerie" },
+    { "type": "text", "id": "gallery_headline", "label": "Galerie Headline", "default": "Licht, das Räume verwandelt." },
+    { "type": "image_picker", "id": "gallery_img_1", "label": "Galeriebild 1 (groß, links)" },
+    { "type": "text", "id": "gallery_alt_1", "label": "Alt-Text Bild 1", "default": "LUMOnova Atmosphäre" },
+    { "type": "image_picker", "id": "gallery_img_2", "label": "Galeriebild 2 (oben rechts)" },
+    { "type": "text", "id": "gallery_alt_2", "label": "Alt-Text Bild 2", "default": "LUMOnova Atmosphäre" },
+    { "type": "image_picker", "id": "gallery_img_3", "label": "Galeriebild 3 (unten rechts)" },
+    { "type": "text", "id": "gallery_alt_3", "label": "Alt-Text Bild 3", "default": "LUMOnova Atmosphäre" },
+    { "type": "header", "content": "CTA Banner" },
+    { "type": "text", "id": "cta_headline", "label": "CTA Headline", "default": "Finde dein LUMOnova." },
+    { "type": "textarea", "id": "cta_body", "label": "CTA Text", "default": "Vier Tiers, ein System — starte mit Smart Bulbs oder entdecke das gesamte Sortiment." },
+    { "type": "text", "id": "cta_primary_label", "label": "Button 1 Text", "default": "Kollektion ansehen" },
+    { "type": "url", "id": "cta_primary_url", "label": "Button 1 URL" },
+    { "type": "text", "id": "cta_ghost_label", "label": "Button 2 Text", "default": "Support & Kontakt" },
+    { "type": "url", "id": "cta_ghost_url", "label": "Button 2 URL" }
+  ],
+  "presets": [{ "name": "Über Uns" }]
+}
+{% endschema %}

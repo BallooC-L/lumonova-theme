@@ -1,0 +1,22 @@
+{%- comment -%}
+  logo-arc.liquid
+  Usage: {% render 'logo-arc', variant: 'hero' %} or {% render 'logo-arc', variant: 'divider' %}
+{%- endcomment -%}
+
+{%- if variant == 'hero' -%}
+  <div aria-hidden="true" style="position:absolute; bottom:3rem; right:4rem; z-index:5; opacity:0.08; pointer-events:none;">
+    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="98" stroke="rgba(232,160,96,1)" stroke-width="1"/>
+      <circle cx="100" cy="100" r="70" stroke="rgba(232,160,96,1)" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="40" stroke="rgba(232,160,96,1)" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="4" fill="rgba(232,160,96,1)"/>
+    </svg>
+  </div>
+{%- elsif variant == 'divider' -%}
+  <div class="logo-arc" aria-hidden="true">
+    <svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 50 Q60 5 110 50" stroke="var(--color-amber)" stroke-width="1" fill="none"/>
+      <circle cx="60" cy="20" r="3" fill="var(--color-amber)"/>
+    </svg>
+  </div>
+{%- endif -%}

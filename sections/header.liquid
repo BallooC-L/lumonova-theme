@@ -1,0 +1,335 @@
+{%- assign locale_prefix = "" -%}
+{%- unless localization.language.iso_code == "de" -%}
+  {%- assign locale_prefix = "/" | append: localization.language.iso_code -%}
+{%- endunless -%}
+<header class="site-header" id="site-header">
+  <nav class="site-nav" aria-label="{{ 'nav.aria_label' | t }}">
+    <div class="container site-nav__inner">
+
+      {%- comment -%} Logo {%- endcomment -%}
+      <a href="{{ routes.root_url }}" class="site-nav__logo" aria-label="{{ shop.name }} – {{ 'nav.logo_aria' | t }}">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}" loading="eager">
+        {%- else -%}
+          <span style="font-size:18px; font-weight:700; color:var(--fg-primary); letter-spacing:var(--tracking-logo);">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+
+      {%- comment -%} Desktop links {%- endcomment -%}
+      <ul class="site-nav__links" role="list">
+        <li>
+          <button
+            type="button"
+            class="site-nav__link"
+            id="mega-trigger"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="mega-menu"
+          >
+            {{ 'nav.products' | t }}
+            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">expand_more</span>
+          </button>
+        </li>
+        <li><a href="{{ locale_prefix }}/pages/ueber-uns" class="site-nav__link">{{ 'nav.about' | t }}</a></li>
+        <li><a href="{{ locale_prefix }}/pages/support" class="site-nav__link">{{ 'nav.support' | t }}</a></li>
+      </ul>
+
+      {%- comment -%} Right side {%- endcomment -%}
+      <div class="site-nav__right">
+        {%- comment -%} Language switcher via Shopify Localization API {%- endcomment -%}
+        {%- if localization.available_languages.size > 1 -%}
+          <div class="site-nav__lang" aria-label="{{ 'nav.lang_switcher_aria' | t }}">
+            {%- for language in localization.available_languages -%}
+              {%- if language.iso_code == localization.language.iso_code -%}
+                <span class="text-amber" style="font-size:12px;letter-spacing:0.10em;font-weight:600;">{{ language.iso_code | upcase }}</span>
+              {%- else -%}
+                <span class="fg-ghost">|</span>
+                {%- form 'localization' -%}
+                  <input type="hidden" name="locale_code" value="{{ language.iso_code }}">
+                  {%- assign current_path = request.path -%}
+                  {%- assign path_parts = current_path | split: '/' -%}
+                  {%- assign first_part = path_parts[1] -%}
+                  {%- assign is_locale_prefix = false -%}
+                  {%- for lang in localization.available_languages -%}
+                    {%- if lang.iso_code == first_part -%}
+                      {%- assign is_locale_prefix = true -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if is_locale_prefix -%}
+                    {%- assign stripped_path = current_path | remove_first: '/' | remove_first: first_part -%}
+                    {%- if stripped_path == blank -%}{%- assign stripped_path = '/' -%}{%- endif -%}
+                  {%- else -%}
+                    {%- assign stripped_path = current_path -%}
+                  {%- endif -%}
+                  {%- if language.iso_code == 'de' -%}
+                    {%- assign return_path = stripped_path -%}
+                  {%- else -%}
+                    {%- assign return_path = '/' | append: language.iso_code | append: stripped_path -%}
+                  {%- endif -%}
+                  <input type="hidden" name="return_to" value="{{ return_path }}">
+                  <button
+                    type="submit"
+                    class="fg-mid"
+                    style="background:none;border:none;font-size:12px;letter-spacing:0.10em;cursor:pointer;padding:0;"
+                    aria-label="{{ 'nav.switch_lang_aria' | t: lang: language.endonym_name }}"
+                  >{{ language.iso_code | upcase }}</button>
+                {%- endform -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Cart — opens drawer {%- endcomment -%}
+        <button
+          type="button"
+          onclick="openCartDrawer()"
+          aria-label="{{ 'nav.cart_aria' | t: count: cart.item_count }}"
+          style="position:relative; color:var(--fg-high); display:flex; align-items:center; background:none; border:none;"
+        >
+          <span class="material-symbols-outlined" style="font-size:22px;" aria-hidden="true">shopping_bag</span>
+          <span
+            data-cart-count
+            style="position:absolute; top:-6px; right:-6px; width:16px; height:16px; border-radius:50%; background:var(--color-amber); color:#fff; font-size:9px; font-weight:700; display:{% if cart.item_count > 0 %}flex{% else %}none{% endif %}; align-items:center; justify-content:center;"
+          >{{ cart.item_count }}</span>
+        </button>
+
+        {%- comment -%} Mobile burger {%- endcomment -%}
+        <button
+          type="button"
+          class="site-nav__burger"
+          id="mobile-menu-toggle"
+          aria-label="{{ 'nav.menu_open_aria' | t }}"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span class="material-symbols-outlined" style="font-size:24px;" aria-hidden="true">menu</span>
+        </button>
+      </div>
+    </div>
+
+    {%- comment -%} Mobile nav {%- endcomment -%}
+    <div id="mobile-nav" class="mobile-nav" aria-hidden="true">
+      <button type="button" class="mobile-nav__link" id="mobile-mega-trigger" aria-haspopup="true" aria-expanded="false">
+        {{ 'nav.products' | t }}
+        <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">expand_more</span>
+      </button>
+      <a href="{{ locale_prefix }}/pages/ueber-uns" class="mobile-nav__link">{{ 'nav.about' | t }}</a>
+      <a href="{{ locale_prefix }}/pages/support" class="mobile-nav__link">{{ 'nav.support' | t }}</a>
+    </div>
+  </nav>
+
+  {%- comment -%} MEGA MENU {%- endcomment -%}
+  <div id="mega-menu" class="mega-menu" role="menu" aria-hidden="true" aria-labelledby="mega-trigger">
+    <div class="container">
+      <div class="mega-menu__grid">
+
+        {%- comment -%} Column 1: Categories {%- endcomment -%}
+        <div>
+          <p class="mega-menu__col-label">{{ 'nav.mega.col_categories' | t }}</p>
+          <div class="mega-menu__categories">
+
+            <a href="{{ locale_prefix }}/collections/smart-bulbs" class="mega-menu__cat-tile" onclick="closeMegaMenu()">
+              <span class="mega-menu__cat-icon">
+                <span class="material-symbols-outlined text-amber" style="font-size:22px;" aria-hidden="true">lightbulb</span>
+              </span>
+              <div>
+                <p class="mega-menu__cat-name">Smart Bulbs</p>
+                <p class="mega-menu__cat-desc">{{ 'nav.mega.smart_bulbs_desc' | t }}</p>
+              </div>
+            </a>
+
+            <div class="mega-menu__cat-tile mega-menu__cat-tile--disabled" aria-disabled="true">
+              <span class="mega-menu__cat-icon mega-menu__cat-icon--disabled">
+                <span class="material-symbols-outlined fg-minimal" style="font-size:19px;" aria-hidden="true">emoji_objects</span>
+              </span>
+              <div>
+                <p class="mega-menu__cat-name">Filament <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
+                <p class="mega-menu__cat-desc">{{ 'nav.mega.filament_desc' | t }}</p>
+              </div>
+            </div>
+
+            <div class="mega-menu__cat-tile mega-menu__cat-tile--disabled" aria-disabled="true">
+              <span class="mega-menu__cat-icon mega-menu__cat-icon--disabled">
+                <span class="material-symbols-outlined fg-minimal" style="font-size:19px;" aria-hidden="true">grid_on</span>
+              </span>
+              <div>
+                <p class="mega-menu__cat-name">Panels <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
+                <p class="mega-menu__cat-desc">{{ 'nav.mega.panels' | t }}</p>
+              </div>
+            </div>
+
+            <div class="mega-menu__cat-tile mega-menu__cat-tile--disabled" aria-disabled="true">
+              <span class="mega-menu__cat-icon mega-menu__cat-icon--disabled">
+                <span class="material-symbols-outlined fg-minimal" style="font-size:19px;" aria-hidden="true">light_mode</span>
+              </span>
+              <div>
+                <p class="mega-menu__cat-name">Ceiling Lights <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
+                <p class="mega-menu__cat-desc">{{ 'nav.mega.ceiling_lights_desc' | t }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Column 2: Tiers {%- endcomment -%}
+        <div>
+          <p class="mega-menu__col-label">{{ 'nav.mega.col_tiers' | t }}</p>
+          <div class="mega-menu__tiers">
+            <div class="mega-menu__tier-row mega-menu__tier-row--disabled" aria-disabled="true">
+              <span class="mega-menu__tier-num mega-menu__tier-num--disabled">04</span>
+              <div>
+                <p class="mega-menu__tier-name">CLASSIC <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
+                <p class="mega-menu__tier-desc">{{ 'nav.mega.classic_desc' | t }}</p>
+              </div>
+            </div>
+            <div class="mega-menu__tier-row mega-menu__tier-row--disabled" aria-disabled="true">
+              <span class="mega-menu__tier-num mega-menu__tier-num--disabled">02</span>
+              <div>
+                <p class="mega-menu__tier-name">CLASSIC+ <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
+                <p class="mega-menu__tier-desc">{{ 'nav.mega.classic_plus_desc' | t }}</p>
+              </div>
+            </div>
+            <a href="{{ locale_prefix }}/collections/all?filter.p.tag=tier-smart" class="mega-menu__tier-row mega-menu__tier-row--smart" onclick="closeMegaMenu()">
+              <span class="mega-menu__tier-num">03</span>
+              <div>
+                <p class="mega-menu__tier-name">SMART</p>
+                <p class="mega-menu__tier-desc">{{ 'nav.mega.smart_desc' | t }}</p>
+              </div>
+            </a>
+            <div class="mega-menu__tier-row mega-menu__tier-row--disabled" aria-disabled="true">
+              <span class="mega-menu__tier-num mega-menu__tier-num--disabled">04</span>
+              <div>
+                <p class="mega-menu__tier-name">SMART+ <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
+                <p class="mega-menu__tier-desc">{{ 'nav.mega.smart_plus_desc' | t }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {%- comment -%} Column 3: Quick links {%- endcomment -%}
+        <div class="mega-menu__quick">
+          <p class="mega-menu__col-label">{{ 'nav.mega.col_more' | t }}</p>
+          <nav aria-label="{{ 'nav.mega.quick_nav_aria' | t }}">
+            <a href="{{ locale_prefix }}/collections/all" class="mega-menu__quick-link" onclick="closeMegaMenu()">
+              <span class="material-symbols-outlined" style="font-size:15px; color:rgba(232,160,96,0.50);" aria-hidden="true">star</span>
+              {{ 'nav.mega.bestseller' | t }}
+            </a>
+            <a href="{{ locale_prefix }}/pages/support" class="mega-menu__quick-link" onclick="closeMegaMenu()">
+              <span class="material-symbols-outlined" style="font-size:15px; color:rgba(232,160,96,0.50);" aria-hidden="true">info</span>
+              {{ 'nav.mega.smart_home_guide' | t }}
+            </a>
+            <a href="{{ locale_prefix }}/pages/support" class="mega-menu__quick-link" onclick="closeMegaMenu()">
+              <span class="material-symbols-outlined" style="font-size:15px; color:rgba(232,160,96,0.50);" aria-hidden="true">help_outline</span>
+              {{ 'nav.support' | t }}
+            </a>
+            <a href="{{ locale_prefix }}/pages/ueber-uns" class="mega-menu__quick-link" onclick="closeMegaMenu()">
+              <span class="material-symbols-outlined" style="font-size:15px; color:rgba(232,160,96,0.50);" aria-hidden="true">verified</span>
+              {{ 'nav.mega.warranty_link' | t }}
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      {%- comment -%} Mega footer {%- endcomment -%}
+      <div class="mega-menu__footer">
+        <a href="{{ locale_prefix }}/collections/all" class="mega-menu__view-all" onclick="closeMegaMenu()">
+          {{ 'nav.mega.view_all' | t }}
+          <span class="material-symbols-outlined text-amber" style="font-size:15px;" aria-hidden="true">arrow_forward</span>
+        </a>
+        <p style="font-size:13px; color:var(--fg-minimal);">
+          {{ 'nav.mega.product_count' | t: count: collections.all.products_count }}
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  (function() {
+    var trigger = document.getElementById('mega-trigger');
+    var menu = document.getElementById('mega-menu');
+    var header = document.getElementById('site-header');
+    var mobileToggle = document.getElementById('mobile-menu-toggle');
+    var mobileNav = document.getElementById('mobile-nav');
+    var mobileMegaTrigger = document.getElementById('mobile-mega-trigger');
+    var closeTimer = null;
+
+    function openMega() {
+      clearTimeout(closeTimer);
+      menu.classList.add('is-open');
+      menu.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+      var icon = trigger.querySelector('.material-symbols-outlined');
+      if (icon) icon.style.transform = 'rotate(180deg)';
+    }
+
+    function scheduleMegaClose() {
+      closeTimer = setTimeout(function() {
+        closeMegaMenu();
+      }, 150);
+    }
+
+    function cancelClose() { clearTimeout(closeTimer); }
+
+    window.closeMegaMenu = function() {
+      menu.classList.remove('is-open');
+      menu.setAttribute('aria-hidden', 'true');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      var icon = trigger && trigger.querySelector('.material-symbols-outlined');
+      if (icon) icon.style.transform = 'rotate(0deg)';
+    };
+
+    if (trigger) {
+      trigger.addEventListener('mouseenter', openMega);
+      trigger.addEventListener('click', function() {
+        if (menu.classList.contains('is-open')) { closeMegaMenu(); } else { openMega(); }
+      });
+    }
+
+    if (header) {
+      header.addEventListener('mouseleave', scheduleMegaClose);
+      header.addEventListener('mouseenter', cancelClose);
+    }
+
+    if (menu) {
+      menu.addEventListener('mouseenter', cancelClose);
+      menu.addEventListener('mouseleave', scheduleMegaClose);
+    }
+
+    document.addEventListener('mousedown', function(e) {
+      if (menu && menu.classList.contains('is-open')) {
+        if (!header.contains(e.target)) { closeMegaMenu(); }
+      }
+    });
+
+    if (mobileToggle && mobileNav) {
+      mobileToggle.addEventListener('click', function() {
+        var open = mobileNav.classList.toggle('is-open');
+        mobileToggle.setAttribute('aria-expanded', String(open));
+        mobileNav.setAttribute('aria-hidden', String(!open));
+        var icon = mobileToggle.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = open ? 'close' : 'menu';
+        if (open) closeMegaMenu();
+      });
+    }
+
+    if (mobileMegaTrigger) {
+      mobileMegaTrigger.addEventListener('click', function() {
+        mobileNav.classList.remove('is-open');
+        openMega();
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+{% endschema %}

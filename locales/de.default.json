@@ -1,0 +1,379 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "password_page": {
+      "coming_soon": "Demnächst verfügbar"
+    },
+    "coming_soon": "Demnächst"
+  },
+  "coming_soon": "Demnächst verfügbar",
+  "products": {
+    "product": {
+      "add_to_cart": "In den Warenkorb",
+      "sold_out": "Ausverkauft",
+      "unavailable": "Nicht verfügbar",
+      "on_sale": "Sale"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Warenkorb",
+      "empty": "Dein Warenkorb ist leer."
+    },
+    "eyebrow": "Warenkorb",
+    "title": "Dein Warenkorb.",
+    "remove": "Entfernen",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse →",
+    "empty_title": "Dein Warenkorb ist leer.",
+    "empty_body": "Entdecke unser Sortiment und füge Produkte hinzu.",
+    "empty_cta": "Jetzt entdecken"
+  },
+  "cart_drawer": {
+    "aria_label": "Warenkorb",
+    "title": "Warenkorb",
+    "loading": "Wird geladen…",
+    "close_aria": "Warenkorb schließen",
+    "subtotal": "Zwischensumme",
+    "checkout": "Jetzt sicher zur Kasse",
+    "trust_text": "3 Jahre EU-Garantie auf alle LUMOnova Produkte",
+    "toast_added": "hinzugefügt",
+    "empty": "Dein Warenkorb ist leer.",
+    "empty_body": "Entdecke unsere smarten Leuchtmittel und füge Produkte hinzu.",
+    "empty_cta": "Jetzt entdecken",
+    "empty_subtitle": "Dein Warenkorb ist leer",
+    "item_singular": "Artikel",
+    "item_plural": "Artikel",
+    "qty_decrease_aria": "Menge verringern",
+    "qty_increase_aria": "Menge erhöhen",
+    "remove_aria": "entfernen",
+    "error_loading": "Fehler beim Laden."
+  },
+  "nav": {
+    "aria_label": "Hauptnavigation",
+    "logo_aria": "Startseite",
+    "products": "Produkte",
+    "about": "Über Uns",
+    "support": "Support",
+    "lang_switcher_aria": "Sprache wechseln",
+    "switch_lang_aria": "Sprache wechseln zu {{ lang }}",
+    "cart_aria": "Warenkorb öffnen ({{ count }} Artikel)",
+    "menu_open_aria": "Menü öffnen",
+    "mega": {
+      "col_categories": "Kategorien",
+      "col_tiers": "Produktlinien",
+      "col_more": "Mehr",
+      "smart_bulbs_desc": "E27, E14, GU10 — RGB+CCT, Tunable White, Alexa & Google Home",
+      "filament_desc": "Vintage-Optik",
+      "panels_desc": "Büro & Decke",
+      "ceiling_lights_desc": "Mit Smart-Modul",
+      "classic_desc": "Klassisch & langlebig",
+      "classic_plus_desc": "Mit Sensor oder CCT",
+      "smart_desc": "Alexa & Google Home",
+      "smart_plus_desc": "Matter · Apple Home",
+      "bestseller": "Bestseller",
+      "smart_home_guide": "Smart Home Guide",
+      "warranty_link": "3 Jahre Garantie",
+      "view_all": "Alle Produkte ansehen",
+      "product_count": "{{ count }} Produkte verfügbar",
+      "quick_nav_aria": "Schnellzugriff"
+    }
+  },
+  "footer": {
+    "tagline": "European Smart Lighting. No Hub. No Lock-in.",
+    "col_products": "Produkte",
+    "col_legal": "Rechtliches",
+    "col_contact": "Kontakt",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "agb": "AGB",
+    "widerruf": "Widerruf",
+    "coming_at_launch": "folgt zum Launch",
+    "copyright": "© {{ year }} C&L Handels GmbH, Willich, Deutschland"
+  },
+  "trust": {
+    "warranty_label": "3 Jahre EU-Garantie",
+    "warranty_sub": "Auf alle LUMOnova Produkte",
+    "support_label": "Support aus Willich",
+    "support_sub": "Mo–Fr per E-Mail und Telefon",
+    "cert_label": "CE / WEEE / RoHS",
+    "cert_sub": "Vollständig EU-zertifiziert"
+  },
+  "compat": {
+    "available_in": "Verfügbar in",
+    "smart_and_smart_plus": "SMART und SMART+",
+    "smart_app_control": "SMART (App-Steuerung)",
+    "in_preparation": "In Vorbereitung"
+  },
+  "product_card": {
+    "view_details": "Details ansehen",
+    "view": "Ansehen"
+  },
+  "product": {
+    "hero_aria": "Produkthero",
+    "image_coming": "Produktbild folgt",
+    "gallery_prev": "Vorheriges Bild",
+    "gallery_next": "Nächstes Bild",
+    "gallery_thumb_aria": "Bild {{ index }} anzeigen",
+    "gallery_thumb_placeholder": "Bild {{ index }} (Platzhalter)",
+    "gallery_image_label": "Bild",
+    "breadcrumb_aria": "Brotkrumen",
+    "breadcrumb_products": "Produkte",
+    "price_on_request": "Auf Anfrage",
+    "incl_vat": "Inkl. MwSt.",
+    "shipping_costs": "Versandkosten",
+    "shipping_calculated": "werden im Checkout berechnet",
+    "delivery_time": "Lieferzeit",
+    "unavailable": "Derzeit nicht verfügbar",
+    "cta_inquiry": "Anfrage stellen →",
+    "cta_specs": "Technische Daten",
+    "subnav_aria": "Produkt-Sub-Navigation",
+    "tab_description": "Beschreibung",
+    "tab_specs": "Technische Daten",
+    "features_eyebrow": "Features",
+    "features_title": "Was dieses Produkt kann.",
+    "features_subtitle_smart_bulbs": "Vier Kernfunktionen, die den Unterschied zwischen einer LED und einer LUMOnova ausmachen.",
+    "specs_eyebrow": "Technische Daten",
+    "specs_title": "Alles, was zählt.",
+    "specs_coming": "Technische Daten folgen.",
+    "compat_eyebrow": "Kompatibilität",
+    "compat_title": "Vollständig integriert."
+  },
+  "collection": {
+    "eyebrow": "Sortiment",
+    "all_products_title": "Alle Produkte.",
+    "subtitle": "Vier Tiers. Eine Marke. Licht für jeden Anspruch.",
+    "filter_category": "Kategorie",
+    "filter_all": "Alle",
+    "filter_tier": "Tier",
+    "filter_all_tiers": "Alle Tiers",
+    "product_singular": "Produkt",
+    "product_plural": "Produkte",
+    "sort_label": "Sortierung",
+    "sort_recommended": "Empfohlen",
+    "sort_price_asc": "Preis: aufsteigend",
+    "sort_price_desc": "Preis: absteigend",
+    "sort_name_az": "Name A–Z",
+    "pagination_aria": "Pagination",
+    "pagination_prev": "← Zurück",
+    "pagination_next": "Weiter →",
+    "empty_title": "Keine Produkte gefunden.",
+    "empty_body": "Versuche einen anderen Filter.",
+    "reset_filter": "Filter zurücksetzen"
+  },
+  "404": {
+    "title": "Seite nicht gefunden.",
+    "body": "Die gesuchte Seite existiert leider nicht.",
+    "cta": "Zur Startseite"
+  },
+  "home": {
+    "hero": {
+      "aria": "Hero",
+      "body_default": "LUMOnova. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das sich dir anpasst."
+    },
+    "usps": {
+      "aria": "USPs"
+    },
+    "categories": {
+      "eyebrow": "Sortiment",
+      "title": "Vier Produktfamilien.",
+      "subtitle": "Smart Bulbs. Filament, Panels und Ceiling Lights – alle mit derselben Tier-Logik und denselben Smart-Standards.",
+      "smart_bulbs_aria": "Zur Kategorie Smart Bulbs",
+      "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter und klassisch",
+      "filament_desc": "Vintage-Optik mit warmweißem LED-Filament",
+      "panels_aria": "Zur Kategorie Panels",
+      "panels_desc": "LED-Backlit-Panels für Büro und Decke",
+      "ceiling_lights_desc": "Deckenleuchten mit Matter und Sensorik",
+      "available": "Verfügbar"
+    },
+    "tiers": {
+      "eyebrow": "Vier Tiers",
+      "title": "Vom puren Licht bis zum vollwertigen Smart Home.",
+      "subtitle": "Jeder Tier ist eigenständig – kein Upgrade-Zwang, keine versteckten Kosten. Du wählst, wie smart Dein Licht sein soll.",
+      "step": "Stufe",
+      "learn_more": "Mehr erfahren",
+      "classic": {
+        "f1": "Warmweißes Licht (2700K)",
+        "f2": "Stufenlos dimmbar",
+        "f3": "25.000h Lebensdauer",
+        "f4": "IP44 / IP65 Schutz"
+      },
+      "classic_plus": {
+        "f1": "CCT-Schalter (2700K–6500K)",
+        "f2": "Bewegungssensor optional",
+        "f3": "Kein App-Setup nötig",
+        "f4": "IP65 Schutz"
+      },
+      "smart": {
+        "f1": "Wi-Fi 2.4 GHz, kein Hub",
+        "f2": "Amazon Alexa & Google Home",
+        "f3": "App-Steuerung (Tuya Smart)",
+        "f4": "RGB + CCT Vollspektrum"
+      },
+      "smart_plus": {
+        "f1": "Matter over Wi-Fi (kein Hub)",
+        "f2": "Apple Home, Alexa, Google, SmartThings",
+        "f3": "Lokale Steuerung ohne Internet",
+        "f4": "3 Jahre EU-Garantie"
+      }
+    },
+    "atmosphere": {
+      "eyebrow": "Atmosphäre",
+      "title": "Licht macht den Raum.",
+      "subtitle": "Vom warmen Wohnzimmer bis zur stimmungsvollen RGB-Wand – ein paar Beispiele, wie LUMOnova Räume verändert.",
+      "img1_alt": "Familienmoment – Warmweiß",
+      "img1_caption": "Familienmoment – Warmweiß",
+      "img2_alt": "Romantisches Dinner – Warmes Licht",
+      "img2_caption": "Romantisches Dinner – Warmes Licht",
+      "img3_alt": "Schlafzimmer – Entspannung",
+      "img3_caption": "Schlafzimmer – Entspannung"
+    },
+    "featured": {
+      "eyebrow": "Im Fokus",
+      "title": "Die LM-Serie.",
+      "subtitle": "Vom kompakten Tropfen bis zur leistungsstarken A70 – Matter-Modelle (SMART+) decken zusätzlich Apple Home und SmartThings ab.",
+      "all_products": "Alle Produkte"
+    },
+    "compat": {
+      "eyebrow": "Kompatibilität",
+      "title": "Funktioniert mit dem, was Du bereits nutzt.",
+      "subtitle": "Amazon Alexa und Google Home arbeiten ab dem SMART-Tier nativ. Apple Home und Samsung SmartThings sind dem SMART+-Tier vorbehalten – über Matter, kein Hub erforderlich."
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Über LUMOnova"
+    },
+    "story": {
+      "eyebrow": "Unsere Geschichte",
+      "img_placeholder": "Bild im Customizer wählen"
+    },
+    "values": {
+      "eyebrow": "Was uns ausmacht",
+      "title": "Unsere Werte.",
+      "v1": {
+        "title": "3 Jahre EU-Garantie",
+        "text": "Jedes LUMOnova Produkt wird mit drei Jahren gesetzlicher EU-Garantie geliefert. Kein Kleingedrucktes, keine Ausnahmen."
+      },
+      "v2": {
+        "title": "Kein Hub erforderlich",
+        "text": "Unsere SMART-Produkte verbinden sich direkt über dein WLAN. Kein zusätzliches Gateway, kein Bridge-Gerät, keine Abhängigkeit."
+      },
+      "v3": {
+        "title": "EU-zertifiziert",
+        "text": "CE, WEEE und RoHS — alle Produkte sind vollständig nach europäischen Standards zertifiziert und in der EU zugelassen."
+      },
+      "v4": {
+        "title": "Support aus Willich",
+        "text": "Unser Kundendienst sitzt in Willich, NRW. Echte Ansprechpartner, auf Deutsch, Mo–Fr per E-Mail und Telefon."
+      },
+      "v5": {
+        "title": "Vier Tiers, ein System",
+        "text": "Von CLASSIC bis SMART+ — unser Tier-System macht Lichtplanung einfach und konsistent. Du wählst den Grad der Intelligenz."
+      },
+      "v6": {
+        "title": "Kein Lock-in",
+        "text": "LUMOnova arbeitet mit offenen Standards und etablierten Plattformen. Dein Zuhause gehört dir — nicht einem Ökosystem."
+      }
+    },
+    "gallery": {
+      "eyebrow": "Atmosphäre",
+      "img_placeholder_1": "Bild 1 wählen",
+      "img_placeholder_2": "Bild 2 wählen",
+      "img_placeholder_3": "Bild 3 wählen"
+    },
+    "stats": {
+      "families": "Produktfamilien",
+      "products": "Produkte im LM-Sortiment",
+      "warranty": "Jahre EU-Garantie",
+      "support": "Support aus Willich, NRW"
+    },
+    "cta": {
+      "eyebrow": "Jetzt entdecken"
+    }
+  },
+  "support": {
+    "hero": {
+      "eyebrow": "Support & Kontakt",
+      "title": "Wie können wir",
+      "title_accent": "helfen?",
+      "sub": "Unser Team in Willich ist Mo–Fr für Sie erreichbar – per Mail, Telefon oder direkt über das Formular."
+    },
+    "usps": {
+      "usp1": {
+        "label": "3 Jahre EU-Garantie",
+        "sub": "Auf alle LUMOnova Produkte"
+      },
+      "usp2": {
+        "label": "Sitz in Deutschland",
+        "sub": "C&L Handels GmbH, Willich NRW"
+      },
+      "usp3": {
+        "label": "CE / WEEE / RoHS",
+        "sub": "Vollständig EU-zertifiziert"
+      },
+      "usp4": {
+        "label": "Persönlicher Support",
+        "sub": "Kein Bot – echte Antworten"
+      }
+    },
+    "contact": {
+      "eyebrow": "Direkt erreichen",
+      "title": "Kontakt",
+      "email_label": "E-Mail",
+      "phone_label": "Telefon",
+      "address": "C&L Handels GmbH — Willich, NRW, Deutschland"
+    },
+    "hours": {
+      "eyebrow": "Wann wir da sind",
+      "title": "Öffnungszeiten",
+      "row1_day": "Montag – Freitag",
+      "row1_time": "08:00 – 16:30 Uhr",
+      "row2_day": "Samstag",
+      "row3_day": "Sonntag & Feiertage",
+      "closed": "Geschlossen",
+      "note": "Antwortzeit per E-Mail in der Regel innerhalb von 24 h an Werktagen."
+    },
+    "form": {
+      "eyebrow": "Direkt schreiben",
+      "title": "Nachricht senden",
+      "success_title": "Nachricht gesendet!",
+      "success_sub": "Wir melden uns in der Regel innerhalb von 24 Stunden.",
+      "label_name": "Ihr Name",
+      "placeholder_name": "Max Mustermann",
+      "label_email": "E-Mail-Adresse",
+      "placeholder_email": "name@beispiel.de",
+      "label_order": "Bestellnummer",
+      "placeholder_order": "#LM-1234",
+      "optional": "optional",
+      "label_subject": "Betreff",
+      "subject_placeholder": "Bitte wählen …",
+      "subject_1": "Frage zu einem Produkt",
+      "subject_2": "Bestellung & Lieferung",
+      "subject_3": "Garantiefall",
+      "subject_4": "Technische Hilfe",
+      "subject_5": "Rückgabe / Widerruf",
+      "subject_6": "Sonstiges",
+      "label_message": "Ihre Nachricht",
+      "placeholder_message": "Beschreiben Sie Ihr Anliegen …",
+      "privacy_text": "Mit dem Absenden stimmen Sie unserer",
+      "privacy_link": "Datenschutzerklärung",
+      "submit": "Nachricht absenden"
+    }
+  },
+  "shopify": {
+    "checkout": {
+      "marketing": {
+        "accept_marketing_checkbox_label": "Exklusive Angebote & Rabatte sichern!"
+      }
+    }
+  }
+}
