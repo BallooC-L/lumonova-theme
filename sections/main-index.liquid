@@ -10,13 +10,7 @@
 {%- endcomment -%}
 
 {%- assign hero_image = section.settings.hero_image -%}
-{%- assign hero_headline_1 = section.settings.hero_headline_1 | default: 'Kein Hub.' -%}
-{%- assign hero_headline_2 = section.settings.hero_headline_2 | default: 'Kein Lock-in.' -%}
-{%- assign hero_headline_3 = section.settings.hero_headline_3 | default: 'Einfach smart.' -%}
-{%- assign hero_body = section.settings.hero_body -%}
-{%- assign hero_cta_primary_label = section.settings.hero_cta_primary_label | default: 'Kollektion ansehen' -%}
 {%- assign hero_cta_primary_url = section.settings.hero_cta_primary_url | default: '/collections/all' -%}
-{%- assign hero_cta_ghost_label = section.settings.hero_cta_ghost_label | default: 'SMART+ entdecken' -%}
 {%- assign hero_cta_ghost_url = section.settings.hero_cta_ghost_url | default: '/collections/all?filter.p.tag=tier-smart-plus' -%}
 
 {%- comment -%}
@@ -47,18 +41,14 @@
       <span class="hero__eyebrow-line" aria-hidden="true"></span>
       <p class="hero__eyebrow">Smart Lighting</p>
       <h1 class="hero__headline">
-        <span class="fg-primary">{{ hero_headline_1 }}</span>
-        <span class="text-amber">{{ hero_headline_2 }}</span>
-        <span class="fg-minimal" style="font-weight:300;">{{ hero_headline_3 }}</span>
+        <span class="fg-primary">{{ 'home.hero.headline_1' | t }}</span>
+        <span class="text-amber">{{ 'home.hero.headline_2' | t }}</span>
+        <span class="fg-minimal" style="font-weight:300;">{{ 'home.hero.headline_3' | t }}</span>
       </h1>
-      {%- if hero_body != blank -%}
-        <p class="hero__body">{{ hero_body }}</p>
-      {%- else -%}
-        <p class="hero__body">{{ 'home.hero.body_default' | t }}</p>
-      {%- endif -%}
+      <p class="hero__body">{{ 'home.hero.body' | t }}</p>
       <div class="hero__ctas">
-        <a href="{{ hero_cta_primary_url }}" class="btn-amber">{{ hero_cta_primary_label }}</a>
-        <a href="{{ hero_cta_ghost_url }}" class="btn-ghost">{{ hero_cta_ghost_label }}</a>
+        <a href="{{ hero_cta_primary_url }}" class="btn-amber">{{ 'home.hero.cta_primary_label' | t }}</a>
+        <a href="{{ hero_cta_ghost_url }}" class="btn-ghost">{{ 'home.hero.cta_ghost_label' | t }}</a>
       </div>
     </div>
   </div>
@@ -72,17 +62,10 @@
 <section class="usp-bar" aria-label="{{ 'home.usps.aria' | t }}">
   <div class="container">
     <ul class="usp-bar__list" role="list">
-      {%- assign usps = 'Smart Lighting aus Europa|Kein Hub erforderlich|3 Jahre EU-Garantie' | split: '|' -%}
-      {%- if section.settings.usp_1 != blank -%}
-        {%- assign usps = '' -%}
-        {%- if section.settings.usp_1 != blank -%}{%- assign usps = usps | append: section.settings.usp_1 -%}{%- endif -%}
-        {%- if section.settings.usp_2 != blank -%}{%- assign usps = usps | append: '|' | append: section.settings.usp_2 -%}{%- endif -%}
-        {%- if section.settings.usp_3 != blank -%}{%- assign usps = usps | append: '|' | append: section.settings.usp_3 -%}{%- endif -%}
-        {%- assign usps = usps | split: '|' -%}
-      {%- endif -%}
+      {%- assign usps = 'home.usps.usp_1|home.usps.usp_2|home.usps.usp_3' | split: '|' -%}
       {%- for usp in usps -%}
         <li class="usp-bar__item" role="listitem">
-          <span class="usp-bar__text">{{ usp }}</span>
+          <span class="usp-bar__text">{{ usp | t }}</span>
           {%- unless forloop.last -%}<span class="usp-bar__divider" aria-hidden="true"></span>{%- endunless -%}
         </li>
       {%- endfor -%}
@@ -398,20 +381,11 @@
 {
   "name": "Homepage",
   "settings": [
+    { "type": "paragraph", "content": "Hero-Texte, USPs und Button-Beschriftungen werden über die Sprachdateien / Translate & Adapt gepflegt (home.hero.* und home.usps.*). Hier nur Bild, Button-Ziele und Featured Collection." },
     { "type": "header", "content": "Hero" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero Hintergrundbild" },
-    { "type": "text", "id": "hero_headline_1", "label": "Headline Zeile 1", "default": "Kein Hub." },
-    { "type": "text", "id": "hero_headline_2", "label": "Headline Zeile 2 (Amber)", "default": "Kein Lock-in." },
-    { "type": "text", "id": "hero_headline_3", "label": "Headline Zeile 3 (Ghost)", "default": "Einfach smart." },
-    { "type": "textarea", "id": "hero_body", "label": "Fließtext", "default": "LUMOnova ist Beleuchtung, die zu Dir kommt – nicht zu einem Ökosystem. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das funktioniert." },
-    { "type": "text", "id": "hero_cta_primary_label", "label": "CTA 1 Text", "default": "Kollektion ansehen" },
     { "type": "url", "id": "hero_cta_primary_url", "label": "CTA 1 URL" },
-    { "type": "text", "id": "hero_cta_ghost_label", "label": "CTA 2 Text", "default": "SMART+ entdecken" },
     { "type": "url", "id": "hero_cta_ghost_url", "label": "CTA 2 URL" },
-    { "type": "header", "content": "USP Bar" },
-    { "type": "text", "id": "usp_1", "label": "USP 1", "default": "Smart Lighting aus Europa" },
-    { "type": "text", "id": "usp_2", "label": "USP 2", "default": "Kein Hub erforderlich" },
-    { "type": "text", "id": "usp_3", "label": "USP 3", "default": "3 Jahre EU-Garantie" },
     { "type": "header", "content": "Atmosphere Bilder" },
     { "type": "image_picker", "id": "atmosphere_img_1", "label": "Atmosphäre Bild 1 (groß)" },
     { "type": "image_picker", "id": "atmosphere_img_2", "label": "Atmosphäre Bild 2" },

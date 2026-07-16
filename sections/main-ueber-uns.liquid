@@ -1,12 +1,12 @@
 {%- comment -%}
   main-ueber-uns.liquid
-  Sections: 1. Page Hero, 2. Brand Story, 3. Werte/USP Cards,
-  4. Bildergalerie, 5. Zahlen & Fakten, 6. CTA Banner, 7. Trust Row
+  Alle sichtbaren Texte via {{ '...' | t }} → vollständig erkannt & übersetzt von Translate & Adapt.
+  Schema-Settings nur noch für echte Konfiguration (Bilder, Button-URLs).
 {%- endcomment -%}
 
-{%- assign img1    = section.settings.gallery_img_1 -%}
-{%- assign img2    = section.settings.gallery_img_2 -%}
-{%- assign img3    = section.settings.gallery_img_3 -%}
+{%- assign img1      = section.settings.gallery_img_1 -%}
+{%- assign img2      = section.settings.gallery_img_2 -%}
+{%- assign img3      = section.settings.gallery_img_3 -%}
 {%- assign story_img = section.settings.story_image -%}
 
 {%- comment -%} ── 1. PAGE HERO ─────────────────────────────────────── {%- endcomment -%}
@@ -14,10 +14,10 @@
   <div class="container au-hero__inner">
     <p class="section-eyebrow reveal">{{ 'about.hero.eyebrow' | t }}</p>
     <h1 class="au-hero__headline reveal">
-      <span class="fg-primary">{{ section.settings.hero_line1 | default: 'Licht mit' }}</span>
-      <span class="text-amber">{{ section.settings.hero_line2 | default: 'Haltung.' }}</span>
+      <span class="fg-primary">{{ 'about.hero.headline_1' | t }}</span>
+      <span class="text-amber">{{ 'about.hero.headline_2' | t }}</span>
     </h1>
-    <p class="au-hero__sub reveal">{{ section.settings.hero_body | default: 'Wir sind LUMOnova — ein deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss.' }}</p>
+    <p class="au-hero__sub reveal">{{ 'about.hero.body' | t }}</p>
   </div>
 </section>
 
@@ -26,9 +26,9 @@
   <div class="container au-story__grid">
     <div class="au-story__text reveal">
       <p class="section-eyebrow">{{ 'about.story.eyebrow' | t }}</p>
-      <h2 class="section-title" style="font-size:clamp(26px,3vw,40px);">{{ section.settings.story_headline | default: 'Entstanden aus Frustration.' }}</h2>
-      <p class="au-story__body">{{ section.settings.story_body | default: 'LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen — aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist. Wir haben selbst nach einer Lösung gesucht und keine gefunden. Also haben wir sie gebaut.' }}</p>
-      <p class="au-story__body">{{ section.settings.story_body_2 | default: 'Heute entwickeln wir vier Produktfamilien — von der klassischen Glühbirne bis zum steuerbaren Panel — alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.' }}</p>
+      <h2 class="section-title" style="font-size:clamp(26px,3vw,40px);">{{ 'about.story.headline' | t }}</h2>
+      <p class="au-story__body">{{ 'about.story.body' | t }}</p>
+      <p class="au-story__body">{{ 'about.story.body_2' | t }}</p>
     </div>
     <div class="au-story__image reveal">
       {%- if story_img != blank -%}
@@ -36,7 +36,7 @@
           src="{{ story_img | img_url: '900x' }}"
           srcset="{{ story_img | img_url: '600x' }} 600w, {{ story_img | img_url: '900x' }} 900w"
           sizes="(min-width:1024px) 45vw, 100vw"
-          alt="{{ section.settings.story_img_alt | default: 'LUMOnova Produkte' }}"
+          alt="{{ 'about.story.img_alt' | t }}"
           loading="lazy"
           class="au-story__img"
         >
@@ -104,26 +104,26 @@
   <div class="container">
     <div class="section-heading reveal">
       <p class="section-eyebrow">{{ 'about.gallery.eyebrow' | t }}</p>
-      <h2 class="section-title">{{ section.settings.gallery_headline | default: 'Licht, das Räume verwandelt.' }}</h2>
+      <h2 class="section-title">{{ 'about.gallery.headline' | t }}</h2>
     </div>
     <div class="au-gallery__grid">
       <div class="au-gallery__item au-gallery__item--large reveal">
         {%- if img1 != blank -%}
-          <img src="{{ img1 | img_url: '1200x' }}" alt="{{ section.settings.gallery_alt_1 | default: 'LUMOnova Atmosphäre' }}" loading="lazy">
+          <img src="{{ img1 | img_url: '1200x' }}" alt="{{ 'about.gallery.alt_1' | t }}" loading="lazy">
         {%- else -%}
           <div class="au-gallery__placeholder"><span class="material-symbols-outlined text-amber" style="font-size:36px;" aria-hidden="true">add_photo_alternate</span><p>{{ 'about.gallery.img_placeholder_1' | t }}</p></div>
         {%- endif -%}
       </div>
       <div class="au-gallery__item reveal" style="transition-delay:0.1s;">
         {%- if img2 != blank -%}
-          <img src="{{ img2 | img_url: '800x' }}" alt="{{ section.settings.gallery_alt_2 | default: 'LUMOnova Atmosphäre' }}" loading="lazy">
+          <img src="{{ img2 | img_url: '800x' }}" alt="{{ 'about.gallery.alt_2' | t }}" loading="lazy">
         {%- else -%}
           <div class="au-gallery__placeholder"><span class="material-symbols-outlined text-amber" style="font-size:36px;" aria-hidden="true">add_photo_alternate</span><p>{{ 'about.gallery.img_placeholder_2' | t }}</p></div>
         {%- endif -%}
       </div>
       <div class="au-gallery__item reveal" style="transition-delay:0.2s;">
         {%- if img3 != blank -%}
-          <img src="{{ img3 | img_url: '800x' }}" alt="{{ section.settings.gallery_alt_3 | default: 'LUMOnova Atmosphäre' }}" loading="lazy">
+          <img src="{{ img3 | img_url: '800x' }}" alt="{{ 'about.gallery.alt_3' | t }}" loading="lazy">
         {%- else -%}
           <div class="au-gallery__placeholder"><span class="material-symbols-outlined text-amber" style="font-size:36px;" aria-hidden="true">add_photo_alternate</span><p>{{ 'about.gallery.img_placeholder_3' | t }}</p></div>
         {%- endif -%}
@@ -161,14 +161,14 @@
   <div class="container" style="text-align:center; max-width:640px; margin-inline:auto;">
     <div class="reveal">
       <p class="section-eyebrow">{{ 'about.cta.eyebrow' | t }}</p>
-      <h2 class="section-title" style="margin-bottom:1rem;">{{ section.settings.cta_headline | default: 'Finde dein LUMOnova.' }}</h2>
-      <p class="section-subtitle" style="margin-bottom:2rem;">{{ section.settings.cta_body | default: 'Vier Tiers, ein System — starte mit Smart Bulbs oder entdecke das gesamte Sortiment.' }}</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">{{ 'about.cta.headline' | t }}</h2>
+      <p class="section-subtitle" style="margin-bottom:2rem;">{{ 'about.cta.body' | t }}</p>
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
         <a href="{{ section.settings.cta_primary_url | default: '/collections/all' }}" class="btn-amber">
-          {{ section.settings.cta_primary_label | default: 'Kollektion ansehen' }}
+          {{ 'about.cta.primary_label' | t }}
         </a>
         <a href="{{ section.settings.cta_ghost_url | default: '/pages/support' }}" class="btn-ghost">
-          {{ section.settings.cta_ghost_label | default: 'Support & Kontakt' }}
+          {{ 'about.cta.ghost_label' | t }}
         </a>
       </div>
     </div>
@@ -218,30 +218,15 @@
 {
   "name": "Über Uns",
   "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "hero_line1", "label": "Headline Zeile 1", "default": "Licht mit" },
-    { "type": "text", "id": "hero_line2", "label": "Headline Zeile 2 (Amber)", "default": "Haltung." },
-    { "type": "textarea", "id": "hero_body", "label": "Einleitungstext", "default": "Wir sind LUMOnova — ein deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss." },
+    { "type": "paragraph", "content": "Alle Texte dieser Seite werden über die Sprachdateien / Translate & Adapt gepflegt (Inhalte → Sprachen bzw. Übersetzen & Anpassen → Theme). Hier werden nur Bilder und Button-Ziele konfiguriert." },
     { "type": "header", "content": "Brand Story" },
-    { "type": "text", "id": "story_headline", "label": "Story Headline", "default": "Entstanden aus Frustration." },
-    { "type": "textarea", "id": "story_body", "label": "Story Absatz 1", "default": "LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen — aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist." },
-    { "type": "textarea", "id": "story_body_2", "label": "Story Absatz 2", "default": "Heute entwickeln wir vier Produktfamilien — von der klassischen Glühbirne bis zum steuerbaren Panel — alle unter einem Anspruch: Qualität, die man sieht." },
     { "type": "image_picker", "id": "story_image", "label": "Story Bild (rechts)" },
-    { "type": "text", "id": "story_img_alt", "label": "Story Bild Alt-Text", "default": "LUMOnova Produkte" },
     { "type": "header", "content": "Bildergalerie" },
-    { "type": "text", "id": "gallery_headline", "label": "Galerie Headline", "default": "Licht, das Räume verwandelt." },
     { "type": "image_picker", "id": "gallery_img_1", "label": "Galeriebild 1 (groß, links)" },
-    { "type": "text", "id": "gallery_alt_1", "label": "Alt-Text Bild 1", "default": "LUMOnova Atmosphäre" },
     { "type": "image_picker", "id": "gallery_img_2", "label": "Galeriebild 2 (oben rechts)" },
-    { "type": "text", "id": "gallery_alt_2", "label": "Alt-Text Bild 2", "default": "LUMOnova Atmosphäre" },
     { "type": "image_picker", "id": "gallery_img_3", "label": "Galeriebild 3 (unten rechts)" },
-    { "type": "text", "id": "gallery_alt_3", "label": "Alt-Text Bild 3", "default": "LUMOnova Atmosphäre" },
     { "type": "header", "content": "CTA Banner" },
-    { "type": "text", "id": "cta_headline", "label": "CTA Headline", "default": "Finde dein LUMOnova." },
-    { "type": "textarea", "id": "cta_body", "label": "CTA Text", "default": "Vier Tiers, ein System — starte mit Smart Bulbs oder entdecke das gesamte Sortiment." },
-    { "type": "text", "id": "cta_primary_label", "label": "Button 1 Text", "default": "Kollektion ansehen" },
     { "type": "url", "id": "cta_primary_url", "label": "Button 1 URL" },
-    { "type": "text", "id": "cta_ghost_label", "label": "Button 2 Text", "default": "Support & Kontakt" },
     { "type": "url", "id": "cta_ghost_url", "label": "Button 2 URL" }
   ],
   "presets": [{ "name": "Über Uns" }]

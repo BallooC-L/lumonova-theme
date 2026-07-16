@@ -176,10 +176,19 @@
   "home": {
     "hero": {
       "aria": "Hero",
-      "body_default": "LUMOnova. Four tiers, four product families, one promise: light that fits you."
+      "body_default": "LUMOnova. Four tiers, four product families, one promise: light that fits you.",
+      "headline_1": "No hub.",
+      "headline_2": "No lock-in.",
+      "headline_3": "Simply smart.",
+      "body": "LUMOnova is lighting that comes to you – not to an ecosystem. Four tiers, four product families, one standard: light that works.",
+      "cta_primary_label": "View collection",
+      "cta_ghost_label": "Discover SMART+"
     },
     "usps": {
-      "aria": "USPs"
+      "aria": "USPs",
+      "usp_1": "Smart lighting from Europe",
+      "usp_2": "No hub required",
+      "usp_3": "3-year EU warranty"
     },
     "categories": {
       "eyebrow": "Range",
@@ -249,11 +258,18 @@
   },
   "about": {
     "hero": {
-      "eyebrow": "About LUMOnova"
+      "eyebrow": "About LUMOnova",
+      "headline_1": "Light with",
+      "headline_2": "attitude.",
+      "body": "We are LUMOnova — a German smart lighting label that develops light which adapts to you. No hub, no lock-in, no compromise."
     },
     "story": {
       "eyebrow": "Our Story",
-      "img_placeholder": "Select image in Customizer"
+      "img_placeholder": "Select image in Customizer",
+      "headline": "Born out of frustration.",
+      "body": "LUMOnova was founded in 2023 in Willich, North Rhine-Westphalia — out of the simple desire to buy smart lighting that isn't tied to a proprietary ecosystem. We searched for a solution ourselves and found none. So we built it.",
+      "body_2": "Today we develop four product families — from the classic bulb to the controllable panel — all held to one standard: quality you can see, and technology you don't need explained.",
+      "img_alt": "LUMOnova products"
     },
     "values": {
       "eyebrow": "What defines us",
@@ -287,7 +303,11 @@
       "eyebrow": "Atmosphere",
       "img_placeholder_1": "Select image 1",
       "img_placeholder_2": "Select image 2",
-      "img_placeholder_3": "Select image 3"
+      "img_placeholder_3": "Select image 3",
+      "headline": "Light that transforms rooms.",
+      "alt_1": "Light in many colours and for every room",
+      "alt_2": "Atmospheric light for the bedroom",
+      "alt_3": "Atmospheric light in the evening, natural bright light during the day."
     },
     "stats": {
       "families": "Product families",
@@ -296,7 +316,11 @@
       "support": "Support from Willich, NRW"
     },
     "cta": {
-      "eyebrow": "Explore now"
+      "eyebrow": "Explore now",
+      "headline": "Find your LUMOnova.",
+      "body": "Four tiers, one system — start with smart bulbs or explore the entire range.",
+      "primary_label": "View collection",
+      "ghost_label": "Support & Contact"
     }
   },
   "support": {
@@ -307,10 +331,22 @@
       "sub": "Our team in Willich is available Monday through Friday — by email, phone, or directly via the form."
     },
     "usps": {
-      "usp1": { "label": "3-year EU warranty", "sub": "On all LUMOnova products" },
-      "usp2": { "label": "Headquarter in Germany", "sub": "C&L Handels GmbH, Willich NRW" },
-      "usp3": { "label": "CE / WEEE / RoHS", "sub": "Fully EU-certified" },
-      "usp4": { "label": "Personal Support", "sub": "No AI – Only Real People" }
+      "usp1": {
+        "label": "3-year EU warranty",
+        "sub": "On all LUMOnova products"
+      },
+      "usp2": {
+        "label": "Headquarter in Germany",
+        "sub": "C&L Handels GmbH, Willich NRW"
+      },
+      "usp3": {
+        "label": "CE / WEEE / RoHS",
+        "sub": "Fully EU-certified"
+      },
+      "usp4": {
+        "label": "Personal Support",
+        "sub": "No AI – Only Real People"
+      }
     },
     "contact": {
       "eyebrow": "Direct Message",

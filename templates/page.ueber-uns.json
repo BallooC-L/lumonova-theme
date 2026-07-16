@@ -1,1 +1,16 @@
-{"sections":{"main":{"type":"main-ueber-uns","settings":{"hero_line1":"Licht mit","hero_line2":"Haltung.","hero_body":"Wir sind LUMOnova.\nEin deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss.","story_headline":"Entstanden aus Frustration.","story_body":"LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist. Wir haben selbst nach einer Lösung gesucht und keine gefunden. Also haben wir sie gebaut.","story_body_2":"Heute entwickeln wir vier Produktfamilien. Von der klassischen Glühbirne bis zum steuerbaren Panel sind alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.","story_image":"shopify:\/\/shop_images\/Smart-Control.webp","story_img_alt":"LUMOnova Produkte","gallery_headline":"Licht, das Räume verwandelt.","gallery_img_1":"shopify:\/\/shop_images\/Farbvielfalt.webp","gallery_alt_1":"Licht in vielen Farben und für jeden Raum","gallery_img_2":"shopify:\/\/shop_images\/Schlafzimmer-Entspannung.webp","gallery_alt_2":"Stimmiges Licht für das Schlafzimmer","gallery_img_3":"shopify:\/\/shop_images\/Szenen-_-Anwendungsfaelle.webp","gallery_alt_3":"Auf der linken Seite ist es abends mit atmosphärischen Licht, auf der rechten Seite natürliches helles Licht am Tag.","cta_headline":"Finde dein LUMOnova.","cta_body":"Vier Tiers, ein System: starte mit Smart Bulbs oder entdecke das gesamte Sortiment.","cta_primary_label":"Kollektion ansehen","cta_primary_url":"","cta_ghost_label":"Support & Kontakt","cta_ghost_url":""}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-ueber-uns",
+      "settings": {
+        "story_image": "shopify://shop_images/Smart-Control.webp",
+        "gallery_img_1": "shopify://shop_images/Farbvielfalt.webp",
+        "gallery_img_2": "shopify://shop_images/Schlafzimmer-Entspannung.webp",
+        "gallery_img_3": "shopify://shop_images/Szenen-_-Anwendungsfaelle.webp",
+        "cta_primary_url": "",
+        "cta_ghost_url": ""
+      }
+    }
+  },
+  "order": ["main"]
+}

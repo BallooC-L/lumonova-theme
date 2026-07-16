@@ -177,10 +177,19 @@
   "home": {
     "hero": {
       "aria": "Hero",
-      "body_default": "LUMOnova. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das sich dir anpasst."
+      "body_default": "LUMOnova. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das sich dir anpasst.",
+      "headline_1": "Kein Hub.",
+      "headline_2": "Kein Lock-in.",
+      "headline_3": "Einfach smart.",
+      "body": "LUMOnova ist Beleuchtung, die zu Dir kommt – nicht zu einem Ökosystem. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das funktioniert.",
+      "cta_primary_label": "Kollektion ansehen",
+      "cta_ghost_label": "SMART+ entdecken"
     },
     "usps": {
-      "aria": "USPs"
+      "aria": "USPs",
+      "usp_1": "Smart Lighting aus Europa",
+      "usp_2": "Kein Hub erforderlich",
+      "usp_3": "3 Jahre EU-Garantie"
     },
     "categories": {
       "eyebrow": "Sortiment",
@@ -250,11 +259,18 @@
   },
   "about": {
     "hero": {
-      "eyebrow": "Über LUMOnova"
+      "eyebrow": "Über LUMOnova",
+      "headline_1": "Licht mit",
+      "headline_2": "Haltung.",
+      "body": "Wir sind LUMOnova — ein deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss."
     },
     "story": {
       "eyebrow": "Unsere Geschichte",
-      "img_placeholder": "Bild im Customizer wählen"
+      "img_placeholder": "Bild im Customizer wählen",
+      "headline": "Entstanden aus Frustration.",
+      "body": "LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen — aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist. Wir haben selbst nach einer Lösung gesucht und keine gefunden. Also haben wir sie gebaut.",
+      "body_2": "Heute entwickeln wir vier Produktfamilien — von der klassischen Glühbirne bis zum steuerbaren Panel — alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.",
+      "img_alt": "LUMOnova Produkte"
     },
     "values": {
       "eyebrow": "Was uns ausmacht",
@@ -288,7 +304,11 @@
       "eyebrow": "Atmosphäre",
       "img_placeholder_1": "Bild 1 wählen",
       "img_placeholder_2": "Bild 2 wählen",
-      "img_placeholder_3": "Bild 3 wählen"
+      "img_placeholder_3": "Bild 3 wählen",
+      "headline": "Licht, das Räume verwandelt.",
+      "alt_1": "Licht in vielen Farben und für jeden Raum",
+      "alt_2": "Stimmiges Licht für das Schlafzimmer",
+      "alt_3": "Abends atmosphärisches Licht, tagsüber natürliches helles Licht."
     },
     "stats": {
       "families": "Produktfamilien",
@@ -297,7 +317,11 @@
       "support": "Support aus Willich, NRW"
     },
     "cta": {
-      "eyebrow": "Jetzt entdecken"
+      "eyebrow": "Jetzt entdecken",
+      "headline": "Finde dein LUMOnova.",
+      "body": "Vier Tiers, ein System — starte mit Smart Bulbs oder entdecke das gesamte Sortiment.",
+      "primary_label": "Kollektion ansehen",
+      "ghost_label": "Support & Kontakt"
     }
   },
   "support": {
