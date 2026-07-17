@@ -25,10 +25,23 @@
   {%- endfor -%}
 {%- endfor -%}
 {%- assign store_tags = store_tags | append: '|' -%}
-{%- if current_collection.handle -%}
-  {%- assign filter_base = routes.root_url | append: '/collections/' | append: current_collection.handle -%}
+{%- comment -%}
+  filter_base = the collection's own URL with any active tag stripped off.
+  collection.url returns a clean path like "/collections/all"; on a filtered
+  view it becomes "/collections/all/tier-smart", so we cut everything after
+  the collection handle to always link off the base.
+{%- endcomment -%}
+{%- assign url_parts = current_collection.url | split: '/collections/' -%}
+{%- assign handle_part = url_parts[1] | split: '/' | first -%}
+{%- if handle_part != blank -%}
+  {%- assign filter_base = '/collections/' | append: handle_part -%}
 {%- else -%}
-  {%- assign filter_base = routes.all_products_collection_url -%}
+  {%- assign filter_base = '/collections/all' -%}
+{%- endif -%}
+{%- comment -%} Preserve locale prefix (e.g. /en) if the collection URL has one {%- endcomment -%}
+{%- assign prefix_part = url_parts[0] -%}
+{%- if prefix_part != blank -%}
+  {%- assign filter_base = prefix_part | append: filter_base -%}
 {%- endif -%}
 
 <section class="section bg-base" aria-labelledby="collection-title">
