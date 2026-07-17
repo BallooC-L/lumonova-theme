@@ -244,12 +244,17 @@
           {%- assign img_left = false -%}
           {%- if feature.image_on_left == true or feature.image_on_left == 'true' -%}{%- assign img_left = true -%}{%- endif -%}
 
-          {%- comment -%} image_src can be a file reference OR a plain URL string {%- endcomment -%}
+          {%- comment -%} image_src can be a file reference (MediaImage / image) OR GenericFile OR a plain URL string {%- endcomment -%}
           {%- assign feat_img_url = '' -%}
-          {%- if feature.image_src -%}
-            {%- if feature.image_src.src -%}
+          {%- if feature.image_src != blank -%}
+            {%- if feature.image_src.width -%}
+              {%- comment -%} image reference or MediaImage {%- endcomment -%}
               {%- assign feat_img_url = feature.image_src | image_url: width: 1600 -%}
+            {%- elsif feature.image_src.url -%}
+              {%- comment -%} generic file reference {%- endcomment -%}
+              {%- assign feat_img_url = feature.image_src.url -%}
             {%- else -%}
+              {%- comment -%} plain URL string {%- endcomment -%}
               {%- assign feat_img_url = feature.image_src -%}
             {%- endif -%}
           {%- endif -%}
