@@ -125,19 +125,28 @@
 
         {%- comment -%}
           Column 1: Categories
-          Availability is derived from the store's live tag list
-          (collections.all.all_tags). A category is a real link when at least
-          one product carries its tag; otherwise it renders as "coming soon".
-          Products must be tagged with the category handle
-          (e.g. "smart-bulbs", "filament", "panels", "ceiling-lights").
+          Availability is derived by scanning the actual products in the "all"
+          collection and collecting their (handleized) tags into one string.
+          This is more reliable than collections.all.all_tags, which can be
+          empty or inconsistently cased depending on the store setup.
+          A category is a live link when its tag appears; otherwise "coming soon".
+          Expected tags: smart-bulbs, filament, panels, ceiling-lights,
+                         tier-classic, tier-classic-plus, tier-smart, tier-smart-plus
         {%- endcomment -%}
-        {%- assign all_tags = collections.all.all_tags -%}
+        {%- assign store_tags = '' -%}
+        {%- for product in collections.all.products -%}
+          {%- for tag in product.tags -%}
+            {%- assign tag_handle = tag | handleize -%}
+            {%- assign store_tags = store_tags | append: '|' | append: tag_handle -%}
+          {%- endfor -%}
+        {%- endfor -%}
+        {%- assign store_tags = store_tags | append: '|' -%}
         <div>
           <p class="mega-menu__col-label">{{ 'nav.mega.col_categories' | t }}</p>
           <div class="mega-menu__categories">
 
             {%- comment -%} Smart Bulbs {%- endcomment -%}
-            {%- if all_tags contains 'smart-bulbs' -%}
+            {%- if store_tags contains '|smart-bulbs|' -%}
               <a href="{{ locale_prefix }}/collections/smart-bulbs" class="mega-menu__cat-tile" onclick="closeMegaMenu()">
                 <span class="mega-menu__cat-icon">
                   <span class="material-symbols-outlined text-amber" style="font-size:22px;" aria-hidden="true">lightbulb</span>
@@ -160,7 +169,7 @@
             {%- endif -%}
 
             {%- comment -%} Filament {%- endcomment -%}
-            {%- if all_tags contains 'filament' -%}
+            {%- if store_tags contains '|filament|' -%}
               <a href="{{ locale_prefix }}/collections/all/filament" class="mega-menu__cat-tile" onclick="closeMegaMenu()">
                 <span class="mega-menu__cat-icon">
                   <span class="material-symbols-outlined text-amber" style="font-size:19px;" aria-hidden="true">emoji_objects</span>
@@ -183,7 +192,7 @@
             {%- endif -%}
 
             {%- comment -%} Panels {%- endcomment -%}
-            {%- if all_tags contains 'panels' -%}
+            {%- if store_tags contains '|panels|' -%}
               <a href="{{ locale_prefix }}/collections/all/panels" class="mega-menu__cat-tile" onclick="closeMegaMenu()">
                 <span class="mega-menu__cat-icon">
                   <span class="material-symbols-outlined text-amber" style="font-size:19px;" aria-hidden="true">grid_on</span>
@@ -206,7 +215,7 @@
             {%- endif -%}
 
             {%- comment -%} Ceiling Lights {%- endcomment -%}
-            {%- if all_tags contains 'ceiling-lights' -%}
+            {%- if store_tags contains '|ceiling-lights|' -%}
               <a href="{{ locale_prefix }}/collections/all/ceiling-lights" class="mega-menu__cat-tile" onclick="closeMegaMenu()">
                 <span class="mega-menu__cat-icon">
                   <span class="material-symbols-outlined text-amber" style="font-size:19px;" aria-hidden="true">light_mode</span>
@@ -241,7 +250,7 @@
           <div class="mega-menu__tiers">
 
             {%- comment -%} CLASSIC {%- endcomment -%}
-            {%- if all_tags contains 'tier-classic' -%}
+            {%- if store_tags contains '|tier-classic|' -%}
               <a href="{{ locale_prefix }}/collections/all/tier-classic" class="mega-menu__tier-row" onclick="closeMegaMenu()">
                 <span class="mega-menu__tier-num">01</span>
                 <div>
@@ -260,7 +269,7 @@
             {%- endif -%}
 
             {%- comment -%} CLASSIC+ {%- endcomment -%}
-            {%- if all_tags contains 'tier-classic-plus' -%}
+            {%- if store_tags contains '|tier-classic-plus|' -%}
               <a href="{{ locale_prefix }}/collections/all/tier-classic-plus" class="mega-menu__tier-row" onclick="closeMegaMenu()">
                 <span class="mega-menu__tier-num">02</span>
                 <div>
@@ -279,7 +288,7 @@
             {%- endif -%}
 
             {%- comment -%} SMART {%- endcomment -%}
-            {%- if all_tags contains 'tier-smart' -%}
+            {%- if store_tags contains '|tier-smart|' -%}
               <a href="{{ locale_prefix }}/collections/all/tier-smart" class="mega-menu__tier-row mega-menu__tier-row--smart" onclick="closeMegaMenu()">
                 <span class="mega-menu__tier-num">03</span>
                 <div>
@@ -298,7 +307,7 @@
             {%- endif -%}
 
             {%- comment -%} SMART+ {%- endcomment -%}
-            {%- if all_tags contains 'tier-smart-plus' -%}
+            {%- if store_tags contains '|tier-smart-plus|' -%}
               <a href="{{ locale_prefix }}/collections/all/tier-smart-plus" class="mega-menu__tier-row mega-menu__tier-row--smart" onclick="closeMegaMenu()">
                 <span class="mega-menu__tier-num">04</span>
                 <div>
