@@ -262,6 +262,20 @@
             {%- endif -%}
           {%- endif -%}
 
+          {%- comment -%} ===== TEMP DEBUG 2 ===== {%- endcomment -%}
+          <div style="background:#002; color:#dff; font:12px/1.4 monospace; padding:12px; margin:8px 0; white-space:pre-wrap; word-break:break-all;">
+DEBUG2
+image_src.image raw: [{{ feature.image_src.image }}]
+image_src.image.src: [{{ feature.image_src.image.src }}]
+image_src.image.url: [{{ feature.image_src.image.url }}]
+image_src.image width: [{{ feature.image_src.image.width }}]
+via image_url: [{{ feature.image_src.image | image_url: width: 1600 }}]
+via img_url direct: [{{ feature.image_src | image_url: width: 1600 }}]
+preview_image: [{{ feature.image_src.preview_image | image_url: width: 1600 }}]
+feat_img_url: [{{ feat_img_url }}]
+          </div>
+          {%- comment -%} ===== /TEMP DEBUG 2 ===== {%- endcomment -%}
+
           <div class="feature-block{% unless img_left %} feature-block--text-first{% endunless %}">
             {%- if img_left -%}
               <div class="feature-block__image">
