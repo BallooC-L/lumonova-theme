@@ -5,23 +5,24 @@
 
 {%- assign current_collection = collection -%}
 {%- comment -%}
-  Availability is derived from the store's live tag list.
-  A filter chip is a real link when at least one product carries its tag;
+  Availability is derived from the store's live tag list (collections.all.all_tags).
+  A filter chip is a real link when at least one product carries the matching tag;
   otherwise it renders disabled with a "coming soon" pill.
-  Products must be tagged with the category handle (smart-bulbs, filament,
-  panels, ceiling-lights) and tier handle (tier-classic, tier-classic-plus,
-  tier-smart, tier-smart-plus) for the corresponding chip to activate.
 
-  On a tag-filtered view the collection URL already contains the tag, so we
-  build filter links off the base collection handle to avoid stacked tags.
+  Expected tags:
+    Categories: smart-bulbs, filament, panels, ceiling-lights
+    Tiers:      tier-classic, tier-classic-plus, tier-smart, tier-smart-plus
+
+  Filter links use Shopify's native /collections/<handle>/<tag> pattern.
+  We always build off the base collection handle so switching a filter never
+  stacks multiple tags into the URL.
 {%- endcomment -%}
 {%- assign all_tags = collections.all.all_tags -%}
-{%- assign base_url = current_collection.url | split: '/' -%}
-{%- comment -%} collection.url is /collections/<handle>; strip any trailing tag {%- endcomment -%}
-{%- assign filter_base = routes.root_url | append: '/collections/' | append: current_collection.handle -%}
-{%- unless current_collection.handle -%}
+{%- if current_collection.handle -%}
+  {%- assign filter_base = routes.root_url | append: '/collections/' | append: current_collection.handle -%}
+{%- else -%}
   {%- assign filter_base = routes.all_products_collection_url -%}
-{%- endunless -%}
+{%- endif -%}
 
 <section class="section bg-base" aria-labelledby="collection-title">
   <div class="container">
