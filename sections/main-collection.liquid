@@ -4,6 +4,24 @@
 {%- endcomment -%}
 
 {%- assign current_collection = collection -%}
+{%- comment -%}
+  Availability is derived from the store's live tag list.
+  A filter chip is a real link when at least one product carries its tag;
+  otherwise it renders disabled with a "coming soon" pill.
+  Products must be tagged with the category handle (smart-bulbs, filament,
+  panels, ceiling-lights) and tier handle (tier-classic, tier-classic-plus,
+  tier-smart, tier-smart-plus) for the corresponding chip to activate.
+
+  On a tag-filtered view the collection URL already contains the tag, so we
+  build filter links off the base collection handle to avoid stacked tags.
+{%- endcomment -%}
+{%- assign all_tags = collections.all.all_tags -%}
+{%- assign base_url = current_collection.url | split: '/' -%}
+{%- comment -%} collection.url is /collections/<handle>; strip any trailing tag {%- endcomment -%}
+{%- assign filter_base = routes.root_url | append: '/collections/' | append: current_collection.handle -%}
+{%- unless current_collection.handle -%}
+  {%- assign filter_base = routes.all_products_collection_url -%}
+{%- endunless -%}
 
 <section class="section bg-base" aria-labelledby="collection-title">
   <div class="container">
@@ -27,37 +45,97 @@
       <div>
         <p class="filter-row__label">{{ 'collection.filter_category' | t }}</p>
         <div class="filter-row__chips no-scrollbar">
-          <a href="{{ current_collection.url }}" class="filter-chip{% unless current_tags %} is-active{% endunless %}">
+          <a href="{{ filter_base }}" class="filter-chip{% unless current_tags %} is-active{% endunless %}">
             <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_view</span>
             {{ 'collection.filter_all' | t }}
           </a>
-          <a href="{{ current_collection.url }}/smart-bulbs" class="filter-chip{% if current_tags contains 'smart-bulbs' %} is-active{% endif %}">
-            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">lightbulb</span>
-            Smart Bulbs
-          </a>
-          <a href="{{ current_collection.url }}/filament" class="filter-chip{% if current_tags contains 'filament' %} is-active{% endif %}">
-            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">emoji_objects</span>
-            Filament
-          </a>
-          <a href="{{ current_collection.url }}/panels" class="filter-chip{% if current_tags contains 'panels' %} is-active{% endif %}">
-            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_on</span>
-            Panels
-          </a>
-          <a href="{{ current_collection.url }}/ceiling-lights" class="filter-chip{% if current_tags contains 'ceiling-lights' %} is-active{% endif %}">
-            <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">light_mode</span>
-            Ceiling Lights
-          </a>
+
+          {%- comment -%} Smart Bulbs {%- endcomment -%}
+          {%- if all_tags contains 'smart-bulbs' -%}
+            <a href="{{ filter_base }}/smart-bulbs" class="filter-chip{% if current_tags contains 'smart-bulbs' %} is-active{% endif %}">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">lightbulb</span>
+              Smart Bulbs
+            </a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">lightbulb</span>
+              Smart Bulbs <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+            </span>
+          {%- endif -%}
+
+          {%- comment -%} Filament {%- endcomment -%}
+          {%- if all_tags contains 'filament' -%}
+            <a href="{{ filter_base }}/filament" class="filter-chip{% if current_tags contains 'filament' %} is-active{% endif %}">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">emoji_objects</span>
+              Filament
+            </a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">emoji_objects</span>
+              Filament <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+            </span>
+          {%- endif -%}
+
+          {%- comment -%} Panels {%- endcomment -%}
+          {%- if all_tags contains 'panels' -%}
+            <a href="{{ filter_base }}/panels" class="filter-chip{% if current_tags contains 'panels' %} is-active{% endif %}">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_on</span>
+              Panels
+            </a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_on</span>
+              Panels <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+            </span>
+          {%- endif -%}
+
+          {%- comment -%} Ceiling Lights {%- endcomment -%}
+          {%- if all_tags contains 'ceiling-lights' -%}
+            <a href="{{ filter_base }}/ceiling-lights" class="filter-chip{% if current_tags contains 'ceiling-lights' %} is-active{% endif %}">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">light_mode</span>
+              Ceiling Lights
+            </a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
+              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">light_mode</span>
+              Ceiling Lights <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+            </span>
+          {%- endif -%}
         </div>
       </div>
 
       <div>
         <p class="filter-row__label">{{ 'collection.filter_tier' | t }}</p>
         <div class="filter-row__chips no-scrollbar">
-          <a href="{{ current_collection.url }}" class="filter-chip{% unless current_tags contains 'tier-' %} is-active{% endunless %}">{{ 'collection.filter_all_tiers' | t }}</a>
-          <a href="{{ current_collection.url }}/tier-classic" class="filter-chip{% if current_tags contains 'tier-classic' %} is-active{% endif %}">CLASSIC</a>
-          <a href="{{ current_collection.url }}/tier-classic-plus" class="filter-chip{% if current_tags contains 'tier-classic-plus' %} is-active{% endif %}">CLASSIC+</a>
-          <a href="{{ current_collection.url }}/tier-smart" class="filter-chip{% if current_tags contains 'tier-smart' %} is-active{% endif %}">SMART</a>
-          <a href="{{ current_collection.url }}/tier-smart-plus" class="filter-chip{% if current_tags contains 'tier-smart-plus' %} is-active{% endif %}">SMART+</a>
+          <a href="{{ filter_base }}" class="filter-chip{% unless current_tags contains 'tier-' %} is-active{% endunless %}">{{ 'collection.filter_all_tiers' | t }}</a>
+
+          {%- comment -%} CLASSIC {%- endcomment -%}
+          {%- if all_tags contains 'tier-classic' -%}
+            <a href="{{ filter_base }}/tier-classic" class="filter-chip{% if current_tags contains 'tier-classic' %} is-active{% endif %}">CLASSIC</a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">CLASSIC <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
+          {%- endif -%}
+
+          {%- comment -%} CLASSIC+ {%- endcomment -%}
+          {%- if all_tags contains 'tier-classic-plus' -%}
+            <a href="{{ filter_base }}/tier-classic-plus" class="filter-chip{% if current_tags contains 'tier-classic-plus' %} is-active{% endif %}">CLASSIC+</a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">CLASSIC+ <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
+          {%- endif -%}
+
+          {%- comment -%} SMART {%- endcomment -%}
+          {%- if all_tags contains 'tier-smart' -%}
+            <a href="{{ filter_base }}/tier-smart" class="filter-chip{% if current_tags contains 'tier-smart' %} is-active{% endif %}">SMART</a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">SMART <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
+          {%- endif -%}
+
+          {%- comment -%} SMART+ {%- endcomment -%}
+          {%- if all_tags contains 'tier-smart-plus' -%}
+            <a href="{{ filter_base }}/tier-smart-plus" class="filter-chip{% if current_tags contains 'tier-smart-plus' %} is-active{% endif %}">SMART+</a>
+          {%- else -%}
+            <span class="filter-chip filter-chip--disabled" aria-disabled="true">SMART+ <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
+          {%- endif -%}
         </div>
       </div>
     </div>
