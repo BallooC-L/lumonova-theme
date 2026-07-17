@@ -244,11 +244,14 @@
           {%- assign img_left = false -%}
           {%- if feature.image_on_left == true or feature.image_on_left == 'true' -%}{%- assign img_left = true -%}{%- endif -%}
 
-          {%- comment -%} image_src can be a file reference (MediaImage / image) OR GenericFile OR a plain URL string {%- endcomment -%}
+          {%- comment -%} image_src is a File(Image) field → MediaImage object; the actual image sits on .image {%- endcomment -%}
           {%- assign feat_img_url = '' -%}
           {%- if feature.image_src != blank -%}
-            {%- if feature.image_src.width -%}
-              {%- comment -%} image reference or MediaImage {%- endcomment -%}
+            {%- if feature.image_src.image -%}
+              {%- comment -%} MediaImage (uploaded via file/image picker) {%- endcomment -%}
+              {%- assign feat_img_url = feature.image_src.image | image_url: width: 1600 -%}
+            {%- elsif feature.image_src.width -%}
+              {%- comment -%} direct image reference {%- endcomment -%}
               {%- assign feat_img_url = feature.image_src | image_url: width: 1600 -%}
             {%- elsif feature.image_src.url -%}
               {%- comment -%} generic file reference {%- endcomment -%}
@@ -258,19 +261,6 @@
               {%- assign feat_img_url = feature.image_src -%}
             {%- endif -%}
           {%- endif -%}
-
-          {%- comment -%} ===== TEMP DEBUG - nach Diagnose wieder entfernen ===== {%- endcomment -%}
-          <div style="background:#200; color:#fdd; font:12px/1.4 monospace; padding:12px; margin:8px 0; white-space:pre-wrap; word-break:break-all;">
-DEBUG feature.image_src
-raw: [{{ feature.image_src }}]
-type: [{{ feature.image_src.type }}]
-width: [{{ feature.image_src.width }}]
-url: [{{ feature.image_src.url }}]
-src: [{{ feature.image_src.src }}]
-blank?: [{% if feature.image_src == blank %}YES{% else %}NO{% endif %}]
-resolved feat_img_url: [{{ feat_img_url }}]
-          </div>
-          {%- comment -%} ===== /TEMP DEBUG ===== {%- endcomment -%}
 
           <div class="feature-block{% unless img_left %} feature-block--text-first{% endunless %}">
             {%- if img_left -%}
