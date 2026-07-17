@@ -259,6 +259,19 @@
             {%- endif -%}
           {%- endif -%}
 
+          {%- comment -%} ===== TEMP DEBUG - nach Diagnose wieder entfernen ===== {%- endcomment -%}
+          <div style="background:#200; color:#fdd; font:12px/1.4 monospace; padding:12px; margin:8px 0; white-space:pre-wrap; word-break:break-all;">
+DEBUG feature.image_src
+raw: [{{ feature.image_src }}]
+type: [{{ feature.image_src.type }}]
+width: [{{ feature.image_src.width }}]
+url: [{{ feature.image_src.url }}]
+src: [{{ feature.image_src.src }}]
+blank?: [{% if feature.image_src == blank %}YES{% else %}NO{% endif %}]
+resolved feat_img_url: [{{ feat_img_url }}]
+          </div>
+          {%- comment -%} ===== /TEMP DEBUG ===== {%- endcomment -%}
+
           <div class="feature-block{% unless img_left %} feature-block--text-first{% endunless %}">
             {%- if img_left -%}
               <div class="feature-block__image">
