@@ -11,7 +11,9 @@
 {%- assign tier = product.metafields.custom.tier | default: '' -%}
 {%- assign short_desc = product.metafields.custom.short_description | default: product.description | strip_html | truncate: 120 -%}
 {%- assign usps = product.metafields.custom.usps.value -%}
-{%- assign has_features = product.metafields.custom.features -%}
+{%- assign feature_blocks = product.metafields.custom.feature_blocks.value -%}
+{%- assign has_features = false -%}
+{%- if feature_blocks and feature_blocks.size > 0 -%}{%- assign has_features = true -%}{%- endif -%}
 {%- assign has_compatibility = product.metafields.custom.compatibility -%}
 {%- assign intro_hero_image = product.metafields.custom.intro_hero_image -%}
 {%- assign intro_hero_eyebrow = product.metafields.custom.intro_hero_eyebrow -%}
@@ -221,7 +223,7 @@
   ════════════════════════════════════════════════
 {%- endcomment -%}
 {%- if has_features -%}
-  {%- assign features = product.metafields.custom.features.value -%}
+  {%- assign features = feature_blocks -%}
   {%- if features.size > 0 -%}
     <section
       id="features"
@@ -238,11 +240,25 @@
           {%- endif -%}
         </div>
         {%- for feature in features -%}
-          <div class="feature-block{% if feature.image_on_left == false %} feature-block--text-first{% endif %}">
-            {%- if feature.image_on_left -%}
+          {%- comment -%} image_on_left comes from a metaobject boolean field {%- endcomment -%}
+          {%- assign img_left = false -%}
+          {%- if feature.image_on_left == true or feature.image_on_left == 'true' -%}{%- assign img_left = true -%}{%- endif -%}
+
+          {%- comment -%} image_src can be a file reference OR a plain URL string {%- endcomment -%}
+          {%- assign feat_img_url = '' -%}
+          {%- if feature.image_src -%}
+            {%- if feature.image_src.src -%}
+              {%- assign feat_img_url = feature.image_src | image_url: width: 1600 -%}
+            {%- else -%}
+              {%- assign feat_img_url = feature.image_src -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          <div class="feature-block{% unless img_left %} feature-block--text-first{% endunless %}">
+            {%- if img_left -%}
               <div class="feature-block__image">
-                {%- if feature.image_src != blank -%}
-                  <img src="{{ feature.image_src }}" alt="{{ feature.image_alt | escape }}" loading="lazy">
+                {%- if feat_img_url != blank -%}
+                  <img src="{{ feat_img_url }}" alt="{{ feature.image_alt | escape }}" loading="lazy">
                 {%- else -%}
                   <div class="feature-block__image feature-block__image--placeholder">FEATURE-BILD / 1600 × 1200</div>
                 {%- endif -%}
@@ -259,8 +275,8 @@
                 <p class="feature-block__body">{{ feature.text }}</p>
               </div>
               <div class="feature-block__image">
-                {%- if feature.image_src != blank -%}
-                  <img src="{{ feature.image_src }}" alt="{{ feature.image_alt | escape }}" loading="lazy">
+                {%- if feat_img_url != blank -%}
+                  <img src="{{ feat_img_url }}" alt="{{ feature.image_alt | escape }}" loading="lazy">
                 {%- else -%}
                   <div class="feature-block__image feature-block__image--placeholder">FEATURE-BILD / 1600 × 1200</div>
                 {%- endif -%}
@@ -293,13 +309,15 @@
       </div>
     </div>
 
-    {%- assign specs = product.metafields.custom.specs.value -%}
+    {%- assign specs = product.metafields.custom.spec_rows.value -%}
     <div role="table" aria-label="{{ 'product.specs_eyebrow' | t }}" style="margin-top:2rem;">
-      {%- if specs -%}
+      {%- if specs and specs.size > 0 -%}
         {%- for spec in specs -%}
+          {%- assign is_accent = false -%}
+          {%- if spec.accent == true or spec.accent == 'true' -%}{%- assign is_accent = true -%}{%- endif -%}
           <div class="spec-row" role="row">
             <div class="spec-row__label" role="rowheader">{{ spec.label }}</div>
-            <div class="spec-row__value{% if spec.accent %} spec-row__value--accent{% endif %}" role="cell">{{ spec.value }}</div>
+            <div class="spec-row__value{% if is_accent %} spec-row__value--accent{% endif %}" role="cell">{{ spec.value }}</div>
           </div>
         {%- endfor -%}
       {%- else -%}
