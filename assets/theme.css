@@ -1262,6 +1262,12 @@
   box-shadow: 0 0 14px rgba(232, 160, 96, 0.18);
 }
 .filter-chip:hover:not(.is-active) { border-color: rgba(255, 255, 255, 0.15); color: var(--fg-high); }
+.filter-chip--disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+.filter-chip--disabled:hover { border-color: rgba(255, 255, 255, 0.08); color: rgba(242, 242, 242, 0.50); }
 .filter-row__label {
   font-size: 10px;
   font-weight: 700;
