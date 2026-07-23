@@ -117,6 +117,8 @@
     "view": "View"
   },
   "product": {
+    "energy_datasheet_default": "Product datasheet",
+    "energy_label_aria": "View energy efficiency label",
     "hero_aria": "Product hero",
     "image_coming": "Product image coming soon",
     "gallery_prev": "Previous image",

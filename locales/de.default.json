@@ -118,6 +118,8 @@
     "view": "Ansehen"
   },
   "product": {
+    "energy_datasheet_default": "Produktdatenblatt",
+    "energy_label_aria": "Energieeffizienzlabel anzeigen",
     "hero_aria": "Produkthero",
     "image_coming": "Produktbild folgt",
     "gallery_prev": "Vorheriges Bild",
