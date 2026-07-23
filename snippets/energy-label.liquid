@@ -1,0 +1,148 @@
+{%- comment -%}
+  energy-label.liquid
+  ---------------------------------------------------------------
+  Renders the EU energy efficiency label + product datasheet link.
+
+  Data comes from three product metafields (namespace: custom):
+    • energy_label      → URL to the energy-label image  (opens in new tab)
+    • energy_datasheet  → URL to the datasheet PDF        (opens in new tab)
+    • energy_title      → clickable word, e.g. "Produktdatenblatt"
+                          (marked translatable → resolves per language)
+
+  Both energy_datasheet and energy_title should be flagged as
+  "translatable" in their metafield definition, so Translate & Adapt
+  can hold a separate EN datasheet URL + EN title. When the storefront
+  is served in English, Liquid returns the English values automatically.
+
+  Usage:
+    {% render 'energy-label', product: product %}                → PDP variant
+    {% render 'energy-label', product: product, variant: 'card' %} → collection card
+{%- endcomment -%}
+
+{%- assign el_label = product.metafields.custom.energy_label -%}
+{%- assign el_sheet = product.metafields.custom.energy_datasheet -%}
+{%- assign el_title = product.metafields.custom.energy_title -%}
+
+{%- comment -%} Resolve the label image URL (File(image) metafield OR plain URL string) {%- endcomment -%}
+{%- assign el_label_url = '' -%}
+{%- if el_label != blank -%}
+  {%- if el_label.url -%}
+    {%- assign el_label_url = el_label.url -%}
+  {%- else -%}
+    {%- assign el_label_url = el_label | image_url: width: 1000 -%}
+    {%- if el_label_url == blank -%}{%- assign el_label_url = el_label -%}{%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- comment -%} Resolve the datasheet URL (File metafield OR plain URL string) {%- endcomment -%}
+{%- assign el_sheet_url = '' -%}
+{%- if el_sheet != blank -%}
+  {%- if el_sheet.url -%}
+    {%- assign el_sheet_url = el_sheet.url -%}
+  {%- else -%}
+    {%- assign el_sheet_url = el_sheet -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- comment -%} Fallback title if the metafield is empty {%- endcomment -%}
+{%- if el_title == blank -%}
+  {%- assign el_title = 'product.energy_datasheet_default' | t -%}
+{%- endif -%}
+
+{%- comment -%} Only render if at least the label OR the datasheet is present {%- endcomment -%}
+{%- if el_label_url != blank or el_sheet_url != blank -%}
+  {%- if variant == 'card' -%}
+    {%- comment -%}
+      ── COLLECTION CARD VARIANT ───────────────────────
+      The whole product card is a single <a>, so we must NOT nest
+      real <a> elements here (invalid HTML). Instead we use
+      role="link" spans that open a new tab via JS and stop the
+      click from bubbling up to the card link.
+    {%- endcomment -%}
+    <div class="energy-label energy-label--card">
+      {%- if el_label_url != blank -%}
+        <span
+          class="energy-label__badge"
+          role="link"
+          tabindex="0"
+          aria-label="{{ 'product.energy_label_aria' | t }}"
+          data-energy-open="{{ el_label_url }}"
+        >
+          <img src="{{ el_label_url }}" alt="{{ 'product.energy_label_aria' | t }}" loading="lazy">
+        </span>
+      {%- endif -%}
+      {%- if el_sheet_url != blank -%}
+        <span
+          class="energy-label__sheet"
+          role="link"
+          tabindex="0"
+          data-energy-open="{{ el_sheet_url }}"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">description</span>
+          <span class="energy-label__sheet-text">{{ el_title }}</span>
+        </span>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    {%- comment -%} ── PDP VARIANT ─────────────────────────────────── {%- endcomment -%}
+    <div class="energy-label energy-label--pdp">
+      {%- if el_label_url != blank -%}
+        <a
+          href="{{ el_label_url }}"
+          class="energy-label__badge"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="{{ 'product.energy_label_aria' | t }}"
+        >
+          <img src="{{ el_label_url }}" alt="{{ 'product.energy_label_aria' | t }}" loading="lazy">
+        </a>
+      {%- endif -%}
+      {%- if el_sheet_url != blank -%}
+        <a
+          href="{{ el_sheet_url }}"
+          class="energy-label__sheet"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">description</span>
+          <span class="energy-label__sheet-text">{{ el_title }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%}
+    One-time delegated handler for the card variant's role="link" spans.
+    Opens the target in a new tab and prevents the click from triggering
+    the surrounding product-card <a>. Guarded so it binds only once even
+    when many cards render on one page.
+  {%- endcomment -%}
+  <script>
+  (function () {
+    if (window.__energyLabelBound) return;
+    window.__energyLabelBound = true;
+
+    function openTarget(el) {
+      var url = el.getAttribute('data-energy-open');
+      if (url) window.open(url, '_blank', 'noopener');
+    }
+
+    document.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-energy-open]');
+      if (!el) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openTarget(el);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var el = e.target.closest('[data-energy-open]');
+      if (!el) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openTarget(el);
+    });
+  })();
+  </script>
+{%- endif -%}
