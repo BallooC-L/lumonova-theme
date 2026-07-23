@@ -1324,8 +1324,7 @@
 
 /* The small A–G efficiency flag (clickable → opens full label in new tab) */
 .energy-label__flag {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
   flex-shrink: 0;
   line-height: 0;
   cursor: pointer;
@@ -1334,8 +1333,8 @@
 }
 .energy-label__flag img {
   display: block;
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
   object-fit: contain;
 }
 .energy-label__flag:hover {
@@ -1395,7 +1394,8 @@
   gap: 0.45rem;
 }
 .energy-label--card .energy-label__flag {
-  height: 20px;
+  width: 100%;
+  max-width: 42px;
 }
 .energy-label--card .energy-label__sheet {
   font-size: 11px;
@@ -1413,7 +1413,8 @@
   gap: 0.85rem;
 }
 .energy-label--pdp .energy-label__flag {
-  height: 30px;
+  width: 100%;
+  max-width: 50px;
 }
 .energy-label--pdp .energy-label__sheet {
   font-size: 13px;
@@ -1425,9 +1426,9 @@
     gap: 0.65rem;
   }
   .energy-label--pdp .energy-label__flag {
-    height: 26px;
+    max-width: 44px;
   }
   .energy-label--card .energy-label__flag {
-    height: 18px;
+    max-width: 38px;
   }
 }
