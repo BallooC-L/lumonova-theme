@@ -107,6 +107,9 @@
 
       <h1 class="product-info__name">{{ product.title }}</h1>
       <p class="product-info__sku">{{ product.metafields.custom.sku | default: product.variants.first.sku }}</p>
+
+      {% render 'energy-label', product: product %}
+
       <p class="product-info__short-desc">{{ short_desc }}</p>
 
       {%- if usps -%}
