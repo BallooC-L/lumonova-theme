@@ -1,18 +1,26 @@
 {%- comment -%}
   energy-label.liquid
   ---------------------------------------------------------------
-  Renders the EU energy efficiency label + product datasheet link.
+  Renders the small EU energy-efficiency FLAG (A–G) + datasheet link.
 
-  Data comes from three product metafields (namespace: custom):
-    • energy_label      → URL to the energy-label image  (opens in new tab)
-    • energy_datasheet  → URL to the datasheet PDF        (opens in new tab)
-    • energy_title      → clickable word, e.g. "Produktdatenblatt"
-                          (marked translatable → resolves per language)
+  ── How the flag is chosen ──────────────────────────────────────
+  The efficiency class is read from the product's spec_rows metaobjects
+  (custom.spec_rows). We look for the row whose label matches the
+  energy-class label (DE "Energieeffizienzklasse" / EN "Energy efficiency
+  class"), take its value (e.g. "E"), and load the matching theme asset:
 
-  Both energy_datasheet and energy_title should be flagged as
-  "translatable" in their metafield definition, so Translate & Adapt
-  can hold a separate EN datasheet URL + EN title. When the storefront
-  is served in English, Liquid returns the English values automatically.
+      assets/energieeffizienzklasse_<CLASS>.svg   e.g. _E.svg
+
+  So the small flags live in the theme (versioned in the repo), and no
+  per-product metafield is needed for them — only the class in spec_rows.
+
+  ── Metafields still used (namespace: custom) ───────────────────
+    • energy_label      → URL to the FULL product label image
+                          (opens in a new tab when the flag is clicked)
+    • energy_datasheet  → URL to the datasheet PDF (opens in new tab)
+                          (translatable → EN storefront gets the EN PDF)
+    • energy_title      → clickable datasheet word, e.g. "Produktdatenblatt"
+                          (translatable)
 
   Usage:
     {% render 'energy-label', product: product %}                → PDP variant
@@ -23,7 +31,32 @@
 {%- assign el_sheet = product.metafields.custom.energy_datasheet -%}
 {%- assign el_title = product.metafields.custom.energy_title -%}
 
-{%- comment -%} Resolve the label image URL (File(image) metafield OR plain URL string) {%- endcomment -%}
+{%- comment -%} ── 1) Read the efficiency class from spec_rows ── {%- endcomment -%}
+{%- assign el_class = '' -%}
+{%- assign el_class_labels = 'Energieeffizienzklasse,Energy efficiency class,Energy Efficiency Class,Energieeffizienz' | split: ',' -%}
+{%- assign spec_rows = product.metafields.custom.spec_rows.value -%}
+{%- if spec_rows -%}
+  {%- for row in spec_rows -%}
+    {%- assign row_label = row.label -%}
+    {%- if el_class_labels contains row_label -%}
+      {%- assign el_class = row.value | strip -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%} Normalise the class token: uppercase, keep only the letter(s) {%- endcomment -%}
+{%- assign el_class = el_class | upcase | strip -%}
+
+{%- comment -%} ── 2) Build the flag asset URL for that class ── {%- endcomment -%}
+{%- assign el_flag_url = '' -%}
+{%- assign valid_classes = 'A,B,C,D,E,F,G' | split: ',' -%}
+{%- if valid_classes contains el_class -%}
+  {%- assign el_flag_file = 'energieeffizienzklasse_' | append: el_class | append: '.svg' -%}
+  {%- assign el_flag_url = el_flag_file | asset_url -%}
+{%- endif -%}
+
+{%- comment -%} ── 3) Resolve the FULL label URL (opened on flag click) ── {%- endcomment -%}
 {%- assign el_label_url = '' -%}
 {%- if el_label != blank -%}
   {%- if el_label.url -%}
@@ -34,7 +67,7 @@
   {%- endif -%}
 {%- endif -%}
 
-{%- comment -%} Resolve the datasheet URL (File metafield OR plain URL string) {%- endcomment -%}
+{%- comment -%} ── 4) Resolve the datasheet URL ── {%- endcomment -%}
 {%- assign el_sheet_url = '' -%}
 {%- if el_sheet != blank -%}
   {%- if el_sheet.url -%}
@@ -44,31 +77,40 @@
   {%- endif -%}
 {%- endif -%}
 
-{%- comment -%} Fallback title if the metafield is empty {%- endcomment -%}
+{%- comment -%} Fallback datasheet title if the metafield is empty {%- endcomment -%}
 {%- if el_title == blank -%}
   {%- assign el_title = 'product.energy_datasheet_default' | t -%}
 {%- endif -%}
 
-{%- comment -%} Only render if at least the label OR the datasheet is present {%- endcomment -%}
-{%- if el_label_url != blank or el_sheet_url != blank -%}
+{%- comment -%}
+  The flag click target: prefer the full label; if no label URL is set yet,
+  fall back to opening the datasheet so the flag still does something useful.
+{%- endcomment -%}
+{%- assign el_flag_target = el_label_url -%}
+{%- if el_flag_target == blank -%}{%- assign el_flag_target = el_sheet_url -%}{%- endif -%}
+
+{%- comment -%} Aria label incl. class, e.g. "Energieeffizienzklasse E – Label anzeigen" {%- endcomment -%}
+{%- assign el_flag_aria = 'product.energy_label_aria' | t -%}
+{%- if el_class != blank -%}
+  {%- assign el_flag_aria = el_flag_aria | append: ' (' | append: el_class | append: ')' -%}
+{%- endif -%}
+
+{%- comment -%} Only render if we have a flag OR a datasheet to show ── {%- endcomment -%}
+{%- if el_flag_url != blank or el_sheet_url != blank -%}
   {%- if variant == 'card' -%}
     {%- comment -%}
       ── COLLECTION CARD VARIANT ───────────────────────
-      The whole product card is a single <a>, so we must NOT nest
-      real <a> elements here (invalid HTML). Instead we use
-      role="link" spans that open a new tab via JS and stop the
-      click from bubbling up to the card link.
+      The whole product card is a single <a>, so we must NOT nest real
+      <a> elements. We use role="link" spans that open a new tab via JS
+      and stop the click from bubbling up to the card link.
     {%- endcomment -%}
     <div class="energy-label energy-label--card">
-      {%- if el_label_url != blank -%}
+      {%- if el_flag_url != blank -%}
         <span
-          class="energy-label__badge"
-          role="link"
-          tabindex="0"
-          aria-label="{{ 'product.energy_label_aria' | t }}"
-          data-energy-open="{{ el_label_url }}"
+          class="energy-label__flag{% unless el_flag_target != blank %} energy-label__flag--static{% endunless %}"
+          {% if el_flag_target != blank %}role="link" tabindex="0" data-energy-open="{{ el_flag_target }}" aria-label="{{ el_flag_aria }}"{% else %}aria-label="{{ el_flag_aria }}"{% endif %}
         >
-          <img src="{{ el_label_url }}" alt="{{ 'product.energy_label_aria' | t }}" loading="lazy">
+          <img src="{{ el_flag_url }}" alt="{{ el_flag_aria }}" loading="lazy">
         </span>
       {%- endif -%}
       {%- if el_sheet_url != blank -%}
@@ -86,16 +128,22 @@
   {%- else -%}
     {%- comment -%} ── PDP VARIANT ─────────────────────────────────── {%- endcomment -%}
     <div class="energy-label energy-label--pdp">
-      {%- if el_label_url != blank -%}
-        <a
-          href="{{ el_label_url }}"
-          class="energy-label__badge"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="{{ 'product.energy_label_aria' | t }}"
-        >
-          <img src="{{ el_label_url }}" alt="{{ 'product.energy_label_aria' | t }}" loading="lazy">
-        </a>
+      {%- if el_flag_url != blank -%}
+        {%- if el_flag_target != blank -%}
+          <a
+            href="{{ el_flag_target }}"
+            class="energy-label__flag"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="{{ el_flag_aria }}"
+          >
+            <img src="{{ el_flag_url }}" alt="{{ el_flag_aria }}" loading="lazy">
+          </a>
+        {%- else -%}
+          <span class="energy-label__flag energy-label__flag--static" aria-label="{{ el_flag_aria }}">
+            <img src="{{ el_flag_url }}" alt="{{ el_flag_aria }}" loading="lazy">
+          </span>
+        {%- endif -%}
       {%- endif -%}
       {%- if el_sheet_url != blank -%}
         <a
