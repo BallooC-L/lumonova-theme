@@ -76,8 +76,22 @@
 {%- comment -%}
   ════════════════════════════════════════════════
   3. CATEGORIES
+  Verfügbarkeit wird aus den echten Produkt-Tags abgeleitet — dieselbe
+  Logik wie im Mega-Menü (header.liquid) und in den Collection-Filtern
+  (main-collection.liquid). collections.all enthält nur ACTIVE Produkte,
+  Drafts zählen also korrekterweise nicht.
+  Erwartete Tags: smart-bulbs, filament, panels, ceiling-lights
   ════════════════════════════════════════════════
 {%- endcomment -%}
+{%- assign store_tags = '' -%}
+{%- for product in collections.all.products -%}
+  {%- for tag in product.tags -%}
+    {%- assign tag_handle = tag | handleize -%}
+    {%- assign store_tags = store_tags | append: '|' | append: tag_handle -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign store_tags = store_tags | append: '|' -%}
+
 <section class="section bg-base" aria-labelledby="categories-title">
   <div class="container">
     <div class="section-heading reveal">
@@ -86,56 +100,47 @@
       <p class="section-subtitle">{{ 'home.categories.subtitle' | t }}</p>
     </div>
     <div class="grid-4 reveal">
-      {%- comment -%} Smart Bulbs — available {%- endcomment -%}
-      <a href="{{ locale_prefix }}/collections/smart-bulbs" aria-label="{{ 'home.categories.smart_bulbs_aria' | t }}">
-        <article class="category-card category-card--available">
-          <span class="category-card__icon" aria-hidden="true">
-            <span class="material-symbols-outlined text-amber" style="font-size:32px;">lightbulb</span>
-          </span>
-          <h3 class="category-card__name">Smart Bulbs</h3>
-          <p class="category-card__desc">{{ 'home.categories.smart_bulbs_desc' | t }}</p>
-          <div class="category-card__status">
-            <span class="category-card__available">{{ 'home.categories.available' | t }}</span>
-          </div>
-        </article>
-      </a>
+      {%- assign cat_tags  = 'smart-bulbs,filament,panels,ceiling-lights' | split: ',' -%}
+      {%- assign cat_names = 'Smart Bulbs,Filament,Panels,Ceiling Lights' | split: ',' -%}
+      {%- assign cat_icons = 'lightbulb,emoji_objects,grid_view,wb_iridescent' | split: ',' -%}
+      {%- assign cat_descs = 'smart_bulbs_desc,filament_desc,panels_desc,ceiling_lights_desc' | split: ',' -%}
+      {%- assign cat_arias = 'smart_bulbs_aria,filament_aria,panels_aria,ceiling_lights_aria' | split: ',' -%}
+      {%- assign cat_urls  = '/collections/smart-bulbs,/collections/all/filament,/collections/all/panels,/collections/all/ceiling-lights' | split: ',' -%}
 
-      {%- comment -%} Filament — coming soon {%- endcomment -%}
-      <article class="category-card category-card--unavailable" aria-disabled="true">
-        <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
-          <span class="material-symbols-outlined text-amber" style="font-size:32px;">emoji_objects</span>
-        </span>
-        <h3 class="category-card__name">Filament</h3>
-        <p class="category-card__desc">{{ 'home.categories.filament_desc' | t }}</p>
-        <div class="category-card__status">
-          <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-        </div>
-      </article>
+      {%- for cat_tag in cat_tags -%}
+        {%- assign i = forloop.index0 -%}
+        {%- assign cat_name = cat_names[i] -%}
+        {%- assign cat_icon = cat_icons[i] -%}
+        {%- assign desc_key = 'home.categories.' | append: cat_descs[i] -%}
+        {%- assign aria_key = 'home.categories.' | append: cat_arias[i] -%}
+        {%- assign lookup   = '|' | append: cat_tag | append: '|' -%}
 
-      {%- comment -%} Panels — available {%- endcomment -%}
-        <article class="category-card category-card--unavailable" aria-disabled="true">
-          <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
-            <span class="material-symbols-outlined text-amber" style="font-size:32px;">grid_view</span>
-          </span>
-          <h3 class="category-card__name">Panels</h3>
-          <p class="category-card__desc">{{ 'home.categories.panels_desc' | t }}</p>
-          <div class="category-card__status">
-            <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-          </div>
-        </article>
-      </a>
-
-      {%- comment -%} Ceiling Lights — coming soon {%- endcomment -%}
-      <article class="category-card category-card--unavailable" aria-disabled="true">
-        <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
-          <span class="material-symbols-outlined text-amber" style="font-size:32px;">wb_iridescent</span>
-        </span>
-        <h3 class="category-card__name">Ceiling Lights</h3>
-        <p class="category-card__desc">{{ 'home.categories.ceiling_lights_desc' | t }}</p>
-        <div class="category-card__status">
-          <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-        </div>
-      </article>
+        {%- if store_tags contains lookup -%}
+          <a href="{{ locale_prefix }}{{ cat_urls[i] }}" aria-label="{{ aria_key | t }}">
+            <article class="category-card category-card--available">
+              <span class="category-card__icon" aria-hidden="true">
+                <span class="material-symbols-outlined text-amber" style="font-size:32px;">{{ cat_icon }}</span>
+              </span>
+              <h3 class="category-card__name">{{ cat_name }}</h3>
+              <p class="category-card__desc">{{ desc_key | t }}</p>
+              <div class="category-card__status">
+                <span class="category-card__available">{{ 'home.categories.available' | t }}</span>
+              </div>
+            </article>
+          </a>
+        {%- else -%}
+          <article class="category-card category-card--unavailable" aria-disabled="true">
+            <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
+              <span class="material-symbols-outlined text-amber" style="font-size:32px;">{{ cat_icon }}</span>
+            </span>
+            <h3 class="category-card__name">{{ cat_name }}</h3>
+            <p class="category-card__desc">{{ desc_key | t }}</p>
+            <div class="category-card__status">
+              <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -143,6 +148,10 @@
 {%- comment -%}
   ════════════════════════════════════════════════
   4. TIERS
+  Ein Tier ist erst dann verlinkt, wenn mindestens ein aktives Produkt
+  den passenden Tag trägt (tier-classic, tier-classic-plus, tier-smart,
+  tier-smart-plus). Sonst bleibt das „Demnächst"-Pill stehen.
+  store_tags wird oben in Sektion 3 gesetzt.
   ════════════════════════════════════════════════
 {%- endcomment -%}
 <section class="section bg-mid" aria-labelledby="tiers-title">
@@ -154,124 +163,50 @@
     </div>
 
     <div class="grid-4 reveal">
+      {%- assign tier_tags   = 'tier-classic,tier-classic-plus,tier-smart,tier-smart-plus' | split: ',' -%}
+      {%- assign tier_names  = 'CLASSIC,CLASSIC+,SMART,SMART+' | split: ',' -%}
+      {%- assign tier_slugs  = 'classic,classic_plus,smart,smart_plus' | split: ',' -%}
+      {%- assign tier_ranges = '€20–€60,€35–€80,€35–€80,€55–€120' | split: ',' -%}
+      {%- assign tier_steps  = '01,02,03,04' | split: ',' -%}
+      {%- assign feature_keys = 'f1,f2,f3,f4' | split: ',' -%}
 
-      {%- comment -%} CLASSIC {%- endcomment -%}
-      <article class="tier-card">
-        <div>
-          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 01</p>
-          <h3 class="tier-card__name">CLASSIC</h3>
-          <p class="tier-card__range">€20–€60</p>
-          <ul class="tier-card__features" role="list">
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic.f1' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic.f2' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic.f3' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic.f4' | t }}
-            </li>
-          </ul>
-        </div>
-        <div style="margin-top:2.5rem; display:flex; justify-content:center;">
-          <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>
-        </div>
-      </article>
+      {%- for tier_tag in tier_tags -%}
+        {%- assign i = forloop.index0 -%}
+        {%- assign lookup = '|' | append: tier_tag | append: '|' -%}
+        {%- assign tier_available = false -%}
+        {%- if store_tags contains lookup -%}
+          {%- assign tier_available = true -%}
+        {%- endif -%}
+        {%- if tier_available -%}
+          {%- assign check_color = 'var(--color-amber)' -%}
+        {%- else -%}
+          {%- assign check_color = 'rgba(232,160,96,0.60)' -%}
+        {%- endif -%}
 
-      {%- comment -%} CLASSIC+ {%- endcomment -%}
-      <article class="tier-card">
-        <div>
-          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 02</p>
-          <h3 class="tier-card__name">CLASSIC+</h3>
-          <p class="tier-card__range">€35–€80</p>
-          <ul class="tier-card__features" role="list">
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic_plus.f1' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic_plus.f2' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic_plus.f3' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.classic_plus.f4' | t }}
-            </li>
-          </ul>
-        </div>
-        <div style="margin-top:2.5rem; display:flex; justify-content:center;">
-          <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>
-        </div>
-      </article>
-
-      {%- comment -%} SMART — recommended {%- endcomment -%}
-      <article class="tier-card tier-card--recommended">
-        <div>
-          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 03</p>
-          <h3 class="tier-card__name">SMART</h3>
-          <p class="tier-card__range">€35–€80</p>
-          <ul class="tier-card__features" role="list">
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart.f1' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart.f2' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart.f3' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:var(--color-amber); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart.f4' | t }}
-            </li>
-          </ul>
-        </div>
-        <a href="{{ locale_prefix }}/collections/all?filter.p.tag=tier-smart" class="tier-card__cta">{{ 'home.tiers.learn_more' | t }}</a>
-      </article>
-
-      {%- comment -%} SMART+ — coming soon {%- endcomment -%}
-      <article class="tier-card">
-        <div>
-          <p class="tier-card__step">{{ 'home.tiers.step' | t }} 04</p>
-          <h3 class="tier-card__name">SMART+</h3>
-          <p class="tier-card__range">€55–€120</p>
-          <ul class="tier-card__features" role="list">
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart_plus.f1' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart_plus.f2' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart_plus.f3' | t }}
-            </li>
-            <li class="tier-card__feature">
-              <span class="material-symbols-outlined" style="font-size:19px; color:rgba(232,160,96,0.60); flex-shrink:0;" aria-hidden="true">check_circle</span>
-              {{ 'home.tiers.smart_plus.f4' | t }}
-            </li>
-          </ul>
-        </div>
-        <div style="margin-top:2.5rem; display:flex; justify-content:center;">
-          <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>
-        </div>
-      </article>
+        <article class="tier-card{% if tier_tag == 'tier-smart' %} tier-card--recommended{% endif %}">
+          <div>
+            <p class="tier-card__step">{{ 'home.tiers.step' | t }} {{ tier_steps[i] }}</p>
+            <h3 class="tier-card__name">{{ tier_names[i] }}</h3>
+            <p class="tier-card__range">{{ tier_ranges[i] }}</p>
+            <ul class="tier-card__features" role="list">
+              {%- for feature_key in feature_keys -%}
+                {%- assign f_key = 'home.tiers.' | append: tier_slugs[i] | append: '.' | append: feature_key -%}
+                <li class="tier-card__feature">
+                  <span class="material-symbols-outlined" style="font-size:19px; color:{{ check_color }}; flex-shrink:0;" aria-hidden="true">check_circle</span>
+                  {{ f_key | t }}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+          {%- if tier_available -%}
+            <a href="{{ locale_prefix }}/collections/all/{{ tier_tag }}" class="tier-card__cta">{{ 'home.tiers.learn_more' | t }}</a>
+          {%- else -%}
+            <div style="margin-top:2.5rem; display:flex; justify-content:center;">
+              <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>
+            </div>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
     </div>
   </div>
 </section>
