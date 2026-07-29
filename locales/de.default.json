@@ -205,6 +205,8 @@
       "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter und klassisch",
       "filament_desc": "Vintage-Optik mit warmweißem LED-Filament",
       "panels_aria": "Zur Kategorie Panels",
+      "filament_aria": "Zur Kategorie Filament",
+      "ceiling_lights_aria": "Zur Kategorie Ceiling Lights",
       "panels_desc": "LED-Backlit-Panels für Büro und Decke",
       "ceiling_lights_desc": "Deckenleuchten mit Matter und Sensorik",
       "available": "Verfügbar"

@@ -204,6 +204,8 @@
       "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter and classic",
       "filament_desc": "Vintage look with warm-white LED filament",
       "panels_aria": "Go to Panels category",
+      "filament_aria": "Go to Filament category",
+      "ceiling_lights_aria": "Go to Ceiling Lights category",
       "panels_desc": "LED backlit panels for office and ceiling",
       "ceiling_lights_desc": "Ceiling lights with Matter and sensors",
       "available": "Available"
