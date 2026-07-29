@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -5,7 +14,7 @@
       "settings": {
         "hero_image": "shopify://shop_images/Hero-Brand-169.webp",
         "hero_cta_primary_url": "/collections/all",
-        "hero_cta_ghost_url": "shopify://collections/smart-tier",
+        "hero_cta_ghost_url": "shopify://collections/tier-smart",
         "atmosphere_img_1": "shopify://shop_images/Familienmoment.webp",
         "atmosphere_img_2": "shopify://shop_images/Romantik-Dinner_edit.webp",
         "atmosphere_img_3": "shopify://shop_images/Schlafzimmer-Entspannung.webp",
