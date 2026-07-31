@@ -188,7 +188,7 @@
       "headline_3": "Simply smart.",
       "body": "LUMOnova is lighting that comes to you – not to an ecosystem. Four tiers, four product families, one standard: light that works.",
       "cta_primary_label": "View collection",
-      "cta_ghost_label": "Discover SMART+"
+      "cta_ghost_label": "Discover {{ tier }}"
     },
     "usps": {
       "aria": "USPs",

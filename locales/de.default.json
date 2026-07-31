@@ -189,7 +189,7 @@
       "headline_3": "Einfach smart.",
       "body": "LUMOnova ist Beleuchtung, die zu Dir kommt – nicht zu einem Ökosystem. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das funktioniert.",
       "cta_primary_label": "Kollektion ansehen",
-      "cta_ghost_label": "SMART+ entdecken"
+      "cta_ghost_label": "{{ tier }} entdecken"
     },
     "usps": {
       "aria": "USPs",
