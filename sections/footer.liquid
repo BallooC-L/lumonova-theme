@@ -24,23 +24,15 @@
         <h3 class="site-footer__col-title">{{ 'footer.col_products' | t }}</h3>
         <nav aria-label="{{ 'footer.col_products' | t }}">
           {%- comment -%}
-            Verfügbarkeit aus den Tags der aktiven Produkte ableiten —
-            gleiche Logik wie Mega-Menü, Startseite und Collection-Filter.
+            Ein Tier ist verlinkt, sobald seine Collection mindestens ein
+            storefront-sichtbares Produkt hat — gleiche Logik wie im
+            Mega-Menü, auf der Startseite und in den Collection-Filtern.
           {%- endcomment -%}
-          {%- assign store_tags = '' -%}
-          {%- for product in collections.all.products -%}
-            {%- for tag in product.tags -%}
-              {%- assign tag_handle = tag | handleize -%}
-              {%- assign store_tags = store_tags | append: '|' | append: tag_handle -%}
-            {%- endfor -%}
-          {%- endfor -%}
-          {%- assign store_tags = store_tags | append: '|' -%}
-          {%- assign tier_tags  = 'tier-classic,tier-classic-plus,tier-smart,tier-smart-plus' | split: ',' -%}
-          {%- assign tier_names = 'CLASSIC,CLASSIC+,SMART,SMART+' | split: ',' -%}
-          {%- for tier_tag in tier_tags -%}
-            {%- assign lookup = '|' | append: tier_tag | append: '|' -%}
-            {%- if store_tags contains lookup -%}
-              <a href="{{ locale_prefix }}/collections/all/{{ tier_tag }}" class="site-footer__link">{{ tier_names[forloop.index0] }}</a>
+          {%- assign tier_handles = 'tier-classic,tier-classic-plus,tier-smart,tier-smart-plus' | split: ',' -%}
+          {%- assign tier_names   = 'CLASSIC,CLASSIC+,SMART,SMART+' | split: ',' -%}
+          {%- for tier_handle in tier_handles -%}
+            {%- if collections[tier_handle].all_products_count > 0 -%}
+              <a href="{{ locale_prefix }}/collections/{{ tier_handle }}" class="site-footer__link">{{ tier_names[forloop.index0] }}</a>
             {%- else -%}
               <span class="site-footer__link site-footer__link--disabled" title="{{ 'general.coming_soon' | t }}">{{ tier_names[forloop.index0] }}</span>
             {%- endif -%}

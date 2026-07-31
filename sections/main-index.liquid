@@ -11,7 +11,7 @@
 
 {%- assign hero_image = section.settings.hero_image -%}
 {%- assign hero_cta_primary_url = section.settings.hero_cta_primary_url | default: '/collections/all' -%}
-{%- assign hero_cta_ghost_url = section.settings.hero_cta_ghost_url | default: '/collections/all?filter.p.tag=tier-smart-plus' -%}
+{%- assign hero_cta_ghost_url = section.settings.hero_cta_ghost_url | default: '/collections/tier-smart-plus' -%}
 
 {%- comment -%}
   ════════════════════════════════════════════════
@@ -76,21 +76,14 @@
 {%- comment -%}
   ════════════════════════════════════════════════
   3. CATEGORIES
-  Verfügbarkeit wird aus den echten Produkt-Tags abgeleitet — dieselbe
-  Logik wie im Mega-Menü (header.liquid) und in den Collection-Filtern
-  (main-collection.liquid). collections.all enthält nur ACTIVE Produkte,
-  Drafts zählen also korrekterweise nicht.
-  Erwartete Tags: smart-bulbs, filament, panels, ceiling-lights
+  Verfügbarkeit kommt aus der jeweiligen Collection: hat sie mindestens
+  ein storefront-sichtbares Produkt, ist die Karte verlinkt. Drafts sind
+  in Liquid gar nicht sichtbar, zählen also korrekterweise nicht mit.
+  all_products_count (nicht products_count) — letzteres ist auf
+  Collection-Seiten filterabhängig.
+  Collections: smart-bulbs, filament, panels, ceiling-lights
   ════════════════════════════════════════════════
 {%- endcomment -%}
-{%- assign store_tags = '' -%}
-{%- for product in collections.all.products -%}
-  {%- for tag in product.tags -%}
-    {%- assign tag_handle = tag | handleize -%}
-    {%- assign store_tags = store_tags | append: '|' | append: tag_handle -%}
-  {%- endfor -%}
-{%- endfor -%}
-{%- assign store_tags = store_tags | append: '|' -%}
 
 <section class="section bg-base" aria-labelledby="categories-title">
   <div class="container">
@@ -100,23 +93,22 @@
       <p class="section-subtitle">{{ 'home.categories.subtitle' | t }}</p>
     </div>
     <div class="grid-4 reveal">
-      {%- assign cat_tags  = 'smart-bulbs,filament,panels,ceiling-lights' | split: ',' -%}
-      {%- assign cat_names = 'Smart Bulbs,Filament,Panels,Ceiling Lights' | split: ',' -%}
-      {%- assign cat_icons = 'lightbulb,emoji_objects,grid_view,wb_iridescent' | split: ',' -%}
-      {%- assign cat_descs = 'smart_bulbs_desc,filament_desc,panels_desc,ceiling_lights_desc' | split: ',' -%}
-      {%- assign cat_arias = 'smart_bulbs_aria,filament_aria,panels_aria,ceiling_lights_aria' | split: ',' -%}
-      {%- assign cat_urls  = '/collections/smart-bulbs,/collections/all/filament,/collections/all/panels,/collections/all/ceiling-lights' | split: ',' -%}
+      {%- assign cat_handles = 'smart-bulbs,filament,panels,ceiling-lights' | split: ',' -%}
+      {%- assign cat_names   = 'Smart Bulbs,Filament,Panels,Ceiling Lights' | split: ',' -%}
+      {%- assign cat_icons   = 'lightbulb,emoji_objects,grid_view,wb_iridescent' | split: ',' -%}
+      {%- assign cat_descs   = 'smart_bulbs_desc,filament_desc,panels_desc,ceiling_lights_desc' | split: ',' -%}
+      {%- assign cat_arias   = 'smart_bulbs_aria,filament_aria,panels_aria,ceiling_lights_aria' | split: ',' -%}
 
-      {%- for cat_tag in cat_tags -%}
+      {%- for cat_handle in cat_handles -%}
         {%- assign i = forloop.index0 -%}
         {%- assign cat_name = cat_names[i] -%}
         {%- assign cat_icon = cat_icons[i] -%}
         {%- assign desc_key = 'home.categories.' | append: cat_descs[i] -%}
         {%- assign aria_key = 'home.categories.' | append: cat_arias[i] -%}
-        {%- assign lookup   = '|' | append: cat_tag | append: '|' -%}
+        {%- assign cat_col  = collections[cat_handle] -%}
 
-        {%- if store_tags contains lookup -%}
-          <a href="{{ locale_prefix }}{{ cat_urls[i] }}" aria-label="{{ aria_key | t }}">
+        {%- if cat_col.all_products_count > 0 -%}
+          <a href="{{ locale_prefix }}/collections/{{ cat_handle }}" aria-label="{{ aria_key | t }}">
             <article class="category-card category-card--available">
               <span class="category-card__icon" aria-hidden="true">
                 <span class="material-symbols-outlined text-amber" style="font-size:32px;">{{ cat_icon }}</span>
@@ -149,9 +141,8 @@
   ════════════════════════════════════════════════
   4. TIERS
   Ein Tier ist erst dann verlinkt, wenn mindestens ein aktives Produkt
-  den passenden Tag trägt (tier-classic, tier-classic-plus, tier-smart,
-  tier-smart-plus). Sonst bleibt das „Demnächst"-Pill stehen.
-  store_tags wird oben in Sektion 3 gesetzt.
+  in der Tier-Collection liegt (tier-classic, tier-classic-plus,
+  tier-smart, tier-smart-plus). Sonst bleibt das „Demnächst"-Pill stehen.
   ════════════════════════════════════════════════
 {%- endcomment -%}
 <section class="section bg-mid" aria-labelledby="tiers-title">
@@ -163,18 +154,18 @@
     </div>
 
     <div class="grid-4 reveal">
-      {%- assign tier_tags   = 'tier-classic,tier-classic-plus,tier-smart,tier-smart-plus' | split: ',' -%}
+      {%- assign tier_handles = 'tier-classic,tier-classic-plus,tier-smart,tier-smart-plus' | split: ',' -%}
       {%- assign tier_names  = 'CLASSIC,CLASSIC+,SMART,SMART+' | split: ',' -%}
       {%- assign tier_slugs  = 'classic,classic_plus,smart,smart_plus' | split: ',' -%}
       {%- assign tier_ranges = '€20–€60,€35–€80,€35–€80,€55–€120' | split: ',' -%}
       {%- assign tier_steps  = '01,02,03,04' | split: ',' -%}
       {%- assign feature_keys = 'f1,f2,f3,f4' | split: ',' -%}
 
-      {%- for tier_tag in tier_tags -%}
+      {%- for tier_handle in tier_handles -%}
         {%- assign i = forloop.index0 -%}
-        {%- assign lookup = '|' | append: tier_tag | append: '|' -%}
+        {%- assign tier_col = collections[tier_handle] -%}
         {%- assign tier_available = false -%}
-        {%- if store_tags contains lookup -%}
+        {%- if tier_col.all_products_count > 0 -%}
           {%- assign tier_available = true -%}
         {%- endif -%}
         {%- if tier_available -%}
@@ -183,7 +174,7 @@
           {%- assign check_color = 'rgba(232,160,96,0.60)' -%}
         {%- endif -%}
 
-        <article class="tier-card{% if tier_tag == 'tier-smart' %} tier-card--recommended{% endif %}">
+        <article class="tier-card{% if tier_handle == 'tier-smart' %} tier-card--recommended{% endif %}">
           <div>
             <p class="tier-card__step">{{ 'home.tiers.step' | t }} {{ tier_steps[i] }}</p>
             <h3 class="tier-card__name">{{ tier_names[i] }}</h3>
@@ -199,7 +190,7 @@
             </ul>
           </div>
           {%- if tier_available -%}
-            <a href="{{ locale_prefix }}/collections/all/{{ tier_tag }}" class="tier-card__cta">{{ 'home.tiers.learn_more' | t }}</a>
+            <a href="{{ locale_prefix }}/collections/{{ tier_handle }}" class="tier-card__cta">{{ 'home.tiers.learn_more' | t }}</a>
           {%- else -%}
             <div style="margin-top:2.5rem; display:flex; justify-content:center;">
               <span class="soon-pill" style="padding:6px 16px;">{{ 'general.coming_soon' | t }}</span>

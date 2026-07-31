@@ -1,47 +1,81 @@
 {%- comment -%}
   main-collection.liquid
   Kollektionsseite mit Kategorie- und Tier-Filter-Chips + Sortierung
-{%- endcomment -%}
 
-{%- assign current_collection = collection -%}
-{%- comment -%}
-  Availability is derived by scanning the products in the "all" collection and
-  collecting their (handleized) tags into one pipe-delimited string. This is
-  more reliable than collections.all.all_tags. A filter chip is a live link
-  when its tag appears; otherwise it shows a disabled "coming soon" pill.
+  URL-Modell (kanonisch)
+  ──────────────────────
+  Kategorie und Tier sind zwei unabhängige Achsen, jede mit eigener Collection:
+    Kategorie: /collections/{smart-bulbs | filament | panels | ceiling-lights}
+    Tier:      /collections/{tier-classic | tier-classic-plus | tier-smart | tier-smart-plus}
+  Die Collection, in der man sich befindet, ist die primäre Achse. Die zweite
+  Achse wird als natives Tag-Filter darauf gelegt, z. B.
+  /collections/panels/tier-classic. Die kanonische URL ist immer die Collection
+  ohne Tag — das erledigt Shopifys canonical_url in theme.liquid automatisch.
 
-  Expected tags:
-    Categories: smart-bulbs, filament, panels, ceiling-lights
-    Tiers:      tier-classic, tier-classic-plus, tier-smart, tier-smart-plus
+  Verfügbarkeit eines Chips = die zugehörige Collection hat mindestens ein
+  storefront-sichtbares Produkt (all_products_count, nicht products_count —
+  letzteres ist filterabhängig). Bewusst global geprüft, nicht als Schnittmenge
+  mit der aktiven Achse: ein Chip kann also zu einem leeren Ergebnis führen,
+  dafür gibt es den Empty State.
+{%- endcomment -%}
+{%- assign locale_prefix = "" -%}
+{%- unless localization.language.iso_code == "de" -%}
+  {%- assign locale_prefix = "/" | append: localization.language.iso_code -%}
+{%- endunless -%}
 
-  Filter links use Shopify's native /collections/<handle>/<tag> pattern,
-  always built off the base collection handle to avoid stacking tags.
-{%- endcomment -%}
-{%- assign store_tags = '' -%}
-{%- for product in collections.all.products -%}
-  {%- for tag in product.tags -%}
-    {%- assign tag_handle = tag | handleize -%}
-    {%- assign store_tags = store_tags | append: '|' | append: tag_handle -%}
-  {%- endfor -%}
-{%- endfor -%}
-{%- assign store_tags = store_tags | append: '|' -%}
-{%- comment -%}
-  filter_base = the collection's own URL with any active tag stripped off.
-  collection.url returns a clean path like "/collections/all"; on a filtered
-  view it becomes "/collections/all/tier-smart", so we cut everything after
-  the collection handle to always link off the base.
-{%- endcomment -%}
-{%- assign url_parts = current_collection.url | split: '/collections/' -%}
-{%- assign handle_part = url_parts[1] | split: '/' | first -%}
-{%- if handle_part != blank -%}
-  {%- assign filter_base = '/collections/' | append: handle_part -%}
-{%- else -%}
-  {%- assign filter_base = '/collections/all' -%}
+{%- assign cat_handles  = 'smart-bulbs,filament,panels,ceiling-lights' | split: ',' -%}
+{%- assign cat_names    = 'Smart Bulbs,Filament,Panels,Ceiling Lights' | split: ',' -%}
+{%- assign cat_icons    = 'lightbulb,emoji_objects,grid_on,light_mode' | split: ',' -%}
+{%- assign tier_handles = 'tier-classic,tier-classic-plus,tier-smart,tier-smart-plus' | split: ',' -%}
+{%- assign tier_names   = 'CLASSIC,CLASSIC+,SMART,SMART+' | split: ',' -%}
+
+{%- comment -%} Welche Achse ist primär, und welcher Tag liegt als zweite darauf? {%- endcomment -%}
+{%- assign cat_list    = '|smart-bulbs|filament|panels|ceiling-lights|' -%}
+{%- assign tier_list   = '|tier-classic|tier-classic-plus|tier-smart|tier-smart-plus|' -%}
+{%- assign current_key = '|' | append: collection.handle | append: '|' -%}
+{%- assign axis = 'none' -%}
+{%- if cat_list contains current_key -%}
+  {%- assign axis = 'category' -%}
+{%- elsif tier_list contains current_key -%}
+  {%- assign axis = 'tier' -%}
 {%- endif -%}
-{%- comment -%} Preserve locale prefix (e.g. /en) if the collection URL has one {%- endcomment -%}
-{%- assign prefix_part = url_parts[0] -%}
-{%- if prefix_part != blank -%}
-  {%- assign filter_base = prefix_part | append: filter_base -%}
+{%- comment -%}
+  carry = der Tag der zweiten Achse. Bewusst auf einen Leerstring
+  normalisiert, damit die Vergleiche unten nicht von nil/blank-Semantik
+  abhängen.
+{%- endcomment -%}
+{%- assign carry = '' -%}
+{%- if current_tags.size > 0 -%}
+  {%- assign carry = current_tags | first -%}
+{%- endif -%}
+
+{%- comment -%} Aktive Werte je Achse — unabhängig davon, welche primär ist {%- endcomment -%}
+{%- assign active_cat  = '' -%}
+{%- assign active_tier = '' -%}
+{%- if axis == 'category' -%}
+  {%- assign active_cat  = collection.handle -%}
+  {%- assign active_tier = carry -%}
+{%- elsif axis == 'tier' -%}
+  {%- assign active_tier = collection.handle -%}
+  {%- assign active_cat  = carry -%}
+{%- endif -%}
+
+{%- assign col_base = locale_prefix | append: '/collections/' -%}
+{%- assign current_path = col_base | append: collection.handle -%}
+{%- if carry != '' -%}
+  {%- assign current_path = current_path | append: '/' | append: carry -%}
+{%- endif -%}
+
+{%- comment -%} "Alle"-Chips setzen ihre eigene Achse zurück und behalten die andere {%- endcomment -%}
+{%- if active_tier != '' -%}
+  {%- assign all_cats_url = col_base | append: active_tier -%}
+{%- else -%}
+  {%- assign all_cats_url = col_base | append: 'all' -%}
+{%- endif -%}
+{%- if active_cat != '' -%}
+  {%- assign all_tiers_url = col_base | append: active_cat -%}
+{%- else -%}
+  {%- assign all_tiers_url = col_base | append: 'all' -%}
 {%- endif -%}
 
 <section class="section bg-base" aria-labelledby="collection-title">
@@ -51,8 +85,8 @@
     <div class="section-heading">
       <p class="section-eyebrow">{{ 'collection.eyebrow' | t }}</p>
       <h1 class="section-title" id="collection-title">
-        {%- if current_collection.title != blank -%}
-          {{ current_collection.title }}
+        {%- if collection.title != blank -%}
+          {{ collection.title }}
         {%- else -%}
           {{ 'collection.all_products_title' | t }}
         {%- endif -%}
@@ -61,102 +95,65 @@
       <div style="width:2rem; height:2px; background:var(--color-amber); margin-top:1rem;"></div>
     </div>
 
-    {%- comment -%} Category filter chips {%- endcomment -%}
+    {%- comment -%} Filter-Chips {%- endcomment -%}
     <div style="margin-top:2.5rem; display:flex; flex-direction:column; gap:1rem;">
+
+      {%- comment -%} Achse 1: Kategorie {%- endcomment -%}
       <div>
         <p class="filter-row__label">{{ 'collection.filter_category' | t }}</p>
         <div class="filter-row__chips no-scrollbar">
-          <a href="{{ filter_base }}" class="filter-chip{% unless current_tags %} is-active{% endunless %}">
+          <a href="{{ all_cats_url }}" class="filter-chip{% if active_cat == '' %} is-active{% endif %}">
             <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_view</span>
             {{ 'collection.filter_all' | t }}
           </a>
 
-          {%- comment -%} Smart Bulbs {%- endcomment -%}
-          {%- if store_tags contains '|smart-bulbs|' -%}
-            <a href="{{ filter_base }}/smart-bulbs" class="filter-chip{% if current_tags contains 'smart-bulbs' %} is-active{% endif %}">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">lightbulb</span>
-              Smart Bulbs
-            </a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">lightbulb</span>
-              Smart Bulbs <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-            </span>
-          {%- endif -%}
+          {%- for cat_handle in cat_handles -%}
+            {%- assign cat_name = cat_names[forloop.index0] -%}
+            {%- assign cat_icon = cat_icons[forloop.index0] -%}
+            {%- if active_tier == '' -%}
+              {%- assign cat_url = col_base | append: cat_handle -%}
+            {%- elsif axis == 'tier' -%}
+              {%- assign cat_url = col_base | append: active_tier | append: '/' | append: cat_handle -%}
+            {%- else -%}
+              {%- assign cat_url = col_base | append: cat_handle | append: '/' | append: active_tier -%}
+            {%- endif -%}
 
-          {%- comment -%} Filament {%- endcomment -%}
-          {%- if store_tags contains '|filament|' -%}
-            <a href="{{ filter_base }}/filament" class="filter-chip{% if current_tags contains 'filament' %} is-active{% endif %}">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">emoji_objects</span>
-              Filament
-            </a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">emoji_objects</span>
-              Filament <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-            </span>
-          {%- endif -%}
-
-          {%- comment -%} Panels {%- endcomment -%}
-          {%- if store_tags contains '|panels|' -%}
-            <a href="{{ filter_base }}/panels" class="filter-chip{% if current_tags contains 'panels' %} is-active{% endif %}">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_on</span>
-              Panels
-            </a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">grid_on</span>
-              Panels <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-            </span>
-          {%- endif -%}
-
-          {%- comment -%} Ceiling Lights {%- endcomment -%}
-          {%- if store_tags contains '|ceiling-lights|' -%}
-            <a href="{{ filter_base }}/ceiling-lights" class="filter-chip{% if current_tags contains 'ceiling-lights' %} is-active{% endif %}">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">light_mode</span>
-              Ceiling Lights
-            </a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">
-              <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">light_mode</span>
-              Ceiling Lights <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-            </span>
-          {%- endif -%}
+            {%- if collections[cat_handle].all_products_count > 0 -%}
+              <a href="{{ cat_url }}" class="filter-chip{% if active_cat == cat_handle %} is-active{% endif %}">
+                <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">{{ cat_icon }}</span>
+                {{ cat_name }}
+              </a>
+            {%- else -%}
+              <span class="filter-chip filter-chip--disabled" aria-disabled="true">
+                <span class="material-symbols-outlined" style="font-size:17px;" aria-hidden="true">{{ cat_icon }}</span>
+                {{ cat_name }} <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
       </div>
 
+      {%- comment -%} Achse 2: Tier {%- endcomment -%}
       <div>
         <p class="filter-row__label">{{ 'collection.filter_tier' | t }}</p>
         <div class="filter-row__chips no-scrollbar">
-          <a href="{{ filter_base }}" class="filter-chip{% unless current_tags contains 'tier-' %} is-active{% endunless %}">{{ 'collection.filter_all_tiers' | t }}</a>
+          <a href="{{ all_tiers_url }}" class="filter-chip{% if active_tier == '' %} is-active{% endif %}">{{ 'collection.filter_all_tiers' | t }}</a>
 
-          {%- comment -%} CLASSIC {%- endcomment -%}
-          {%- if store_tags contains '|tier-classic|' -%}
-            <a href="{{ filter_base }}/tier-classic" class="filter-chip{% if current_tags contains 'tier-classic' %} is-active{% endif %}">CLASSIC</a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">CLASSIC <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
-          {%- endif -%}
+          {%- for tier_handle in tier_handles -%}
+            {%- if active_cat == '' -%}
+              {%- assign tier_url = col_base | append: tier_handle -%}
+            {%- elsif axis == 'category' -%}
+              {%- assign tier_url = col_base | append: active_cat | append: '/' | append: tier_handle -%}
+            {%- else -%}
+              {%- assign tier_url = col_base | append: tier_handle | append: '/' | append: active_cat -%}
+            {%- endif -%}
 
-          {%- comment -%} CLASSIC+ {%- endcomment -%}
-          {%- if store_tags contains '|tier-classic-plus|' -%}
-            <a href="{{ filter_base }}/tier-classic-plus" class="filter-chip{% if current_tags contains 'tier-classic-plus' %} is-active{% endif %}">CLASSIC+</a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">CLASSIC+ <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
-          {%- endif -%}
-
-          {%- comment -%} SMART {%- endcomment -%}
-          {%- if store_tags contains '|tier-smart|' -%}
-            <a href="{{ filter_base }}/tier-smart" class="filter-chip{% if current_tags contains 'tier-smart' %} is-active{% endif %}">SMART</a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">SMART <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
-          {%- endif -%}
-
-          {%- comment -%} SMART+ {%- endcomment -%}
-          {%- if store_tags contains '|tier-smart-plus|' -%}
-            <a href="{{ filter_base }}/tier-smart-plus" class="filter-chip{% if current_tags contains 'tier-smart-plus' %} is-active{% endif %}">SMART+</a>
-          {%- else -%}
-            <span class="filter-chip filter-chip--disabled" aria-disabled="true">SMART+ <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
-          {%- endif -%}
+            {%- if collections[tier_handle].all_products_count > 0 -%}
+              <a href="{{ tier_url }}" class="filter-chip{% if active_tier == tier_handle %} is-active{% endif %}">{{ tier_names[forloop.index0] }}</a>
+            {%- else -%}
+              <span class="filter-chip filter-chip--disabled" aria-disabled="true">{{ tier_names[forloop.index0] }} <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></span>
+            {%- endif -%}
+          {%- endfor -%}
         </div>
       </div>
     </div>
@@ -175,19 +172,19 @@
           onchange="location.href = this.value"
           aria-label="{{ 'collection.sort_label' | t }}"
         >
-          <option value="{{ current_collection.url }}?sort_by=manual"
+          <option value="{{ current_path }}?sort_by=manual"
             {% if collection.sort_by == 'manual' or collection.sort_by == '' %}selected{% endif %}>
             {{ 'collection.sort_recommended' | t }}
           </option>
-          <option value="{{ current_collection.url }}?sort_by=price-ascending"
+          <option value="{{ current_path }}?sort_by=price-ascending"
             {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>
             {{ 'collection.sort_price_asc' | t }}
           </option>
-          <option value="{{ current_collection.url }}?sort_by=price-descending"
+          <option value="{{ current_path }}?sort_by=price-descending"
             {% if collection.sort_by == 'price-descending' %}selected{% endif %}>
             {{ 'collection.sort_price_desc' | t }}
           </option>
-          <option value="{{ current_collection.url }}?sort_by=title-ascending"
+          <option value="{{ current_path }}?sort_by=title-ascending"
             {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>
             {{ 'collection.sort_name_az' | t }}
           </option>
@@ -195,7 +192,11 @@
       </label>
     </div>
 
-    {%- comment -%} Product grid {%- endcomment -%}
+    {%- comment -%}
+      Product grid — paginate war vorher nie geöffnet, dadurch war das Grid
+      still auf 50 Produkte gedeckelt und der Pagination-Block toter Code.
+    {%- endcomment -%}
+    {%- paginate collection.products by 24 -%}
     {%- if collection.products.size > 0 -%}
       <div class="grid-3" role="list">
         {%- for product in collection.products -%}
@@ -230,9 +231,10 @@
         <p class="empty-state__icon material-symbols-outlined" aria-hidden="true">search_off</p>
         <p class="empty-state__title">{{ 'collection.empty_title' | t }}</p>
         <p class="empty-state__body">{{ 'collection.empty_body' | t }}</p>
-        <a href="{{ current_collection.url }}" class="btn-ghost">{{ 'collection.reset_filter' | t }}</a>
+        <a href="{{ col_base }}all" class="btn-ghost">{{ 'collection.reset_filter' | t }}</a>
       </div>
     {%- endif -%}
+    {%- endpaginate -%}
 
   </div>
 </section>
