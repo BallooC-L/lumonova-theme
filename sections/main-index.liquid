@@ -11,7 +11,32 @@
 
 {%- assign hero_image = section.settings.hero_image -%}
 {%- assign hero_cta_primary_url = section.settings.hero_cta_primary_url | default: '/collections/all' -%}
-{%- assign hero_cta_ghost_url = section.settings.hero_cta_ghost_url | default: '/collections/tier-smart-plus' -%}
+
+{%- comment -%}
+  Ghost-CTA im Hero: zeigt auf das höchste Tier, das tatsächlich Produkte
+  hat, und beschriftet sich entsprechend. Über die Section-Einstellung lässt
+  sich ein Tier fest vorgeben — hat dieses (noch) keine Produkte, fällt die
+  Logik automatisch auf das höchste verfügbare zurück. Der Button wirbt so
+  nie für ein leeres Tier, und Label und Ziel können nicht auseinanderlaufen.
+{%- endcomment -%}
+{%- assign hero_tier_order  = 'tier-smart-plus,tier-smart,tier-classic-plus,tier-classic' | split: ',' -%}
+{%- assign hero_tier_labels = 'SMART+,SMART,CLASSIC+,CLASSIC' | split: ',' -%}
+{%- assign hero_pinned_tier = section.settings.hero_ghost_tier | default: 'auto' -%}
+{%- assign hero_tier_handle = '' -%}
+{%- assign hero_tier_name   = '' -%}
+{%- for hero_h in hero_tier_order -%}
+  {%- if collections[hero_h].all_products_count > 0 -%}
+    {%- if hero_pinned_tier == hero_h -%}
+      {%- assign hero_tier_handle = hero_h -%}
+      {%- assign hero_tier_name   = hero_tier_labels[forloop.index0] -%}
+      {%- break -%}
+    {%- endif -%}
+    {%- if hero_tier_handle == '' -%}
+      {%- assign hero_tier_handle = hero_h -%}
+      {%- assign hero_tier_name   = hero_tier_labels[forloop.index0] -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
 
 {%- comment -%}
   ════════════════════════════════════════════════
@@ -48,7 +73,9 @@
       <p class="hero__body">{{ 'home.hero.body' | t }}</p>
       <div class="hero__ctas">
         <a href="{{ hero_cta_primary_url }}" class="btn-amber">{{ 'home.hero.cta_primary_label' | t }}</a>
-        <a href="{{ hero_cta_ghost_url }}" class="btn-ghost">{{ 'home.hero.cta_ghost_label' | t }}</a>
+        {%- if hero_tier_handle != '' -%}
+          <a href="{{ locale_prefix }}/collections/{{ hero_tier_handle }}" class="btn-ghost">{{ 'home.hero.cta_ghost_label' | t: tier: hero_tier_name }}</a>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -311,7 +338,16 @@
     { "type": "header", "content": "Hero" },
     { "type": "image_picker", "id": "hero_image", "label": "Hero Hintergrundbild" },
     { "type": "url", "id": "hero_cta_primary_url", "label": "CTA 1 URL" },
-    { "type": "url", "id": "hero_cta_ghost_url", "label": "CTA 2 URL" },
+    { "type": "select", "id": "hero_ghost_tier", "label": "CTA 2: Ziel-Tier",
+      "info": "Automatisch = höchstes Tier mit Produkten. Ein fest gewähltes Tier ohne Produkte fällt automatisch darauf zurück. Die Beschriftung ergibt sich aus dem Ziel.",
+      "options": [
+        { "value": "auto", "label": "Automatisch" },
+        { "value": "tier-smart-plus", "label": "SMART+" },
+        { "value": "tier-smart", "label": "SMART" },
+        { "value": "tier-classic-plus", "label": "CLASSIC+" },
+        { "value": "tier-classic", "label": "CLASSIC" }
+      ],
+      "default": "auto" },
     { "type": "header", "content": "Atmosphere Bilder" },
     { "type": "image_picker", "id": "atmosphere_img_1", "label": "Atmosphäre Bild 1 (groß)" },
     { "type": "image_picker", "id": "atmosphere_img_2", "label": "Atmosphäre Bild 2" },
