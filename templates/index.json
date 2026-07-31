@@ -5,7 +5,7 @@
       "settings": {
         "hero_image": "shopify://shop_images/Hero-Brand-169.webp",
         "hero_cta_primary_url": "/collections/all",
-        "hero_cta_ghost_url": "shopify://collections/tier-smart",
+        "hero_ghost_tier": "auto",
         "atmosphere_img_1": "shopify://shop_images/Familienmoment.webp",
         "atmosphere_img_2": "shopify://shop_images/Romantik-Dinner_edit.webp",
         "atmosphere_img_3": "shopify://shop_images/Schlafzimmer-Entspannung.webp",
