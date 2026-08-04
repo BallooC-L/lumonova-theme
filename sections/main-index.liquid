@@ -108,7 +108,7 @@
   in Liquid gar nicht sichtbar, zählen also korrekterweise nicht mit.
   all_products_count (nicht products_count) — letzteres ist auf
   Collection-Seiten filterabhängig.
-  Collections: smart-bulbs, filament, panels, ceiling-lights
+  Collections: smart-bulbs, filament, panels, ceiling-lights, tri-proof
   ════════════════════════════════════════════════
 {%- endcomment -%}
 
@@ -119,12 +119,12 @@
       <h2 class="section-title" id="categories-title">{{ 'home.categories.title' | t }}</h2>
       <p class="section-subtitle">{{ 'home.categories.subtitle' | t }}</p>
     </div>
-    <div class="grid-4 reveal">
-      {%- assign cat_handles = 'smart-bulbs,filament,panels,ceiling-lights' | split: ',' -%}
-      {%- assign cat_names   = 'Smart Bulbs,Filament,Panels,Ceiling Lights' | split: ',' -%}
-      {%- assign cat_icons   = 'lightbulb,emoji_objects,grid_view,wb_iridescent' | split: ',' -%}
-      {%- assign cat_descs   = 'smart_bulbs_desc,filament_desc,panels_desc,ceiling_lights_desc' | split: ',' -%}
-      {%- assign cat_arias   = 'smart_bulbs_aria,filament_aria,panels_aria,ceiling_lights_aria' | split: ',' -%}
+    <div class="grid-5 reveal">
+      {%- assign cat_handles = 'smart-bulbs,filament,panels,ceiling-lights,tri-proof' | split: ',' -%}
+      {%- assign cat_names   = 'Smart Bulbs,Filament,Panels,Ceiling Lights,Tri-Proof' | split: ',' -%}
+      {%- assign cat_icons   = 'lightbulb,emoji_objects,grid_view,wb_iridescent,fluorescent' | split: ',' -%}
+      {%- assign cat_descs   = 'smart_bulbs_desc,filament_desc,panels_desc,ceiling_lights_desc,tri_proof_desc' | split: ',' -%}
+      {%- assign cat_arias   = 'smart_bulbs_aria,filament_aria,panels_aria,ceiling_lights_aria,tri_proof_aria' | split: ',' -%}
 
       {%- for cat_handle in cat_handles -%}
         {%- assign i = forloop.index0 -%}

@@ -5,7 +5,7 @@
   URL-Modell (kanonisch)
   ──────────────────────
   Kategorie und Tier sind zwei unabhängige Achsen, jede mit eigener Collection:
-    Kategorie: /collections/{smart-bulbs | filament | panels | ceiling-lights}
+    Kategorie: /collections/{smart-bulbs | filament | panels | ceiling-lights | tri-proof}
     Tier:      /collections/{tier-classic | tier-classic-plus | tier-smart | tier-smart-plus}
   Die Collection, in der man sich befindet, ist die primäre Achse. Die zweite
   Achse wird als natives Tag-Filter darauf gelegt, z. B.
@@ -23,14 +23,14 @@
   {%- assign locale_prefix = "/" | append: localization.language.iso_code -%}
 {%- endunless -%}
 
-{%- assign cat_handles  = 'smart-bulbs,filament,panels,ceiling-lights' | split: ',' -%}
-{%- assign cat_names    = 'Smart Bulbs,Filament,Panels,Ceiling Lights' | split: ',' -%}
-{%- assign cat_icons    = 'lightbulb,emoji_objects,grid_on,light_mode' | split: ',' -%}
+{%- assign cat_handles  = 'smart-bulbs,filament,panels,ceiling-lights,tri-proof' | split: ',' -%}
+{%- assign cat_names    = 'Smart Bulbs,Filament,Panels,Ceiling Lights,Tri-Proof' | split: ',' -%}
+{%- assign cat_icons    = 'lightbulb,emoji_objects,grid_on,light_mode,fluorescent' | split: ',' -%}
 {%- assign tier_handles = 'tier-classic,tier-classic-plus,tier-smart,tier-smart-plus' | split: ',' -%}
 {%- assign tier_names   = 'CLASSIC,CLASSIC+,SMART,SMART+' | split: ',' -%}
 
 {%- comment -%} Welche Achse ist primär, und welcher Tag liegt als zweite darauf? {%- endcomment -%}
-{%- assign cat_list    = '|smart-bulbs|filament|panels|ceiling-lights|' -%}
+{%- assign cat_list    = '|smart-bulbs|filament|panels|ceiling-lights|tri-proof|' -%}
 {%- assign tier_list   = '|tier-classic|tier-classic-plus|tier-smart|tier-smart-plus|' -%}
 {%- assign current_key = '|' | append: collection.handle | append: '|' -%}
 {%- assign axis = 'none' -%}

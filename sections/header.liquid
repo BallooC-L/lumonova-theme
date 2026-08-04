@@ -130,7 +130,7 @@
           "Demnächst". Drafts sind in Liquid nicht sichtbar und zählen
           damit korrekterweise nicht mit. all_products_count statt
           products_count, weil letzteres filterabhängig ist.
-          Collections: smart-bulbs, filament, panels, ceiling-lights,
+          Collections: smart-bulbs, filament, panels, ceiling-lights, tri-proof,
                        tier-classic, tier-classic-plus, tier-smart, tier-smart-plus
         {%- endcomment -%}
         <div>
@@ -225,6 +225,29 @@
                 <div>
                   <p class="mega-menu__cat-name">Ceiling Lights <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
                   <p class="mega-menu__cat-desc">{{ 'nav.mega.ceiling_lights_desc' | t }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} Tri-Proof {%- endcomment -%}
+            {%- if collections['tri-proof'].all_products_count > 0 -%}
+              <a href="{{ locale_prefix }}/collections/tri-proof" class="mega-menu__cat-tile" onclick="closeMegaMenu()">
+                <span class="mega-menu__cat-icon">
+                  <span class="material-symbols-outlined text-amber" style="font-size:19px;" aria-hidden="true">fluorescent</span>
+                </span>
+                <div>
+                  <p class="mega-menu__cat-name">Tri-Proof</p>
+                  <p class="mega-menu__cat-desc">{{ 'nav.mega.tri_proof_desc' | t }}</p>
+                </div>
+              </a>
+            {%- else -%}
+              <div class="mega-menu__cat-tile mega-menu__cat-tile--disabled" aria-disabled="true">
+                <span class="mega-menu__cat-icon mega-menu__cat-icon--disabled">
+                  <span class="material-symbols-outlined fg-minimal" style="font-size:19px;" aria-hidden="true">fluorescent</span>
+                </span>
+                <div>
+                  <p class="mega-menu__cat-name">Tri-Proof <span class="soon-pill">{{ 'general.coming_soon' | t }}</span></p>
+                  <p class="mega-menu__cat-desc">{{ 'nav.mega.tri_proof_desc' | t }}</p>
                 </div>
               </div>
             {%- endif -%}
