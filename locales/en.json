@@ -74,6 +74,7 @@
       "filament_desc": "Vintage look",
       "panels_desc": "Office & ceiling",
       "ceiling_lights_desc": "With smart module",
+      "tri_proof_desc": "Damp rooms & workshops",
       "classic_desc": "Classic & durable",
       "classic_plus_desc": "With sensor or CCT",
       "smart_desc": "Alexa & Google Home",
@@ -182,11 +183,11 @@
   "home": {
     "hero": {
       "aria": "Hero",
-      "body_default": "LUMOnova. Four tiers, four product families, one promise: light that fits you.",
+      "body_default": "LUMOnova. Four tiers, five product families, one promise: light that fits you.",
       "headline_1": "No hub.",
       "headline_2": "No lock-in.",
       "headline_3": "Simply smart.",
-      "body": "LUMOnova is lighting that comes to you – not to an ecosystem. Four tiers, four product families, one standard: light that works.",
+      "body": "LUMOnova is lighting that comes to you – not to an ecosystem. Four tiers, five product families, one standard: light that works.",
       "cta_primary_label": "View collection",
       "cta_ghost_label": "Discover {{ tier }}"
     },
@@ -198,8 +199,8 @@
     },
     "categories": {
       "eyebrow": "Range",
-      "title": "Four Product Families.",
-      "subtitle": "Smart Bulbs. Filament, Panels and Ceiling Lights — all with the same tier logic and the same smart standards.",
+      "title": "Five Product Families.",
+      "subtitle": "Smart Bulbs, Filament, Panels, Ceiling Lights and Tri-Proof — all with the same tier logic and the same smart standards.",
       "smart_bulbs_aria": "Go to Smart Bulbs category",
       "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter and classic",
       "filament_desc": "Vintage look with warm-white LED filament",
@@ -208,6 +209,8 @@
       "ceiling_lights_aria": "Go to Ceiling Lights category",
       "panels_desc": "LED backlit panels for office and ceiling",
       "ceiling_lights_desc": "Ceiling lights with Matter and sensors",
+      "tri_proof_aria": "Go to Tri-Proof category",
+      "tri_proof_desc": "IP65 damp-proof batten lights for garage, cellar and warehouse",
       "available": "Available"
     },
     "tiers": {
@@ -276,7 +279,7 @@
       "img_placeholder": "Select image in Customizer",
       "headline": "Born out of frustration.",
       "body": "LUMOnova was founded in 2023 in Willich, North Rhine-Westphalia — out of the simple desire to buy smart lighting that isn't tied to a proprietary ecosystem. We searched for a solution ourselves and found none. So we built it.",
-      "body_2": "Today we develop four product families — from the classic bulb to the controllable panel — all held to one standard: quality you can see, and technology you don't need explained.",
+      "body_2": "Today we develop five product families — from the classic bulb to the damp-proof batten — all held to one standard: quality you can see, and technology you don't need explained.",
       "img_alt": "LUMOnova products"
     },
     "values": {

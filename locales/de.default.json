@@ -75,6 +75,7 @@
       "filament_desc": "Vintage-Optik",
       "panels_desc": "Büro & Decke",
       "ceiling_lights_desc": "Mit Smart-Modul",
+      "tri_proof_desc": "Feuchtraum & Werkstatt",
       "classic_desc": "Klassisch & langlebig",
       "classic_plus_desc": "Mit Sensor oder CCT",
       "smart_desc": "Alexa & Google Home",
@@ -183,11 +184,11 @@
   "home": {
     "hero": {
       "aria": "Hero",
-      "body_default": "LUMOnova. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das sich dir anpasst.",
+      "body_default": "LUMOnova. Vier Tiers, fünf Produktfamilien, ein Anspruch: Licht, das sich dir anpasst.",
       "headline_1": "Kein Hub.",
       "headline_2": "Kein Lock-in.",
       "headline_3": "Einfach smart.",
-      "body": "LUMOnova ist Beleuchtung, die zu Dir kommt – nicht zu einem Ökosystem. Vier Tiers, vier Produktfamilien, ein Anspruch: Licht, das funktioniert.",
+      "body": "LUMOnova ist Beleuchtung, die zu Dir kommt – nicht zu einem Ökosystem. Vier Tiers, fünf Produktfamilien, ein Anspruch: Licht, das funktioniert.",
       "cta_primary_label": "Kollektion ansehen",
       "cta_ghost_label": "{{ tier }} entdecken"
     },
@@ -199,8 +200,8 @@
     },
     "categories": {
       "eyebrow": "Sortiment",
-      "title": "Vier Produktfamilien.",
-      "subtitle": "Smart Bulbs. Filament, Panels und Ceiling Lights – alle mit derselben Tier-Logik und denselben Smart-Standards.",
+      "title": "Fünf Produktfamilien.",
+      "subtitle": "Smart Bulbs, Filament, Panels, Ceiling Lights und Tri-Proof – alle mit derselben Tier-Logik und denselben Smart-Standards.",
       "smart_bulbs_aria": "Zur Kategorie Smart Bulbs",
       "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter und klassisch",
       "filament_desc": "Vintage-Optik mit warmweißem LED-Filament",
@@ -209,6 +210,8 @@
       "ceiling_lights_aria": "Zur Kategorie Ceiling Lights",
       "panels_desc": "LED-Backlit-Panels für Büro und Decke",
       "ceiling_lights_desc": "Deckenleuchten mit Matter und Sensorik",
+      "tri_proof_aria": "Zur Kategorie Tri-Proof",
+      "tri_proof_desc": "IP65-Feuchtraumleuchten für Garage, Keller und Lager",
       "available": "Verfügbar"
     },
     "tiers": {
@@ -277,7 +280,7 @@
       "img_placeholder": "Bild im Customizer wählen",
       "headline": "Entstanden aus Frustration.",
       "body": "LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen — aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist. Wir haben selbst nach einer Lösung gesucht und keine gefunden. Also haben wir sie gebaut.",
-      "body_2": "Heute entwickeln wir vier Produktfamilien — von der klassischen Glühbirne bis zum steuerbaren Panel — alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.",
+      "body_2": "Heute entwickeln wir fünf Produktfamilien — von der klassischen Glühbirne bis zur Feuchtraumleuchte — alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.",
       "img_alt": "LUMOnova Produkte"
     },
     "values": {
