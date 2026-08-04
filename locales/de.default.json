@@ -98,7 +98,7 @@
     "agb": "AGB",
     "widerruf": "Widerruf",
     "coming_at_launch": "folgt zum Launch",
-    "copyright": "© {{ year }} C&L Handels GmbH, Willich, Deutschland"
+    "copyright": "© {{ year }} C & L Handels GmbH, Willich, Deutschland"
   },
   "trust": {
     "warranty_label": "3 Jahre EU-Garantie",
@@ -349,7 +349,7 @@
       },
       "usp2": {
         "label": "Sitz in Deutschland",
-        "sub": "C&L Handels GmbH, Willich NRW"
+        "sub": "C & L Handels GmbH, Willich NRW"
       },
       "usp3": {
         "label": "CE / WEEE / RoHS",
@@ -365,7 +365,7 @@
       "title": "Kontakt",
       "email_label": "E-Mail",
       "phone_label": "Telefon",
-      "address": "C&L Handels GmbH — Willich, NRW, Deutschland"
+      "address": "C & L Handels GmbH — Willich, NRW, Deutschland"
     },
     "hours": {
       "eyebrow": "Wann wir da sind",
