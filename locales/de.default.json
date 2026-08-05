@@ -257,10 +257,10 @@
       "img3_caption": "Schlafzimmer, warmweiß zum Runterkommen",
       "img4_alt": "Filament-Leuchtmittel über dem Esstisch",
       "img4_caption": "Filament über dem Esstisch, ohne App",
-      "img5_alt": "Regal mit farbigem RGB-Akzentlicht",
-      "img5_caption": "Farbwechsel per Sprachbefehl",
-      "img6_alt": "Büro mit LED-Panels, blendfrei bei 4000 Kelvin",
-      "img6_caption": "Büro unter 4000K, blendfrei"
+      "img5_alt": "Büro mit LED-Panels, blendfrei bei 4000 Kelvin",
+      "img5_caption": "Büro unter 4000K, blendfrei",
+      "img6_alt": "Regal mit farbigem RGB-Akzentlicht",
+      "img6_caption": "Farbwechsel per Sprachbefehl"
     },
     "featured": {
       "eyebrow": "Im Fokus",

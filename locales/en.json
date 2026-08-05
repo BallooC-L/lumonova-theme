@@ -256,10 +256,10 @@
       "img3_caption": "Bedroom, warm white to unwind",
       "img4_alt": "Filament bulb above the dining table",
       "img4_caption": "Filament above the dining table, no app",
-      "img5_alt": "Shelf with coloured RGB accent lighting",
-      "img5_caption": "Colour change by voice command",
-      "img6_alt": "Office with LED panels, glare-free at 4000 Kelvin",
-      "img6_caption": "Office at 4000K, glare-free"
+      "img5_alt": "Office with LED panels, glare-free at 4000 Kelvin",
+      "img5_caption": "Office at 4000K, glare-free",
+      "img6_alt": "Shelf with coloured RGB accent lighting",
+      "img6_caption": "Colour change by voice command"
     },
     "featured": {
       "eyebrow": "In Focus",
