@@ -162,7 +162,7 @@
             {{ cta_external_label | default: cta_amazon_default }}
           </a>
         {%- elsif price_is_request -%}
-          <a href="mailto:support@lumonova.com?subject=Anfrage%20{{ product.title | url_encode }}" class="btn-amber">
+          <a href="mailto:support@lumo-nova.de?subject=Anfrage%20{{ product.title | url_encode }}" class="btn-amber">
             {{ 'product.cta_inquiry' | t }}
           </a>
         {%- else -%}
