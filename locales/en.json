@@ -264,7 +264,7 @@
     "compat": {
       "eyebrow": "Compatibility",
       "title": "Works with what you already use.",
-      "subtitle": "Amazon Alexa and Google Home work natively from the SMART tier. Apple Home and Samsung SmartThings are reserved for the SMART+ tier. Via Matter, no hub required."
+      "subtitle": "Apple Home and SmartThings are reserved for the SMART+ tier. Coming 2026."
     }
   },
   "about": {
