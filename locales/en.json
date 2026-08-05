@@ -70,7 +70,7 @@
       "col_categories": "Categories",
       "col_tiers": "Product Lines",
       "col_more": "More",
-      "smart_bulbs_desc": "E27, E14, GU10 — RGB+CCT, Tunable White, Alexa & Google Home",
+      "smart_bulbs_desc": "E27, E14, GU10. RGB+CCT, Tunable White, Alexa & Google Home",
       "filament_desc": "Vintage look",
       "panels_desc": "Office & ceiling",
       "ceiling_lights_desc": "With smart module",
@@ -183,11 +183,11 @@
   "home": {
     "hero": {
       "aria": "Hero",
-      "body_default": "LUMOnova. Four tiers, five product families, one promise: light that fits you.",
-      "headline_1": "No hub.",
-      "headline_2": "No lock-in.",
-      "headline_3": "Simply smart.",
-      "body": "LUMOnova is lighting that comes to you – not to an ecosystem. Four tiers, five product families, one standard: light that works.",
+      "body_default": "LUMOnova. One tier logic for everything, from pure light to smart home.",
+      "headline_1": "Light that",
+      "headline_2": "simply",
+      "headline_3": "works.",
+      "body": "Control it by app, by voice, or just flip the switch. No hub, no extra device, no detours.",
       "cta_primary_label": "View collection",
       "cta_ghost_label": "Discover {{ tier }}"
     },
@@ -200,7 +200,7 @@
     "categories": {
       "eyebrow": "Range",
       "title": "Five Product Families.",
-      "subtitle": "Smart Bulbs, Filament, Panels, Ceiling Lights and Tri-Proof — all with the same tier logic and the same smart standards.",
+      "subtitle": "Smart bulbs, filament, panels, ceiling lights and tri-proof. One tier logic for everything, from pure light to smart home.",
       "smart_bulbs_aria": "Go to Smart Bulbs category",
       "smart_bulbs_desc": "E27, E14, GU10. RGB+CCT, Alexa & Google Home",
       "filament_desc": "Vintage look with warm-white LED filament",
@@ -216,7 +216,7 @@
     "tiers": {
       "eyebrow": "Four Tiers",
       "title": "From pure light to a full smart home.",
-      "subtitle": "Each tier stands on its own — no forced upgrades, no hidden costs. You choose how smart your light should be.",
+      "subtitle": "Each tier stands on its own. No forced upgrades, no hidden costs. You choose how smart your light should be.",
       "step": "Level",
       "learn_more": "Learn more",
       "classic": {
@@ -247,13 +247,19 @@
     "atmosphere": {
       "eyebrow": "Atmosphere",
       "title": "Light sets the mood.",
-      "subtitle": "From a warm living room to a moody RGB wall — a few examples of how LUMOnova transforms spaces.",
-      "img1_alt": "Family moment – Warm white",
-      "img1_caption": "Family moment – Warm white",
-      "img2_alt": "Romantic dinner – Warm light",
-      "img2_caption": "Romantic dinner – Warm light",
-      "img3_alt": "Bedroom – Relaxation",
-      "img3_caption": "Bedroom – Relaxation"
+      "subtitle": "From a warm living room to a moody RGB wall. A few examples of how LUMOnova transforms spaces.",
+      "img1_alt": "Living room in the evening in warm white light at 2700 Kelvin",
+      "img1_caption": "Living room in the evening, 2700K",
+      "img2_alt": "Dining table dimmed to candlelight level",
+      "img2_caption": "Dining table, dimmed to candlelight level",
+      "img3_alt": "Bedroom in warm white light to unwind",
+      "img3_caption": "Bedroom, warm white to unwind",
+      "img4_alt": "Filament bulb above the dining table",
+      "img4_caption": "Filament above the dining table, no app",
+      "img5_alt": "Colour change by voice command on the RGB wall",
+      "img5_caption": "Colour change by voice command",
+      "img6_alt": "Office under glare-free light at 4000 Kelvin",
+      "img6_caption": "Office at 4000K, glare-free"
     },
     "featured": {
       "eyebrow": "In Focus",
@@ -272,14 +278,14 @@
       "eyebrow": "About LUMOnova",
       "headline_1": "Light with",
       "headline_2": "attitude.",
-      "body": "We are LUMOnova — a German smart lighting label that develops light which adapts to you. No hub, no lock-in, no compromise."
+      "body": "We are LUMOnova. A German smart lighting label that develops light which adapts to you. No hub, no lock-in, no compromise."
     },
     "story": {
       "eyebrow": "Our Story",
       "img_placeholder": "Select image in Customizer",
       "headline": "Born out of frustration.",
-      "body": "LUMOnova was founded in 2023 in Willich, North Rhine-Westphalia — out of the simple desire to buy smart lighting that isn't tied to a proprietary ecosystem. We searched for a solution ourselves and found none. So we built it.",
-      "body_2": "Today we develop five product families — from the classic bulb to the damp-proof batten — all held to one standard: quality you can see, and technology you don't need explained.",
+      "body": "LUMOnova was founded in 2023 in Willich, North Rhine-Westphalia. Out of the simple desire to buy smart lighting that isn't tied to a proprietary ecosystem. We searched for a solution ourselves and found none. So we built it.",
+      "body_2": "Today we develop five product families, from the classic bulb to the damp-proof batten, all held to one standard: quality you can see, and technology you don't need explained.",
       "img_alt": "LUMOnova products"
     },
     "values": {
@@ -295,7 +301,7 @@
       },
       "v3": {
         "title": "EU-Certified",
-        "text": "CE, WEEE and RoHS — all products are fully certified to European standards and approved in the EU."
+        "text": "CE, WEEE and RoHS. All products are fully certified to European standards and approved in the EU."
       },
       "v4": {
         "title": "Support from Willich",
@@ -303,11 +309,11 @@
       },
       "v5": {
         "title": "Four Tiers, One System",
-        "text": "From CLASSIC to SMART+ — our tier system makes lighting planning simple and consistent. You choose the level of intelligence."
+        "text": "From CLASSIC to SMART+. Our tier system makes lighting planning simple and consistent. You choose the level of intelligence."
       },
       "v6": {
         "title": "No Lock-in",
-        "text": "LUMOnova uses open standards and established platforms. Your home belongs to you — not an ecosystem."
+        "text": "LUMOnova uses open standards and established platforms. Your home belongs to you, not an ecosystem."
       }
     },
     "gallery": {
@@ -329,7 +335,7 @@
     "cta": {
       "eyebrow": "Explore now",
       "headline": "Find your LUMOnova.",
-      "body": "Four tiers, one system — start with smart bulbs or explore the entire range.",
+      "body": "Four tiers, one system. Start with smart bulbs or explore the entire range.",
       "primary_label": "View collection",
       "ghost_label": "Support & Contact"
     }
@@ -339,7 +345,7 @@
       "eyebrow": "Support & Contact",
       "title": "How can we ",
       "title_accent": "help?",
-      "sub": "Our team in Willich is available Monday through Friday — by email, phone, or directly via the form."
+      "sub": "Our team in Willich is available Monday through Friday, by email, phone, or directly via the form."
     },
     "usps": {
       "usp1": {
@@ -356,7 +362,7 @@
       },
       "usp4": {
         "label": "Personal Support",
-        "sub": "No AI – Only Real People"
+        "sub": "No AI, only real people"
       }
     },
     "contact": {
@@ -364,7 +370,7 @@
       "title": "Contact",
       "email_label": "Mail",
       "phone_label": "Phone",
-      "address": "C & L Handels GmbH — Willich, NRW, Germany"
+      "address": "C & L Handels GmbH, Willich, NRW, Germany"
     },
     "hours": {
       "eyebrow": "Our Opening Times",

@@ -71,7 +71,7 @@
       "col_categories": "Kategorien",
       "col_tiers": "Produktlinien",
       "col_more": "Mehr",
-      "smart_bulbs_desc": "E27, E14, GU10 — RGB+CCT, Tunable White, Alexa & Google Home",
+      "smart_bulbs_desc": "E27, E14, GU10. RGB+CCT, Tunable White, Alexa & Google Home",
       "filament_desc": "Vintage-Optik",
       "panels_desc": "Büro & Decke",
       "ceiling_lights_desc": "Mit Smart-Modul",
@@ -184,11 +184,11 @@
   "home": {
     "hero": {
       "aria": "Hero",
-      "body_default": "LUMOnova. Vier Tiers, fünf Produktfamilien, ein Anspruch: Licht, das sich dir anpasst.",
-      "headline_1": "Kein Hub.",
-      "headline_2": "Kein Lock-in.",
-      "headline_3": "Einfach smart.",
-      "body": "LUMOnova ist Beleuchtung, die zu Dir kommt – nicht zu einem Ökosystem. Vier Tiers, fünf Produktfamilien, ein Anspruch: Licht, das funktioniert.",
+      "body_default": "LUMOnova. Eine Tier-Logik für alles, vom puren Licht bis zum Smart Home.",
+      "headline_1": "Licht, das",
+      "headline_2": "einfach",
+      "headline_3": "funktioniert.",
+      "body": "Per App, per Stimme oder ganz klassisch per Schalter. Ohne Hub, ohne Zusatzgerät, ohne Umwege.",
       "cta_primary_label": "Kollektion ansehen",
       "cta_ghost_label": "{{ tier }} entdecken"
     },
@@ -201,7 +201,7 @@
     "categories": {
       "eyebrow": "Sortiment",
       "title": "Fünf Produktfamilien.",
-      "subtitle": "Smart Bulbs, Filament, Panels, Ceiling Lights und Tri-Proof – alle mit derselben Tier-Logik und denselben Smart-Standards.",
+      "subtitle": "Smart Bulbs, Filament, Panels, Ceiling Lights und Tri-Proof. Eine Tier-Logik für alles, vom puren Licht bis zum Smart Home.",
       "smart_bulbs_aria": "Zur Kategorie Smart Bulbs",
       "smart_bulbs_desc": "E27, E14, GU10. RGB+CCT, Alexa & Google Home",
       "filament_desc": "Vintage-Optik mit warmweißem LED-Filament",
@@ -217,7 +217,7 @@
     "tiers": {
       "eyebrow": "Vier Tiers",
       "title": "Vom puren Licht bis zum vollwertigen Smart Home.",
-      "subtitle": "Jeder Tier ist eigenständig – kein Upgrade-Zwang, keine versteckten Kosten. Du wählst, wie smart Dein Licht sein soll.",
+      "subtitle": "Jeder Tier ist eigenständig. Kein Upgrade-Zwang, keine versteckten Kosten. Du wählst, wie smart Dein Licht sein soll.",
       "step": "Stufe",
       "learn_more": "Mehr erfahren",
       "classic": {
@@ -248,13 +248,19 @@
     "atmosphere": {
       "eyebrow": "Atmosphäre",
       "title": "Licht macht den Raum.",
-      "subtitle": "Vom warmen Wohnzimmer bis zur stimmungsvollen RGB-Wand – ein paar Beispiele, wie LUMOnova Räume verändert.",
-      "img1_alt": "Familienmoment – Warmweiß",
-      "img1_caption": "Familienmoment – Warmweiß",
-      "img2_alt": "Romantisches Dinner – Warmes Licht",
-      "img2_caption": "Romantisches Dinner – Warmes Licht",
-      "img3_alt": "Schlafzimmer – Entspannung",
-      "img3_caption": "Schlafzimmer – Entspannung"
+      "subtitle": "Vom warmen Wohnzimmer bis zur stimmungsvollen RGB-Wand. Ein paar Beispiele, wie LUMOnova Räume verändert.",
+      "img1_alt": "Wohnzimmer am Abend in warmweißem Licht bei 2700 Kelvin",
+      "img1_caption": "Wohnzimmer am Abend, 2700K",
+      "img2_alt": "Esstisch, auf Kerzenlicht-Niveau gedimmt",
+      "img2_caption": "Esstisch, gedimmt auf Kerzenlicht-Niveau",
+      "img3_alt": "Schlafzimmer in warmweißem Licht zum Entspannen",
+      "img3_caption": "Schlafzimmer, warmweiß zum Runterkommen",
+      "img4_alt": "Filament-Leuchtmittel über dem Esstisch",
+      "img4_caption": "Filament über dem Esstisch, ohne App",
+      "img5_alt": "Farbwechsel per Sprachbefehl an der RGB-Wand",
+      "img5_caption": "Farbwechsel per Sprachbefehl",
+      "img6_alt": "Büro unter blendfreiem Licht bei 4000 Kelvin",
+      "img6_caption": "Büro unter 4000K, blendfrei"
     },
     "featured": {
       "eyebrow": "Im Fokus",
@@ -273,14 +279,14 @@
       "eyebrow": "Über LUMOnova",
       "headline_1": "Licht mit",
       "headline_2": "Haltung.",
-      "body": "Wir sind LUMOnova — ein deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss."
+      "body": "Wir sind LUMOnova. Ein deutsches Smart-Lighting-Label, das Licht entwickelt, das sich dir anpasst. Kein Hub, kein Lock-in, kein Kompromiss."
     },
     "story": {
       "eyebrow": "Unsere Geschichte",
       "img_placeholder": "Bild im Customizer wählen",
       "headline": "Entstanden aus Frustration.",
-      "body": "LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen — aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist. Wir haben selbst nach einer Lösung gesucht und keine gefunden. Also haben wir sie gebaut.",
-      "body_2": "Heute entwickeln wir fünf Produktfamilien — von der klassischen Glühbirne bis zur Feuchtraumleuchte — alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.",
+      "body": "LUMOnova entstand 2023 in Willich, Nordrhein-Westfalen. Aus dem einfachen Wunsch, Smart Lighting zu kaufen, das nicht an ein proprietäres Ökosystem gebunden ist. Wir haben selbst nach einer Lösung gesucht und keine gefunden. Also haben wir sie gebaut.",
+      "body_2": "Heute entwickeln wir fünf Produktfamilien, von der klassischen Glühbirne bis zur Feuchtraumleuchte, alle unter einem Anspruch: Qualität, die man sieht, und Technik, die man nicht erklärt bekommen muss.",
       "img_alt": "LUMOnova Produkte"
     },
     "values": {
@@ -296,7 +302,7 @@
       },
       "v3": {
         "title": "EU-zertifiziert",
-        "text": "CE, WEEE und RoHS — alle Produkte sind vollständig nach europäischen Standards zertifiziert und in der EU zugelassen."
+        "text": "CE, WEEE und RoHS. Alle Produkte sind vollständig nach europäischen Standards zertifiziert und in der EU zugelassen."
       },
       "v4": {
         "title": "Support aus Willich",
@@ -304,11 +310,11 @@
       },
       "v5": {
         "title": "Vier Tiers, ein System",
-        "text": "Von CLASSIC bis SMART+ — unser Tier-System macht Lichtplanung einfach und konsistent. Du wählst den Grad der Intelligenz."
+        "text": "Von CLASSIC bis SMART+. Unser Tier-System macht Lichtplanung einfach und konsistent. Du wählst den Grad der Intelligenz."
       },
       "v6": {
         "title": "Kein Lock-in",
-        "text": "LUMOnova arbeitet mit offenen Standards und etablierten Plattformen. Dein Zuhause gehört dir — nicht einem Ökosystem."
+        "text": "LUMOnova arbeitet mit offenen Standards und etablierten Plattformen. Dein Zuhause gehört dir, nicht einem Ökosystem."
       }
     },
     "gallery": {
@@ -330,7 +336,7 @@
     "cta": {
       "eyebrow": "Jetzt entdecken",
       "headline": "Finde dein LUMOnova.",
-      "body": "Vier Tiers, ein System — starte mit Smart Bulbs oder entdecke das gesamte Sortiment.",
+      "body": "Vier Tiers, ein System. Starte mit Smart Bulbs oder entdecke das gesamte Sortiment.",
       "primary_label": "Kollektion ansehen",
       "ghost_label": "Support & Kontakt"
     }
@@ -340,7 +346,7 @@
       "eyebrow": "Support & Kontakt",
       "title": "Wie können wir",
       "title_accent": "helfen?",
-      "sub": "Unser Team in Willich ist Mo–Fr für Sie erreichbar – per Mail, Telefon oder direkt über das Formular."
+      "sub": "Unser Team in Willich ist Mo–Fr für Sie erreichbar, per Mail, Telefon oder direkt über das Formular."
     },
     "usps": {
       "usp1": {
@@ -357,7 +363,7 @@
       },
       "usp4": {
         "label": "Persönlicher Support",
-        "sub": "Kein Bot – echte Antworten"
+        "sub": "Kein Bot, echte Antworten"
       }
     },
     "contact": {
@@ -365,7 +371,7 @@
       "title": "Kontakt",
       "email_label": "E-Mail",
       "phone_label": "Telefon",
-      "address": "C & L Handels GmbH — Willich, NRW, Deutschland"
+      "address": "C & L Handels GmbH, Willich, NRW, Deutschland"
     },
     "hours": {
       "eyebrow": "Wann wir da sind",
