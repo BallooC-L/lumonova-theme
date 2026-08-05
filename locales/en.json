@@ -202,13 +202,13 @@
       "title": "Five Product Families.",
       "subtitle": "Smart Bulbs, Filament, Panels, Ceiling Lights and Tri-Proof — all with the same tier logic and the same smart standards.",
       "smart_bulbs_aria": "Go to Smart Bulbs category",
-      "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter and classic",
+      "smart_bulbs_desc": "E27, E14, GU10. RGB+CCT, Alexa & Google Home",
       "filament_desc": "Vintage look with warm-white LED filament",
       "panels_aria": "Go to Panels category",
       "filament_aria": "Go to Filament category",
       "ceiling_lights_aria": "Go to Ceiling Lights category",
       "panels_desc": "LED backlit panels for office and ceiling",
-      "ceiling_lights_desc": "Ceiling lights with Matter and sensors",
+      "ceiling_lights_desc": "Ceiling lights with an integrated smart module",
       "tri_proof_aria": "Go to Tri-Proof category",
       "tri_proof_desc": "IP65 damp-proof batten lights for garage, cellar and warehouse",
       "available": "Available"
@@ -221,7 +221,7 @@
       "learn_more": "Learn more",
       "classic": {
         "f1": "Warm white light (2700K)",
-        "f2": "Steplessly dimmable",
+        "f2": "Instant start, flicker-free",
         "f3": "25,000h lifespan",
         "f4": "IP44 / IP65 protection"
       },
@@ -258,13 +258,13 @@
     "featured": {
       "eyebrow": "In Focus",
       "title": "The LM Series.",
-      "subtitle": "From the compact drop bulb to the powerful A70 — Matter models (SMART+) also cover Apple Home and SmartThings.",
+      "subtitle": "From the compact drop bulb to the powerful A70. All smart models with Alexa, Google Home and the full colour spectrum.",
       "all_products": "All Products"
     },
     "compat": {
       "eyebrow": "Compatibility",
       "title": "Works with what you already use.",
-      "subtitle": "Amazon Alexa and Google Home work natively from the SMART tier. Apple Home and Samsung SmartThings are reserved for the SMART+ tier — via Matter, no hub required."
+      "subtitle": "Apple Home and SmartThings are reserved for the SMART+ tier. Coming 2026."
     }
   },
   "about": {

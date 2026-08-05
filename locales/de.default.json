@@ -203,13 +203,13 @@
       "title": "Fünf Produktfamilien.",
       "subtitle": "Smart Bulbs, Filament, Panels, Ceiling Lights und Tri-Proof – alle mit derselben Tier-Logik und denselben Smart-Standards.",
       "smart_bulbs_aria": "Zur Kategorie Smart Bulbs",
-      "smart_bulbs_desc": "E27, E14, GU10 – RGB+CCT, Matter und klassisch",
+      "smart_bulbs_desc": "E27, E14, GU10. RGB+CCT, Alexa & Google Home",
       "filament_desc": "Vintage-Optik mit warmweißem LED-Filament",
       "panels_aria": "Zur Kategorie Panels",
       "filament_aria": "Zur Kategorie Filament",
       "ceiling_lights_aria": "Zur Kategorie Ceiling Lights",
       "panels_desc": "LED-Backlit-Panels für Büro und Decke",
-      "ceiling_lights_desc": "Deckenleuchten mit Matter und Sensorik",
+      "ceiling_lights_desc": "Deckenleuchten mit integriertem Smart-Modul",
       "tri_proof_aria": "Zur Kategorie Tri-Proof",
       "tri_proof_desc": "IP65-Feuchtraumleuchten für Garage, Keller und Lager",
       "available": "Verfügbar"
@@ -222,7 +222,7 @@
       "learn_more": "Mehr erfahren",
       "classic": {
         "f1": "Warmweißes Licht (2700K)",
-        "f2": "Stufenlos dimmbar",
+        "f2": "Sofort-Start, flimmerfrei",
         "f3": "25.000h Lebensdauer",
         "f4": "IP44 / IP65 Schutz"
       },
@@ -259,13 +259,13 @@
     "featured": {
       "eyebrow": "Im Fokus",
       "title": "Die LM-Serie.",
-      "subtitle": "Vom kompakten Tropfen bis zur leistungsstarken A70 – Matter-Modelle (SMART+) decken zusätzlich Apple Home und SmartThings ab.",
+      "subtitle": "Vom kompakten Tropfen bis zur leistungsstarken A70. Alle Smart-Modelle mit Alexa, Google Home und vollem Farbraum.",
       "all_products": "Alle Produkte"
     },
     "compat": {
       "eyebrow": "Kompatibilität",
       "title": "Funktioniert mit dem, was Du bereits nutzt.",
-      "subtitle": "Amazon Alexa und Google Home arbeiten ab dem SMART-Tier nativ. Apple Home und Samsung SmartThings sind dem SMART+-Tier vorbehalten – über Matter, kein Hub erforderlich."
+      "subtitle": "Apple Home und SmartThings sind dem SMART+ Tier vorbehalten. Kommt 2026."
     }
   },
   "about": {
