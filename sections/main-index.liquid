@@ -241,31 +241,31 @@
       <h2 class="section-title" id="atmosphere-title">{{ 'home.atmosphere.title' | t }}</h2>
       <p class="section-subtitle">{{ 'home.atmosphere.subtitle' | t }}</p>
     </div>
+    {%- comment -%}
+      Sechs Szenen in zwei gespiegelten Reihen (Grid-Areas in theme.css):
+      Reihe 1: gross links (Wohnzimmer) + zwei klein rechts (Esstisch / Schlafzimmer)
+      Reihe 2: zwei klein links (Filament / RGB) + gross rechts (Buero)
+      Ohne gesetztes Bild wird eine Platzhalter-Karte (bg-raised) mit Caption gezeigt.
+    {%- endcomment -%}
     <div class="atmosphere-grid reveal-fade">
-      <div class="atmosphere-grid__main">
-        <figure class="scene-tile">
-          {%- if section.settings.atmosphere_img_1 != blank -%}
-            <img src="{{ section.settings.atmosphere_img_1 | img_url: '1400x' }}" alt="{{ 'home.atmosphere.img1_alt' | t }}" class="scene-tile__img" loading="lazy">
+      {%- assign scene_areas = 'big1|s1|s2|s3|s4|big2' | split: '|' -%}
+      {%- assign scene_sizes = '1400x|800x|800x|800x|800x|1400x' | split: '|' -%}
+      {%- for n in (1..6) -%}
+        {%- assign img_key = 'atmosphere_img_' | append: n -%}
+        {%- assign scene_img = section.settings[img_key] -%}
+        {%- assign area = scene_areas[forloop.index0] -%}
+        {%- assign size = scene_sizes[forloop.index0] -%}
+        {%- assign alt_key = 'home.atmosphere.img' | append: n | append: '_alt' -%}
+        {%- assign cap_key = 'home.atmosphere.img' | append: n | append: '_caption' -%}
+        <figure class="scene-tile scene-tile--{{ area }}{% if scene_img == blank %} scene-tile--placeholder{% endif %}">
+          {%- if scene_img != blank -%}
+            <img src="{{ scene_img | img_url: size }}" alt="{{ alt_key | t }}" class="scene-tile__img" loading="lazy">
+          {%- else -%}
+            <span class="scene-tile__ph-icon material-symbols-outlined" aria-hidden="true">image</span>
           {%- endif -%}
-          <figcaption class="scene-tile__caption">{{ 'home.atmosphere.img1_caption' | t }}</figcaption>
+          <figcaption class="scene-tile__caption">{{ cap_key | t }}</figcaption>
         </figure>
-      </div>
-      <div>
-        <figure class="scene-tile">
-          {%- if section.settings.atmosphere_img_2 != blank -%}
-            <img src="{{ section.settings.atmosphere_img_2 | img_url: '800x' }}" alt="{{ 'home.atmosphere.img2_alt' | t }}" class="scene-tile__img" loading="lazy">
-          {%- endif -%}
-          <figcaption class="scene-tile__caption">{{ 'home.atmosphere.img2_caption' | t }}</figcaption>
-        </figure>
-      </div>
-      <div>
-        <figure class="scene-tile">
-          {%- if section.settings.atmosphere_img_3 != blank -%}
-            <img src="{{ section.settings.atmosphere_img_3 | img_url: '800x' }}" alt="{{ 'home.atmosphere.img3_alt' | t }}" class="scene-tile__img" loading="lazy">
-          {%- endif -%}
-          <figcaption class="scene-tile__caption">{{ 'home.atmosphere.img3_caption' | t }}</figcaption>
-        </figure>
-      </div>
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -349,9 +349,13 @@
       ],
       "default": "auto" },
     { "type": "header", "content": "Atmosphere Bilder" },
-    { "type": "image_picker", "id": "atmosphere_img_1", "label": "Atmosphäre Bild 1 (groß)" },
-    { "type": "image_picker", "id": "atmosphere_img_2", "label": "Atmosphäre Bild 2" },
-    { "type": "image_picker", "id": "atmosphere_img_3", "label": "Atmosphäre Bild 3" },
+    { "type": "paragraph", "content": "Sechs Szenen in zwei gespiegelten Reihen. Ohne Bild wird eine Platzhalter-Karte mit Caption angezeigt. Captions/Alt-Texte via Sprachdateien (home.atmosphere.img1–img6)." },
+    { "type": "image_picker", "id": "atmosphere_img_1", "label": "Bild 1: Wohnzimmer (groß)" },
+    { "type": "image_picker", "id": "atmosphere_img_2", "label": "Bild 2: Esstisch" },
+    { "type": "image_picker", "id": "atmosphere_img_3", "label": "Bild 3: Schlafzimmer" },
+    { "type": "image_picker", "id": "atmosphere_img_4", "label": "Bild 4: Filament" },
+    { "type": "image_picker", "id": "atmosphere_img_5", "label": "Bild 5: RGB" },
+    { "type": "image_picker", "id": "atmosphere_img_6", "label": "Bild 6: Büro (groß)" },
     { "type": "header", "content": "Featured Products" },
     { "type": "collection", "id": "featured_collection", "label": "Featured Collection" }
   ],
