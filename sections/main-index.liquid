@@ -112,18 +112,17 @@
         </div>
       </article>
 
-      {%- comment -%} Panels — available {%- endcomment -%}
-        <article class="category-card category-card--unavailable" aria-disabled="true">
-          <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
-            <span class="material-symbols-outlined text-amber" style="font-size:32px;">grid_view</span>
-          </span>
-          <h3 class="category-card__name">Panels</h3>
-          <p class="category-card__desc">{{ 'home.categories.panels_desc' | t }}</p>
-          <div class="category-card__status">
-            <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
-          </div>
-        </article>
-      </a>
+      {%- comment -%} Panels — coming soon {%- endcomment -%}
+      <article class="category-card category-card--unavailable" aria-disabled="true">
+        <span class="category-card__icon" aria-hidden="true" style="opacity:0.3;">
+          <span class="material-symbols-outlined text-amber" style="font-size:32px;">grid_view</span>
+        </span>
+        <h3 class="category-card__name">Panels</h3>
+        <p class="category-card__desc">{{ 'home.categories.panels_desc' | t }}</p>
+        <div class="category-card__status">
+          <span class="soon-pill">{{ 'general.coming_soon' | t }}</span>
+        </div>
+      </article>
 
       {%- comment -%} Ceiling Lights — coming soon {%- endcomment -%}
       <article class="category-card category-card--unavailable" aria-disabled="true">
