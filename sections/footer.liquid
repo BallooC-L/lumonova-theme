@@ -50,15 +50,10 @@
       </div>
     </div>
 
-    {%- comment -%} Bottom bar {%- endcomment -%}
+    {%- comment -%} Bottom bar — CE/WEEE/RoHS-Badges entfernt (stehen in der Trust Row) {%- endcomment -%}
     <div class="site-footer__bottom">
       {%- assign current_year = 'now' | date: '%Y' -%}
       <p class="site-footer__copy">{{ 'footer.copyright' | t: year: current_year }}</p>
-      <ul class="site-footer__certs" role="list">
-        <li class="site-footer__cert">CE</li>
-        <li class="site-footer__cert">WEEE</li>
-        <li class="site-footer__cert">RoHS</li>
-      </ul>
     </div>
   </div>
 </footer>

@@ -1,31 +1,38 @@
 {%- comment -%} trust-row.liquid — portiert aus TrustRow.tsx {%- endcomment -%}
+{%- comment -%}
+  Struktur: .trust-row (volle Breite, Hintergrund) > .container (max-width)
+  > .trust-row__grid (1px-Trennlinien zwischen Items). Der helle Grid-Hintergrund
+  liegt nicht mehr auf dem gepaddeten Container, daher keine grauen Seitenbalken.
+{%- endcomment -%}
 <div class="trust-row">
-  <div class="trust-row__grid container" role="list">
-    <div class="trust-row__item" role="listitem">
-      <span class="trust-row__icon" aria-hidden="true">
-        <span class="material-symbols-outlined text-amber" style="font-size:19px;">verified</span>
-      </span>
-      <div>
-        <p class="trust-row__label">{{ 'trust.warranty_label' | t }}</p>
-        <p class="trust-row__sub">{{ 'trust.warranty_sub' | t }}</p>
+  <div class="container">
+    <div class="trust-row__grid" role="list">
+      <div class="trust-row__item" role="listitem">
+        <span class="trust-row__icon" aria-hidden="true">
+          <span class="material-symbols-outlined text-amber" style="font-size:19px;">verified</span>
+        </span>
+        <div>
+          <p class="trust-row__label">{{ 'trust.warranty_label' | t }}</p>
+          <p class="trust-row__sub">{{ 'trust.warranty_sub' | t }}</p>
+        </div>
       </div>
-    </div>
-    <div class="trust-row__item" role="listitem">
-      <span class="trust-row__icon" aria-hidden="true">
-        <span class="material-symbols-outlined text-amber" style="font-size:19px;">support_agent</span>
-      </span>
-      <div>
-        <p class="trust-row__label">{{ 'trust.support_label' | t }}</p>
-        <p class="trust-row__sub">{{ 'trust.support_sub' | t }}</p>
+      <div class="trust-row__item" role="listitem">
+        <span class="trust-row__icon" aria-hidden="true">
+          <span class="material-symbols-outlined text-amber" style="font-size:19px;">support_agent</span>
+        </span>
+        <div>
+          <p class="trust-row__label">{{ 'trust.support_label' | t }}</p>
+          <p class="trust-row__sub">{{ 'trust.support_sub' | t }}</p>
+        </div>
       </div>
-    </div>
-    <div class="trust-row__item" role="listitem">
-      <span class="trust-row__icon" aria-hidden="true">
-        <span class="material-symbols-outlined text-amber" style="font-size:19px;">task_alt</span>
-      </span>
-      <div>
-        <p class="trust-row__label">{{ 'trust.cert_label' | t }}</p>
-        <p class="trust-row__sub">{{ 'trust.cert_sub' | t }}</p>
+      <div class="trust-row__item" role="listitem">
+        <span class="trust-row__icon" aria-hidden="true">
+          <span class="material-symbols-outlined text-amber" style="font-size:19px;">task_alt</span>
+        </span>
+        <div>
+          <p class="trust-row__label">{{ 'trust.cert_label' | t }}</p>
+          <p class="trust-row__sub">{{ 'trust.cert_sub' | t }}</p>
+        </div>
       </div>
     </div>
   </div>

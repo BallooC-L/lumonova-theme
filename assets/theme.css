@@ -524,32 +524,55 @@
 .tier-card__cta:hover { background: var(--color-amber); color: #fff; border-color: transparent; }
 .tier-card--recommended .tier-card__cta:hover { box-shadow: 0 0 30px rgba(232, 160, 96, 0.35); }
 
-/* ── ATMOSPHERE GRID ────────────────────────────────────────── */
+/* ── ATMOSPHERE GRID (6 Szenen, zwei gespiegelte Reihen) ─────── */
 .atmosphere-grid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  gap: 0.75rem;
-  border-radius: 1.5rem;
-  overflow: hidden;
+  gap: 1rem;
 }
 @media (min-width: 1024px) {
   .atmosphere-grid {
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 230px;
+    grid-template-areas:
+      "big1 big1 s1"
+      "big1 big1 s2"
+      "s3   big2 big2"
+      "s4   big2 big2";
   }
-  .atmosphere-grid__main { grid-column: 1; grid-row: 1 / span 2; }
+  .scene-tile--big1 { grid-area: big1; }
+  .scene-tile--s1   { grid-area: s1; }
+  .scene-tile--s2   { grid-area: s2; }
+  .scene-tile--s3   { grid-area: s3; }
+  .scene-tile--s4   { grid-area: s4; }
+  .scene-tile--big2 { grid-area: big2; }
 }
 .scene-tile {
   position: relative;
+  height: 100%;
+  min-height: 220px;
   background: var(--color-mid);
   overflow: hidden;
   border-radius: 1.5rem;
-  min-height: 220px;
   border: 1px solid rgba(255, 255, 255, .08);
 }
-.atmosphere-grid__main .scene-tile { min-height: 480px; }
-.scene-tile__img { width: 100%; height: 100%; object-fit: cover; }
+.scene-tile--placeholder { background: var(--color-raised); }
+/* Bild fuellt die Karte bis zur Caption (Fix: kein Leerraum mehr) */
+.scene-tile__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.scene-tile__ph-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: rgba(242, 242, 242, 0.12);
+}
 .scene-tile__caption {
   position: absolute;
   left: 0; right: 0; bottom: 0;
