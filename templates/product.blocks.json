@@ -2,12 +2,6 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {
-        "hide_legacy_features": true
-      }
-    },
-    "feature_blocks": {
-      "type": "feature-blocks",
       "blocks": {
         "banner": {
           "type": "banner",
@@ -48,8 +42,9 @@
           }
         }
       },
-      "block_order": ["banner", "imgtext", "cct", "stats"]
+      "block_order": ["banner", "imgtext", "cct", "stats"],
+      "settings": {}
     }
   },
-  "order": ["main", "feature_blocks"]
+  "order": ["main"]
 }
