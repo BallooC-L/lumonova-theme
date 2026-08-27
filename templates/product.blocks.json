@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "hide_legacy_features": true
+      }
+    },
+    "feature_blocks": {
+      "type": "feature-blocks",
+      "blocks": {
+        "banner": {
+          "type": "banner",
+          "settings": {
+            "eyebrow": "Farbe",
+            "headline": "16 Millionen Farben.",
+            "subtext": "Vom warmen Sonnenuntergang bis zum kühlen Tageslicht. Der volle RGB-Farbraum, präzise per App oder Stimme.",
+            "text_position": "bottom-left"
+          }
+        },
+        "imgtext": {
+          "type": "image_text",
+          "settings": {
+            "eyebrow": "Steuerung",
+            "headline": "Kein Hub. Kein Aufwand.",
+            "text": "<p>Direkt über WLAN, ohne Bridge oder Gateway. Per App oder per Stimme, eingerichtet in Minuten.</p>",
+            "image_side": "left"
+          }
+        },
+        "cct": {
+          "type": "cct_slider",
+          "settings": {
+            "eyebrow": "Tunable White",
+            "headline": "Tunable White von 2700K bis 6500K."
+          }
+        },
+        "stats": {
+          "type": "stats",
+          "settings": {
+            "stat_1_number": "806 lm",
+            "stat_1_label": "Lichtstrom",
+            "stat_2_number": "2700–6500 K",
+            "stat_2_label": "Farbtemperatur",
+            "stat_3_number": "25.000 h",
+            "stat_3_label": "Lebensdauer",
+            "stat_4_number": "3 Jahre",
+            "stat_4_label": "EU-Garantie"
+          }
+        }
+      },
+      "block_order": ["banner", "imgtext", "cct", "stats"]
+    }
+  },
+  "order": ["main", "feature_blocks"]
+}
