@@ -153,6 +153,18 @@
     "cta_buy_default": "Buy now",
     "cta_amazon_default": "View on Amazon →"
   },
+  "feature_blocks": {
+    "section_aria": "Product feature blocks",
+    "cct": {
+      "warm": "Warm white",
+      "neutral": "Neutral white",
+      "daylight": "Daylight white",
+      "slider_aria": "Adjust colour temperature"
+    },
+    "scene": {
+      "tablist_aria": "Scenes"
+    }
+  },
   "collection": {
     "eyebrow": "Range",
     "all_products_title": "All Products.",

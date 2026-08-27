@@ -14,6 +14,8 @@
 {%- assign feature_blocks = product.metafields.custom.feature_blocks.value -%}
 {%- assign has_features = false -%}
 {%- if feature_blocks and feature_blocks.size > 0 -%}{%- assign has_features = true -%}{%- endif -%}
+{%- comment -%} Auf Seiten mit der neuen Feature-Blöcke-Section wird die alte metaobjekt-getriebene Features-Sektion (inkl. Subnav-Tab) ausgeblendet {%- endcomment -%}
+{%- if section.settings.hide_legacy_features -%}{%- assign has_features = false -%}{%- endif -%}
 {%- assign has_compatibility = product.metafields.custom.compatibility -%}
 {%- assign intro_hero_image = product.metafields.custom.intro_hero_image -%}
 {%- assign intro_hero_eyebrow = product.metafields.custom.intro_hero_eyebrow -%}
@@ -444,6 +446,8 @@ function scrollToSpecs() {
 {% schema %}
 {
   "name": "Produkt",
-  "settings": []
+  "settings": [
+    { "type": "checkbox", "id": "hide_legacy_features", "label": "Alte Features-Sektion ausblenden", "info": "Für Produktseiten, die stattdessen die neue Feature-Blöcke-Section nutzen (z.B. product.blocks).", "default": false }
+  ]
 }
 {% endschema %}

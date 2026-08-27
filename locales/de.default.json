@@ -154,6 +154,18 @@
     "cta_buy_default": "Jetzt kaufen",
     "cta_amazon_default": "Bei Amazon ansehen →"
   },
+  "feature_blocks": {
+    "section_aria": "Produkt-Feature-Blöcke",
+    "cct": {
+      "warm": "Warmweiß",
+      "neutral": "Neutralweiß",
+      "daylight": "Tageslichtweiß",
+      "slider_aria": "Farbtemperatur einstellen"
+    },
+    "scene": {
+      "tablist_aria": "Szenen"
+    }
+  },
   "collection": {
     "eyebrow": "Sortiment",
     "all_products_title": "Alle Produkte.",
