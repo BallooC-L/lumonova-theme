@@ -23,6 +23,7 @@
 {%- if section.blocks.size > 0 -%}{%- assign use_blocks = true -%}{%- endif -%}
 {%- assign show_features_tab = false -%}
 {%- if use_blocks or has_features -%}{%- assign show_features_tab = true -%}{%- endif -%}
+{%- comment -%} CSS/JS der Feature-Bloecke liegen unten in diesem Section-File (stylesheet/javascript-Tags); ohne konfigurierte Bloecke sind sie wirkungslos, da alle Selektoren auf .fb-* / .feature-blocks genamespaced sind. {%- endcomment -%}
 {%- assign has_compatibility = product.metafields.custom.compatibility -%}
 {%- assign intro_hero_image = product.metafields.custom.intro_hero_image -%}
 {%- assign intro_hero_eyebrow = product.metafields.custom.intro_hero_eyebrow -%}
