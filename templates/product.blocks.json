@@ -7,6 +7,7 @@
           "type": "banner",
           "settings": {
             "eyebrow": "Farbe",
+            "image_alt": "Wohnraum in wechselnden RGB-Farbstimmungen",
             "headline": "16 Millionen Farben.",
             "subtext": "Vom warmen Sonnenuntergang bis zum kühlen Tageslicht. Der volle RGB-Farbraum, präzise per App oder Stimme.",
             "text_position": "bottom-left"
@@ -16,6 +17,7 @@
           "type": "image_text",
           "settings": {
             "eyebrow": "Steuerung",
+            "image_alt": "Smart-Home-Steuerung per App und Sprache",
             "headline": "Kein Hub. Kein Aufwand.",
             "text": "<p>Direkt über WLAN, ohne Bridge oder Gateway. Per App oder per Stimme, eingerichtet in Minuten.</p>",
             "image_side": "left"
