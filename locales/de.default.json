@@ -164,6 +164,26 @@
     },
     "scene": {
       "tablist_aria": "Szenen"
+    },
+    "rgb": {
+      "color_label": "Farbe",
+      "slider_aria": "Lichtfarbe wählen",
+      "presets_aria": "Lichtstimmung wählen",
+      "preset_warm": "Warmweiß",
+      "preset_relax": "Relax",
+      "preset_focus": "Fokus",
+      "preset_party": "Party",
+      "brightness_label": "Helligkeit per App einstellbar",
+      "live": "Lichtfarbe: {{ color }}",
+      "color_red": "Rot",
+      "color_orange": "Orange",
+      "color_yellow": "Gelb",
+      "color_green": "Grün",
+      "color_turquoise": "Türkis",
+      "color_blue": "Blau",
+      "color_violet": "Violett",
+      "color_magenta": "Magenta",
+      "editor_hint": "RGB-Farbslider: bitte beide Szenenbilder setzen (mono-violett und Warmweiß). Wird nur bei Produkttyp Smart Bulbs angezeigt."
     }
   },
   "collection": {

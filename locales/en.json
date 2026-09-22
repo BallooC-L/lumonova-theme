@@ -163,6 +163,26 @@
     },
     "scene": {
       "tablist_aria": "Scenes"
+    },
+    "rgb": {
+      "color_label": "Colour",
+      "slider_aria": "Choose light colour",
+      "presets_aria": "Choose light mood",
+      "preset_warm": "Warm white",
+      "preset_relax": "Relax",
+      "preset_focus": "Focus",
+      "preset_party": "Party",
+      "brightness_label": "Brightness adjustable via app",
+      "live": "Light colour: {{ color }}",
+      "color_red": "Red",
+      "color_orange": "Orange",
+      "color_yellow": "Yellow",
+      "color_green": "Green",
+      "color_turquoise": "Turquoise",
+      "color_blue": "Blue",
+      "color_violet": "Violet",
+      "color_magenta": "Magenta",
+      "editor_hint": "RGB colour slider: please set both scene images (mono violet and warm white). Shown only for product type Smart Bulbs."
     }
   },
   "collection": {

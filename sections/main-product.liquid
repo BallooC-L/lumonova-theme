@@ -240,6 +240,17 @@
   <section id="features" class="feature-blocks" style="scroll-margin-top:120px;" aria-label="{{ 'feature_blocks.section_aria' | t }}">
     {%- for block in section.blocks -%}
       {%- assign seamless = block.settings.seamless -%}
+      {%- comment -%}
+        RGB-Farbslider: rendert nur, wenn beide Szenenbilder gesetzt sind UND product.type == 'Smart Bulbs'.
+        Storefront ohne Bilder: gar kein Wrapper (keine Luecke). Theme-Editor: Hinweis-Karte statt Skip.
+      {%- endcomment -%}
+      {%- assign rgb_ok = false -%}
+      {%- assign skip_block = false -%}
+      {%- if block.type == 'rgb_slider' -%}
+        {%- if product.type == 'Smart Bulbs' and block.settings.image_mono != blank and block.settings.image_warm != blank -%}{%- assign rgb_ok = true -%}{%- endif -%}
+        {%- unless rgb_ok or request.design_mode -%}{%- assign skip_block = true -%}{%- endunless -%}
+      {%- endif -%}
+      {%- unless skip_block -%}
       <div class="fb-block fb-block--{{ block.type }}{% if seamless %} fb-block--seamless{% endif %}" {{ block.shopify_attributes }}>
         {%- case block.type -%}
 
@@ -380,6 +391,70 @@
             {%- if block.settings.width == 'container' -%}</div>{%- endif -%}
           </div>
 
+        {%- when 'rgb_slider' -%}
+          {%- if rgb_ok -%}
+            {%- assign rgb_base = block.settings.base_hue | default: 280 -%}
+            {%- assign rgb_alt = block.settings.image_alt | default: block.settings.headline -%}
+            {%- assign rgb_sizes = '(min-width: 1024px) 1232px, 100vw' -%}
+            <div class="container">
+              <div class="fb-rgb"
+                   data-base-hue="{{ rgb_base }}"
+                   data-live="{{ 'feature_blocks.rgb.live' | t: color: '%s' | escape }}"
+                   data-c-red="{{ 'feature_blocks.rgb.color_red' | t | escape }}"
+                   data-c-orange="{{ 'feature_blocks.rgb.color_orange' | t | escape }}"
+                   data-c-yellow="{{ 'feature_blocks.rgb.color_yellow' | t | escape }}"
+                   data-c-green="{{ 'feature_blocks.rgb.color_green' | t | escape }}"
+                   data-c-turquoise="{{ 'feature_blocks.rgb.color_turquoise' | t | escape }}"
+                   data-c-blue="{{ 'feature_blocks.rgb.color_blue' | t | escape }}"
+                   data-c-violet="{{ 'feature_blocks.rgb.color_violet' | t | escape }}"
+                   data-c-magenta="{{ 'feature_blocks.rgb.color_magenta' | t | escape }}">
+                {%- if block.settings.eyebrow != blank or block.settings.headline != blank or block.settings.text != blank -%}
+                  <div class="fb-rgb__head">
+                    {%- if block.settings.eyebrow != blank -%}<p class="fb-eyebrow">{{ block.settings.eyebrow }}</p>{%- endif -%}
+                    {%- if block.settings.headline != blank -%}<h3 class="fb-headline fb-headline--sm">{{ block.settings.headline }}</h3>{%- endif -%}
+                    {%- if block.settings.text != blank -%}<p class="fb-subtext">{{ block.settings.text }}</p>{%- endif -%}
+                  </div>
+                {%- endif -%}
+                <div class="fb-rgb__stage">
+                  <div class="fb-rgb__images">
+                    <img class="fb-rgb__img fb-rgb__img--mono"
+                         src="{{ block.settings.image_mono | image_url: width: 1600 }}"
+                         srcset="{{ block.settings.image_mono | image_url: width: 800 }} 800w, {{ block.settings.image_mono | image_url: width: 1200 }} 1200w, {{ block.settings.image_mono | image_url: width: 1600 }} 1600w, {{ block.settings.image_mono | image_url: width: 2400 }} 2400w"
+                         sizes="{{ rgb_sizes }}" alt="{{ rgb_alt | escape }}" loading="lazy">
+                    <img class="fb-rgb__img fb-rgb__img--warm"
+                         src="{{ block.settings.image_warm | image_url: width: 1600 }}"
+                         srcset="{{ block.settings.image_warm | image_url: width: 800 }} 800w, {{ block.settings.image_warm | image_url: width: 1200 }} 1200w, {{ block.settings.image_warm | image_url: width: 1600 }} 1600w, {{ block.settings.image_warm | image_url: width: 2400 }} 2400w"
+                         sizes="{{ rgb_sizes }}" alt="" aria-hidden="true" loading="lazy">
+                  </div>
+                </div>
+                <div class="fb-rgb__controls">
+                  <div class="fb-rgb__row">
+                    <label class="fb-rgb__label" for="fb-rgb-hue-{{ block.id }}">{{ 'feature_blocks.rgb.color_label' | t }}</label>
+                    <input id="fb-rgb-hue-{{ block.id }}" class="fb-rgb__hue" type="range" min="0" max="360" step="1" value="{{ rgb_base }}"
+                           aria-label="{{ 'feature_blocks.rgb.slider_aria' | t | escape }}">
+                  </div>
+                  <div class="fb-rgb__chips" role="group" aria-label="{{ 'feature_blocks.rgb.presets_aria' | t | escape }}">
+                    <button type="button" class="fb-rgb__chip" data-preset="warm" aria-pressed="false">{{ 'feature_blocks.rgb.preset_warm' | t }}</button>
+                    <button type="button" class="fb-rgb__chip" data-preset="hue" data-hue="30" aria-pressed="false">{{ 'feature_blocks.rgb.preset_relax' | t }}</button>
+                    <button type="button" class="fb-rgb__chip" data-preset="hue" data-hue="220" data-sat="0.6" aria-pressed="false">{{ 'feature_blocks.rgb.preset_focus' | t }}</button>
+                    <button type="button" class="fb-rgb__chip" data-preset="hue" data-hue="320" aria-pressed="false">{{ 'feature_blocks.rgb.preset_party' | t }}</button>
+                  </div>
+                  {%- if block.settings.show_brightness -%}
+                    <div class="fb-rgb__row">
+                      <label class="fb-rgb__label" for="fb-rgb-bright-{{ block.id }}">{{ 'feature_blocks.rgb.brightness_label' | t }}</label>
+                      <input id="fb-rgb-bright-{{ block.id }}" class="fb-rgb__bright" type="range" min="0.55" max="1" step="0.01" value="1"
+                             aria-label="{{ 'feature_blocks.rgb.brightness_label' | t | escape }}">
+                    </div>
+                  {%- endif -%}
+                  <span class="fb-rgb__live fb-visually-hidden" aria-live="polite" aria-atomic="true"></span>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            {%- comment -%} Nur im Theme-Editor erreichbar (request.design_mode): Hinweis-Karte, damit der Block auswaehlbar bleibt. Im Storefront wird der ganze Block uebersprungen. {%- endcomment -%}
+            <div class="container"><div class="fb-rgb__hint">{{ 'feature_blocks.rgb.editor_hint' | t }}</div></div>
+          {%- endif -%}
+
         {%- when 'stats' -%}
           <div class="fb-stats">
             <div class="container">
@@ -403,6 +478,7 @@
 
         {%- endcase -%}
       </div>
+      {%- endunless -%}
     {%- endfor -%}
   </section>
 {%- elsif has_features -%}
@@ -703,6 +779,33 @@ function scrollToSpecs() {
 .fb-stats__num { font-size: clamp(28px, 4vw, 38px); font-weight: 700; color: var(--color-amber); line-height: 1; letter-spacing: -0.01em; }
 .fb-stats__label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(242,242,242,0.55); }
 @media (min-width: 768px) { .fb-stats__item { flex: 1 1 0; } }
+
+/* 7 · RGB-Farbslider */
+.fb-visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.fb-rgb__head { margin-bottom: 1.75rem; }
+.fb-rgb__stage { position: relative; border-radius: 1rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); aspect-ratio: 16 / 10; background: var(--color-deepest); }
+.fb-rgb__images { position: absolute; inset: 0; }
+.fb-rgb__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.fb-rgb__img--mono { will-change: filter; }
+.fb-rgb__img--warm { opacity: 0; transition: opacity 0.4s ease; }
+.fb-rgb__img--warm.is-warm { opacity: 1; }
+.fb-rgb__controls { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.fb-rgb__row { display: flex; align-items: center; gap: 1rem; }
+.fb-rgb__label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(242,242,242,0.7); white-space: nowrap; min-width: 4.5rem; }
+.fb-rgb__hue, .fb-rgb__bright { -webkit-appearance: none; appearance: none; flex: 1; height: 3px; border-radius: 3px; outline: none; margin: 0; }
+.fb-rgb__hue { background: linear-gradient(90deg, hsl(0,100%,50%), hsl(60,100%,50%), hsl(120,100%,50%), hsl(180,100%,50%), hsl(240,100%,50%), hsl(300,100%,50%), hsl(360,100%,50%)); }
+.fb-rgb__bright { background: linear-gradient(90deg, rgba(242,242,242,0.15), rgba(242,242,242,0.85)); }
+.fb-rgb__hue::-webkit-slider-thumb, .fb-rgb__bright::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--color-amber); border: 2px solid #0a0908; cursor: pointer; box-shadow: 0 0 0 1px rgba(232,160,96,0.5); }
+.fb-rgb__hue::-moz-range-thumb, .fb-rgb__bright::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--color-amber); border: 2px solid #0a0908; cursor: pointer; }
+.fb-rgb__hue:focus-visible, .fb-rgb__bright:focus-visible { outline: 2px solid var(--color-amber); outline-offset: 4px; }
+.fb-rgb__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.fb-rgb__chip { font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; padding: 0.5rem 1.1rem; border-radius: 999px; background: var(--color-raised); border: 1px solid rgba(255,255,255,0.08); color: rgba(242,242,242,0.75); cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+.fb-rgb__chip:hover { color: var(--fg-high); border-color: rgba(255,255,255,0.16); }
+.fb-rgb__chip.is-active { color: #0a0908; background: var(--color-amber); border-color: var(--color-amber); }
+.fb-rgb__chip:focus-visible { outline: 2px solid var(--color-amber); outline-offset: 3px; }
+.fb-rgb__hint { padding: 1.25rem 1.5rem; border-radius: 1rem; background: var(--color-raised); border: 1px dashed rgba(232,160,96,0.4); color: rgba(242,242,242,0.7); font-size: 13px; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) { .fb-rgb__img--warm { transition: none; } }
+@media (max-width: 640px) { .fb-rgb__row { flex-wrap: wrap; } .fb-rgb__label { min-width: 0; width: 100%; } }
 {% endstylesheet %}
 
 {% javascript %}
@@ -743,9 +846,114 @@ function scrollToSpecs() {
       });
     });
   }
+  function initRGB(root) {
+    if (root.dataset.fbInit) return; root.dataset.fbInit = '1';
+    var mono = root.querySelector('.fb-rgb__img--mono');
+    var warm = root.querySelector('.fb-rgb__img--warm');
+    var images = root.querySelector('.fb-rgb__images');
+    var slider = root.querySelector('.fb-rgb__hue');
+    var bright = root.querySelector('.fb-rgb__bright');
+    var chips = root.querySelectorAll('.fb-rgb__chip');
+    var live = root.querySelector('.fb-rgb__live');
+    if (!mono || !warm) return;
+    var baseHue = parseFloat(root.dataset.baseHue) || 280;
+    var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var liveTpl = root.dataset.live || '%s';
+    var names = { red: root.dataset.cRed, orange: root.dataset.cOrange, yellow: root.dataset.cYellow, green: root.dataset.cGreen,
+                  turquoise: root.dataset.cTurquoise, blue: root.dataset.cBlue, violet: root.dataset.cViolet, magenta: root.dataset.cMagenta };
+    var hue = baseHue, sat = 1, interacted = false, raf = null, last = 0, preloaded = false, annT = null;
+    var SPEED = 360 / 20000; /* Grad pro ms: volle Umdrehung in ca. 20 s */
+
+    function norm(h) { return ((h % 360) + 360) % 360; }
+    function applyFilter() {
+      var rot = norm(hue - baseHue);
+      mono.style.filter = 'hue-rotate(' + rot.toFixed(1) + 'deg)' + (sat !== 1 ? ' saturate(' + sat + ')' : '');
+    }
+    function colorName(h) {
+      h = norm(h);
+      if (h < 15 || h >= 345) return names.red;
+      if (h < 45) return names.orange;
+      if (h < 70) return names.yellow;
+      if (h < 160) return names.green;
+      if (h < 200) return names.turquoise;
+      if (h < 260) return names.blue;
+      if (h < 300) return names.violet;
+      return names.magenta;
+    }
+    function announce(text) {
+      if (!live || !text) return;
+      live.textContent = '';
+      setTimeout(function () { live.textContent = text; }, 30);
+    }
+    function announceHue() { clearTimeout(annT); annT = setTimeout(function () { announce(liveTpl.replace('%s', colorName(hue) || '')); }, 250); }
+    function setWarm(on) { warm.classList.toggle('is-warm', !!on); }
+    function setActiveChip(btn) {
+      chips.forEach(function (c) { var on = c === btn; c.classList.toggle('is-active', on); c.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    }
+    function setHue(h, s, fromSlider) {
+      hue = norm(h); sat = s || 1; applyFilter();
+      if (slider && !fromSlider) slider.value = Math.round(hue);
+    }
+    function stopAuto() { interacted = true; if (raf) cancelAnimationFrame(raf); raf = null; last = 0; }
+    function pauseAuto() { if (raf) cancelAnimationFrame(raf); raf = null; last = 0; }
+    function tick(ts) {
+      if (!last) last = ts;
+      var dt = Math.min(ts - last, 100); last = ts;
+      hue = norm(hue + dt * SPEED); applyFilter();
+      if (slider) slider.value = Math.round(hue);
+      raf = requestAnimationFrame(tick);
+    }
+    function startAuto() { if (interacted || reduced || raf) return; last = 0; raf = requestAnimationFrame(tick); }
+    function preload() {
+      if (preloaded) return; preloaded = true;
+      [mono, warm].forEach(function (img) {
+        var im = new Image();
+        var ss = img.getAttribute('srcset'), sz = img.getAttribute('sizes');
+        if (ss) im.srcset = ss;
+        if (sz) im.sizes = sz;
+        im.src = img.getAttribute('src');
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var pre = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { preload(); pre.disconnect(); } });
+      }, { rootMargin: '600px 0px' });
+      pre.observe(root);
+      var vis = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) startAuto(); else pauseAuto(); });
+      }, { threshold: 0.25 });
+      vis.observe(root);
+    } else { preload(); startAuto(); }
+
+    if (slider) {
+      slider.addEventListener('pointerdown', stopAuto);
+      slider.addEventListener('input', function () {
+        stopAuto(); setWarm(false); setActiveChip(null);
+        setHue(parseFloat(slider.value), 1, true); announceHue();
+      });
+    }
+    chips.forEach(function (chip) {
+      chip.addEventListener('pointerdown', stopAuto);
+      chip.addEventListener('click', function () {
+        stopAuto(); setActiveChip(chip);
+        var label = chip.textContent.trim();
+        if (chip.dataset.preset === 'warm') { setWarm(true); announce(liveTpl.replace('%s', label)); return; }
+        setWarm(false);
+        setHue(parseFloat(chip.dataset.hue), parseFloat(chip.dataset.sat) || 1, false);
+        announce(liveTpl.replace('%s', label));
+      });
+    });
+    if (bright && images) {
+      bright.addEventListener('input', function () { images.style.filter = 'brightness(' + parseFloat(bright.value).toFixed(2) + ')'; });
+    }
+    applyFilter();
+    if (slider) slider.value = Math.round(hue);
+  }
   function initAll(scope) {
     (scope || document).querySelectorAll('.fb-cct').forEach(initCCT);
     (scope || document).querySelectorAll('.fb-scene').forEach(initScene);
+    (scope || document).querySelectorAll('.fb-rgb').forEach(initRGB);
   }
   if (document.readyState !== 'loading') { initAll(); }
   else { document.addEventListener('DOMContentLoaded', function () { initAll(); }); }
@@ -852,6 +1060,22 @@ function scrollToSpecs() {
         { "type": "header", "content": "Stat 4 (optional)" },
         { "type": "text", "id": "stat_4_number", "label": "Zahl" },
         { "type": "text", "id": "stat_4_label", "label": "Label" },
+        { "type": "checkbox", "id": "seamless", "label": "Nahtlos an vorherigen Block anschließen", "default": false }
+      ]
+    },
+    {
+      "type": "rgb_slider",
+      "name": "RGB-Farbslider",
+      "settings": [
+        { "type": "paragraph", "content": "Nur für Smart Bulbs. Ein monochrom-violettes Szenenbild wird per CSS hue-rotate live umgefärbt. Das Warmweiß-Bild muss pixelidentisch sein (gleiche Szene, gleicher Ausschnitt) und wird per Crossfade eingeblendet. Der Block bleibt unsichtbar, bis beide Bilder gesetzt sind." },
+        { "type": "image_picker", "id": "image_mono", "label": "Szenenbild mono-violett (Basis)" },
+        { "type": "image_picker", "id": "image_warm", "label": "Szenenbild Warmweiß (pixelidentisch)" },
+        { "type": "text", "id": "image_alt", "label": "Alt-Text (Barrierefreiheit)" },
+        { "type": "range", "id": "base_hue", "label": "Grundton des Mono-Bildes", "min": 0, "max": 360, "step": 5, "unit": "°", "default": 280, "info": "Farbton des violetten Basisbildes. Nur anpassen, wenn das Grading nicht exakt bei 280 Grad liegt." },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+        { "type": "text", "id": "headline", "label": "Headline" },
+        { "type": "textarea", "id": "text", "label": "Text (optional)" },
+        { "type": "checkbox", "id": "show_brightness", "label": "Helligkeitsregler anzeigen", "info": "Wording im Frontend: Helligkeit per App einstellbar", "default": false },
         { "type": "checkbox", "id": "seamless", "label": "Nahtlos an vorherigen Block anschließen", "default": false }
       ]
     }
