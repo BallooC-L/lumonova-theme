@@ -13,6 +13,20 @@
             "text_position": "bottom-left"
           }
         },
+        "rgb": {
+          "type": "rgb_slider",
+          "settings": {
+            "image_mono": "shopify://shop_images/lumonova-farbslider-szene-mono.png",
+            "image_warm": "shopify://shop_images/lumonova-farbslider-szene-warmweiss.png",
+            "image_alt": "Wohnzimmerszene in wechselnder Lichtfarbe",
+            "base_hue": 280,
+            "eyebrow": "Ausprobieren",
+            "headline": "Wähle deine Lichtfarbe.",
+            "text": "Regler ziehen oder eine Stimmung wählen. So sieht dein Wohnzimmer mit LUMOnova aus.",
+            "show_brightness": true,
+            "seamless": false
+          }
+        },
         "imgtext": {
           "type": "image_text",
           "settings": {
@@ -44,9 +58,17 @@
           }
         }
       },
-      "block_order": ["banner", "imgtext", "cct", "stats"],
+      "block_order": [
+        "banner",
+        "rgb",
+        "imgtext",
+        "cct",
+        "stats"
+      ],
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
