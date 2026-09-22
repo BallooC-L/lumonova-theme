@@ -399,6 +399,7 @@
             <div class="container">
               <div class="fb-rgb"
                    data-base-hue="{{ rgb_base }}"
+                   data-saturation="{{ block.settings.color_saturation | default: 130 }}"
                    data-live="{{ 'feature_blocks.rgb.live' | t: color: '%s' | escape }}"
                    data-c-red="{{ 'feature_blocks.rgb.color_red' | t | escape }}"
                    data-c-orange="{{ 'feature_blocks.rgb.color_orange' | t | escape }}"
@@ -857,6 +858,7 @@ function scrollToSpecs() {
     var live = root.querySelector('.fb-rgb__live');
     if (!mono || !warm) return;
     var baseHue = parseFloat(root.dataset.baseHue) || 280;
+    var satBoost = (parseFloat(root.dataset.saturation) || 130) / 100; /* globaler Saettigungs-Boost (Editor-Setting) */
     var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     var liveTpl = root.dataset.live || '%s';
     var names = { red: root.dataset.cRed, orange: root.dataset.cOrange, yellow: root.dataset.cYellow, green: root.dataset.cGreen,
@@ -867,7 +869,8 @@ function scrollToSpecs() {
     function norm(h) { return ((h % 360) + 360) % 360; }
     function applyFilter() {
       var rot = norm(hue - baseHue);
-      mono.style.filter = 'hue-rotate(' + rot.toFixed(1) + 'deg)' + (sat !== 1 ? ' saturate(' + sat + ')' : '');
+      var s = satBoost * sat; /* global * preset, multiplikativ (Fokus bleibt gedaempft) */
+      mono.style.filter = 'hue-rotate(' + rot.toFixed(1) + 'deg) saturate(' + s.toFixed(3) + ')';
     }
     function colorName(h) {
       h = norm(h);
@@ -1072,6 +1075,7 @@ function scrollToSpecs() {
         { "type": "image_picker", "id": "image_warm", "label": "Szenenbild Warmweiß (pixelidentisch)" },
         { "type": "text", "id": "image_alt", "label": "Alt-Text (Barrierefreiheit)" },
         { "type": "range", "id": "base_hue", "label": "Grundton des Mono-Bildes", "min": 0, "max": 360, "step": 5, "unit": "°", "default": 280, "info": "Farbton des violetten Basisbildes. Nur anpassen, wenn das Grading nicht exakt bei 280 Grad liegt." },
+        { "type": "range", "id": "color_saturation", "label": "Farbintensität (%)", "min": 100, "max": 180, "step": 5, "unit": "%", "default": 130, "info": "Verstärkt die Sättigung der Szene. 100 = Originalbild." },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
         { "type": "text", "id": "headline", "label": "Headline" },
         { "type": "textarea", "id": "text", "label": "Text (optional)" },
