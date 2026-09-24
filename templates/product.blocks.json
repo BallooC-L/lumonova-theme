@@ -23,6 +23,7 @@
             "eyebrow": "Ausprobieren",
             "headline": "Wähle deine Lichtfarbe.",
             "text": "Regler ziehen oder eine Stimmung wählen. So sieht dein Wohnzimmer mit LUMOnova aus.",
+            "image_side": "right",
             "show_brightness": true,
             "seamless": false
           }
