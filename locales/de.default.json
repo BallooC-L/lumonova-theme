@@ -121,6 +121,8 @@
   "product": {
     "energy_datasheet_default": "Produktdatenblatt",
     "energy_label_aria": "Energieeffizienzlabel anzeigen",
+    "legal_guarantee_label": "EU-Gewährleistungsrecht",
+    "legal_guarantee_url": "https://cdn.shopify.com/s/files/1/0997/2757/3366/files/Legal_guarantee_notice_DE.svg?v=1790327603",
     "hero_aria": "Produkthero",
     "image_coming": "Produktbild folgt",
     "gallery_prev": "Vorheriges Bild",

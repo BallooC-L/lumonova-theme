@@ -1443,6 +1443,44 @@
   font-size: 13px;
 }
 
+/* ── EU LEGAL GUARANTEE NOTICE (PDP, below CTAs) ─────────────
+   Visually mirrors .energy-label--pdp .energy-label__sheet */
+.legal-guarantee {
+  margin-top: 1.25rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.legal-guarantee__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-mid);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.legal-guarantee__link .material-symbols-outlined {
+  font-size: 16px;
+  color: var(--fg-low);
+  transition: color 0.15s ease;
+}
+.legal-guarantee__text {
+  text-decoration: underline;
+  text-decoration-color: rgba(232, 160, 96, 0.35);
+  text-underline-offset: 2px;
+}
+.legal-guarantee__link:hover,
+.legal-guarantee__link:hover .material-symbols-outlined {
+  color: var(--color-amber);
+}
+.legal-guarantee__link:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 480px) {
   .energy-label--pdp {

@@ -191,6 +191,22 @@
         {%- endif -%}
         <button type="button" class="btn-ghost" onclick="scrollToSpecs()">{{ 'product.cta_specs' | t }}</button>
       </div>
+
+      {%- comment -%}
+        EU-Gewährleistungshinweis (GARAN), Pflicht ab 27.09.2026.
+        Label + Ziel-URL kommen aus den Locale-Dateien → DE/EN wechselt automatisch mit der Storefront-Sprache.
+      {%- endcomment -%}
+      <div class="legal-guarantee">
+        <a
+          href="{{ 'product.legal_guarantee_url' | t }}"
+          class="legal-guarantee__link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">contract</span>
+          <span class="legal-guarantee__text">{{ 'product.legal_guarantee_label' | t }}</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>

@@ -120,6 +120,8 @@
   "product": {
     "energy_datasheet_default": "Product datasheet",
     "energy_label_aria": "View energy efficiency label",
+    "legal_guarantee_label": "EU warranty law",
+    "legal_guarantee_url": "https://cdn.shopify.com/s/files/1/0997/2757/3366/files/Legal_guarantee_notice_EN.svg?v=1790327603",
     "hero_aria": "Product hero",
     "image_coming": "Product image coming soon",
     "gallery_prev": "Previous image",
